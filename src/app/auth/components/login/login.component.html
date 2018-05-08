@@ -23,34 +23,19 @@
             placeholder="Enter your password">
         </div>
 
-        <button
-          type="submit"
-          class="btn btn-primary"
-          (click)="auth.login(email.value, password.value)">
-            Log In
-        </button>
-
-        <button
-          type="submit"
-          class="btn btn-primary"
-          (click)="auth.signup(email.value, password.value)">
-            Sign Up
-        </button>
-
       </form>
 
     </div>
+  </div>
 
+  <div class="row text-center">
     <div class="col-sm-6">
-      <h2>Social Authentication</h2>
-
       <button
         type="submit"
-        class="btn btn-danger"
-        (click)="auth.loginWithGoogle()">
-          Log In with Google
-        </button>
-
+        class="btn btn-primary"
+        (click)="auth.login(email.value, password.value)">
+        Log In
+      </button>
     </div>
   </div>
 </div>
