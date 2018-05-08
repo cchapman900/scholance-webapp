@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import {AuthService} from './auth.service';
 
 import { CallbackComponent } from './components/callback/callback.component';
@@ -11,7 +11,7 @@ import {LoginComponent} from './components/login/login.component';
   imports: [
     CommonModule,
     FormsModule,
-    HttpModule
+    HttpClientModule
   ],
   declarations: [
     LoginComponent,
