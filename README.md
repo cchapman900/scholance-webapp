@@ -24,7 +24,7 @@ npm install
 
 ## Set the Client ID and Domain 
 
-To configure the application for your Auth0 account settings, rename the `auth0-variables.ts` file to `auth0-variables.ts` and provide the **client ID** and **domain** there. This file is located in `src/app/auth/`.
+To configure the application for your Auth0 account settings, rename the `auth0-variables.ts.example` file to `auth0-variables.ts` and provide the **client ID** and **domain** there. This file is located in `src/app/auth/`.
 
 ## Using Cross Origin Authentication
 

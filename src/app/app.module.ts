@@ -1,8 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { AuthModule } from './auth/auth.module';
+import { HttpClientModule } from '@angular/common/http';
+
+import { UserModule } from './user/user.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +18,8 @@ import { ROUTES } from './app.routes';
   ],
   imports: [
     BrowserModule,
-    AuthModule,
+    HttpClientModule,
+    UserModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(ROUTES)
   ],

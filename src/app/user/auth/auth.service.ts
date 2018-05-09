@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AUTH_CONFIG } from './auth0-variables';
 import * as auth0 from 'auth0-js';
+import * as jwt_decode from 'jwt-decode'
 
 @Injectable()
 export class AuthService {
@@ -13,8 +14,10 @@ export class AuthService {
     redirectUri: AUTH_CONFIG.callbackURL,
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     responseType: 'token id_token',
-    scope: 'openid'
+    scope: 'openid profile'
   });
+
+  userProfile: any;
 
   constructor(private router: Router) { }
 
@@ -45,12 +48,6 @@ export class AuthService {
         alert(`Error: ${err.description}. Check the console for further details.`);
         return;
       }
-    });
-  }
-
-  public loginWithGoogle(): void {
-    this.auth0.authorize({
-      connection: 'google-oauth2',
     });
   }
 
@@ -91,6 +88,36 @@ export class AuthService {
     // access token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
+  }
+
+  public getAuthenticatedUserId(): string {
+    if (this.isAuthenticated()) {
+      return this.parseUserIdFromIdToken();
+    } else {
+      return null;
+    }
+  }
+
+  private parseUserIdFromIdToken(): string {
+    const decoded = jwt_decode(localStorage.getItem('id_token'));
+    const sub = decoded.sub;
+    return sub.split('|')[1];
+  }
+
+  // Get Profile
+  public getProfile(cb): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access Token must exist to fetch profile');
+    }
+
+    const self = this;
+    this.auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
+      }
+      cb(err, profile);
+    });
   }
 
 }
