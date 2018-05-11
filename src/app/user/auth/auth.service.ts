@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AUTH_CONFIG } from './auth0-variables';
 import * as auth0 from 'auth0-js';
 import * as jwt_decode from 'jwt-decode'
+import {UserService} from '../user.service';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,10 @@ export class AuthService {
 
   userProfile: any;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   public login(username: string, password: string): void {
     this.auth0.login({
@@ -37,11 +41,12 @@ export class AuthService {
     });
   }
 
-  public signup(email: string, password: string): void {
+  public signup(email: string, password: string, userType: string): void {
     this.auth0.redirect.signupAndLogin({
       connection: 'Username-Password-Authentication',
-      email,
-      password,
+      email: email,
+      password: password,
+      user_metadata: {user_type: userType}
     }, err => {
       if (err) {
         console.log(err);
@@ -54,6 +59,8 @@ export class AuthService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        const user_id = this.parseUserIdFromIdToken(authResult.idToken);
+        this.userService.setAuthenticatedUser(user_id);
         this.setSession(authResult);
       } else if (err) {
         this.router.navigate(['/home']);
@@ -92,14 +99,14 @@ export class AuthService {
 
   public getAuthenticatedUserId(): string {
     if (this.isAuthenticated()) {
-      return this.parseUserIdFromIdToken();
+      return this.parseUserIdFromIdToken(localStorage.getItem('id_token'));
     } else {
       return null;
     }
   }
 
-  private parseUserIdFromIdToken(): string {
-    const decoded = jwt_decode(localStorage.getItem('id_token'));
+  private parseUserIdFromIdToken(id_token: string): string {
+    const decoded = jwt_decode(id_token);
     const sub = decoded.sub;
     return sub.split('|')[1];
   }

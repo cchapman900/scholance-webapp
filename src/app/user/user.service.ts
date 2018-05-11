@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { AuthService } from './auth/auth.service';
 import { User } from './user.model';
 
 @Injectable()
@@ -15,22 +14,17 @@ export class UserService {
   public authenticatedUser$: Observable<User>;
 
   constructor(
-    private http: HttpClient,
-    private authService: AuthService
-  ) {
-    if (this.authService.isAuthenticated()) {
-      const userId = this.authService.getAuthenticatedUserId();
-      this.setAuthenticatedUser(userId);
-    }
-  }
+    private http: HttpClient
+  ) { }
 
   /** GET User */
   getUser (id: string): Observable<User> {
     const getUserUrl = `${this.usersUrl}/users/${id}`;
+    console.log(getUserUrl);
     return this.http.get<User>(getUserUrl)
       .pipe(
-        tap(heroes => this.log(`fetched user id=${id}`)),
-        catchError(this.handleError<User>('getHeroes'))
+        tap(user => this.log(`fetched user id=${id}`)),
+        catchError(this.handleError<User>('getUser'))
       );
   }
 
@@ -39,6 +33,7 @@ export class UserService {
    * @param {string} id
    */
   setAuthenticatedUser (id: string): void {
+    console.log('Setting user for ' + id);
     this.authenticatedUser$ = this.getUser(id);
   }
 

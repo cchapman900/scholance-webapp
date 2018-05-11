@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { AuthService } from './user/auth/auth.service';
-import { UserService } from './user/user.service';
+import {Component} from '@angular/core';
+import {AuthService} from './user/auth/auth.service';
+import {UserService} from './user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,12 @@ import { UserService } from './user/user.service';
 })
 export class AppComponent {
 
-  constructor(
-    public auth: AuthService,
-    private userService: UserService
-  ) {
+  constructor(public auth: AuthService,
+              private userService: UserService) {
     auth.handleAuthentication();
+    if (auth.isAuthenticated()) {
+      this.userService.setAuthenticatedUser(auth.getAuthenticatedUserId());
+    }
   }
 
 }

@@ -5,6 +5,7 @@ import { AuthService } from './auth.service';
 
 import { CallbackComponent } from './components/callback/callback.component';
 import { LoginComponent } from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { LoginComponent } from './components/login/login.component';
   ],
   declarations: [
     LoginComponent,
-    CallbackComponent
+    CallbackComponent,
+    RegisterComponent
   ],
   providers: [
     AuthService
