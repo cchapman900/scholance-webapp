@@ -8,14 +8,16 @@ import {UserService} from '../user.service';
 @Injectable()
 export class AuthService {
 
+  requestedScopes = 'openid profile manage:project manage:entry';
+
   // Configure Auth0
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientID,
     redirectUri: AUTH_CONFIG.callbackURL,
-    audience: `https://${AUTH_CONFIG.domain}/userinfo`,
+    audience: AUTH_CONFIG.apiUrl,
     responseType: 'token id_token',
-    scope: 'openid profile'
+    scope: this.requestedScopes
   });
 
   userProfile: any;
@@ -75,6 +77,7 @@ export class AuthService {
     const expiresAt = JSON.stringify(
       (authResult.expiresIn * 1000) + new Date().getTime()
     );
+    console.log(authResult);
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);

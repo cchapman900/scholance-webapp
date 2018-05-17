@@ -14,6 +14,7 @@ export class AppComponent {
     auth.handleAuthentication();
     if (auth.isAuthenticated()) {
       this.userService.setAuthenticatedUser(auth.getAuthenticatedUserId());
+      console.log(localStorage.getItem('access_token'));
     }
   }
 

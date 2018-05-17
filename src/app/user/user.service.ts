@@ -5,7 +5,14 @@ import { Observable } from 'rxjs/observable';
 import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { User } from './user.model';
+import { User } from './models/user.model';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+  })
+};
 
 @Injectable()
 export class UserService {
@@ -17,10 +24,26 @@ export class UserService {
     private http: HttpClient
   ) { }
 
-  /** GET User */
+  /**
+   * Set the authenticated user singleton
+   * @param {string} id
+   */
+  setAuthenticatedUser (id: string): void {
+    console.log('Setting user for ' + id);
+    this.authenticatedUser$ = this.getUser(id);
+  }
+
+  /**************************************
+   * HTTP METHODS
+   **************************************/
+
+  /**
+   * GET User
+   * @param {string} id
+   * @returns {Observable<User>}
+   */
   getUser (id: string): Observable<User> {
     const getUserUrl = `${this.usersUrl}/users/${id}`;
-    console.log(getUserUrl);
     return this.http.get<User>(getUserUrl)
       .pipe(
         tap(user => this.log(`fetched user id=${id}`)),
@@ -29,12 +52,18 @@ export class UserService {
   }
 
   /**
-   * Set the authenticated user singleton
-   * @param {string} id
+   * UPDATE User
+   * @param {User} user
+   * @returns {Observable<User>}
    */
-  setAuthenticatedUser (id: string): void {
-    console.log('Setting user for ' + id);
-    this.authenticatedUser$ = this.getUser(id);
+  updateUser (user: User): Observable<User> {
+    const updateUserUrl = `${this.usersUrl}/users/${user._id}`;
+    console.log(httpOptions);
+    return this.http.put<User>(updateUserUrl, user, httpOptions)
+      .pipe(
+        tap(updatedUser => this.log(`fetched user=${updatedUser}`)),
+        catchError(this.handleError<User>('updateUser'))
+      );
   }
 
   /**

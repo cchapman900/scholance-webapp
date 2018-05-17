@@ -30,6 +30,13 @@
           Log Out
       </button>
 
+      <button
+        class="btn btn-primary btn-margin"
+        *ngIf="auth.isAuthenticated()"
+        routerLink="users/{{auth.getAuthenticatedUserId()}}/update">
+        Update Profile
+      </button>
+
     </div>
   </div>
 </nav>

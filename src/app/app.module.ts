@@ -9,7 +9,7 @@ import { UserModule } from './user/user.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
-import { ROUTES } from './app.routes';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { ROUTES } from './app.routes';
     HttpClientModule,
     UserModule,
     NgbModule.forRoot(),
-    RouterModule.forRoot(ROUTES)
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

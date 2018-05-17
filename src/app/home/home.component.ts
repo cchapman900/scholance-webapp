@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import { AuthService } from '../user/auth/auth.service';
 import {UserService} from '../user/user.service';
-import {User} from '../user/user.model';
+import {User} from '../user/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -22,9 +22,11 @@ export class HomeComponent implements OnInit {
   }
 
   getUser(): void {
-    this.userService.authenticatedUser$.subscribe((user) => {
-      this.user = user.email;
-    })
+    if (this.auth.isAuthenticated()) {
+      this.userService.authenticatedUser$.subscribe((user) => {
+        this.user = user.email;
+      })
+    }
   }
 
 }
