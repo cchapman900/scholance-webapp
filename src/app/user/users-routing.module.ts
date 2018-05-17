@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import {UpdateUserComponent} from './components/update/update-user.component';
+import {UpdateUserComponent} from './components/update-user/update-user.component';
 
 const usersRoutes: Routes = [
   { path: 'users/:id/update', component: UpdateUserComponent }

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AUTH_CONFIG } from './auth0-variables';
 import * as auth0 from 'auth0-js';
 import * as jwt_decode from 'jwt-decode'
-import {UserService} from '../user.service';
+import {UserService} from '../services/user.service';
 
 @Injectable()
 export class AuthService {

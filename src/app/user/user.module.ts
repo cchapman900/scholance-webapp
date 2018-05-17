@@ -4,8 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { AuthModule } from './auth/auth.module';
 
-import { UserService } from './user.service';
-import { UpdateUserComponent } from './components/update/update-user.component';
+import { UserService } from './services/user.service';
+import { UpdateUserComponent } from './components/update-user/update-user.component';
 import { UsersRoutingModule } from './users-routing.module';
 
 @NgModule({
