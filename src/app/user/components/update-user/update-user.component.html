@@ -1,6 +1,6 @@
 <div [hidden]="submitted">
   <h1>User Profile</h1>
-  <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+  <form (ngSubmit)="onSubmit()" #userForm="ngForm">
     <div class="form-group">
       <label for="name">Name</label>
       <input type="text" class="form-control" id="name"
@@ -20,9 +20,36 @@
              [(ngModel)]="user.email" name="email">
     </div>
 
-    <button (click)="update()" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
+    <button (click)="update()" class="btn btn-success" [disabled]="!userForm.form.valid">Save</button>
   </form>
 </div>
+
+<div *ngIf="user.userType == 'business'">
+  <hr/>
+  <h2>Organization</h2>
+  <div *ngIf="!user.organization">
+    <p>You don't yet have an organization associated with your account.</p>
+    <button
+      class="btn btn-primary btn-margin"
+      routerLink="/organizations/create">
+      Set up your organization
+    </button>
+  </div>
+  <div *ngIf="user.organization">
+    <h4 class="text-muted">{{user.organization.name}} - <a class="small" href="http://{{user.organization.domain}}" target="_blank">{{user.organization.domain}}</a> </h4>
+    <button
+      class="btn btn-primary btn-margin"
+      routerLink="/organizations/{{user.organization._id}}/update">
+      Edit Organization
+    </button>
+    <button
+      class="btn btn-danger btn-margin"
+      (click)="removeUserFromOrganization()">
+      Remove myself from this Organization
+    </button>
+  </div>
+</div>
+
 
 <div [hidden]="!submitted">
   <h2>You submitted the following:</h2>
@@ -31,13 +58,9 @@
     <div class="col-xs-9  pull-left">{{ user.name }}</div>
   </div>
   <div class="row">
-    <div class="col-xs-3">Alter Ego</div>
+    <div class="col-xs-3">Email</div>
     <div class="col-xs-9 pull-left">{{ user.email }}</div>
   </div>
-  <!--<div class="row">-->
-    <!--<div class="col-xs-3">Power</div>-->
-    <!--<div class="col-xs-9 pull-left">{{ model.power }}</div>-->
-  <!--</div>-->
   <br>
   <button class="btn btn-primary" (click)="submitted=false">Edit</button>
 </div>

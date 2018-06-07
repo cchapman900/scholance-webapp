@@ -22,12 +22,12 @@ export class OrganizationService extends SharedService {
    **************************************/
 
   /* GET Organizations whose domain contains search term */
-  listHeroes(domain: string): Observable<Organization[]> {
+  listOrganizations(domain: string): Observable<Organization[]> {
     if (!domain.trim()) {
       // if not search term, return empty organization array.
       return of([]);
     }
-    return this.http.get<Organization[]>(`${this.usersServiceAPIUrl}/?domain=${domain}`).pipe(
+    return this.http.get<Organization[]>(`${this.usersServiceAPIUrl}/organizations?domain=${domain}`).pipe(
       tap(_ => this.log(`found heroes matching "${domain}"`)),
       catchError(this.handleError<Organization[]>('listOrganizations', []))
     );
@@ -56,7 +56,7 @@ export class OrganizationService extends SharedService {
    */
   createOrganization (organization: Organization): Observable<Organization> {
     const createOrganizationUrl = `${this.usersServiceAPIUrl}/organizations`;
-    console.log(this.httpOptions);
+    console.log(organization);
     return this.http.post<Organization>(createOrganizationUrl, organization, this.httpOptions)
       .pipe(
         tap(createdOrganization => this.log(`fetched user=${createdOrganization}`)),
@@ -72,8 +72,39 @@ export class OrganizationService extends SharedService {
    */
   updateOrganization (organization: Organization): Observable<Organization> {
     const updateOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization._id}`;
-    console.log(this.httpOptions);
     return this.http.put<Organization>(updateOrganizationUrl, organization, this.httpOptions)
+      .pipe(
+        tap(updatedOrganization => this.log(`fetched user=${updatedOrganization}`)),
+        catchError(this.handleError<Organization>('updateOrganization'))
+      );
+  }
+
+
+  /**
+   * Add Liaison to Organization
+   * @param {string} organization_id
+   * @param {string} user_id
+   * @returns {Observable<Organization>}
+   */
+  addUserToOrganization (organization_id: string, user_id: string): Observable<Organization> {
+    const addUserToOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization_id}/users/${user_id}`;
+    return this.http.post<Organization>(addUserToOrganizationUrl, null, this.httpOptions)
+      .pipe(
+        tap(updatedOrganization => this.log(`fetched user=${updatedOrganization}`)),
+        catchError(this.handleError<Organization>('updateOrganization'))
+      );
+  }
+
+
+  /**
+   * Add Liaison to Organization
+   * @param {string} organization_id
+   * @param {string} user_id
+   * @returns {Observable<Organization>}
+   */
+  removeUserFromOrganization (organization_id: string, user_id: string): Observable<Organization> {
+    const addUserToOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization_id}/users/${user_id}`;
+    return this.http.delete<Organization>(addUserToOrganizationUrl, this.httpOptions)
       .pipe(
         tap(updatedOrganization => this.log(`fetched user=${updatedOrganization}`)),
         catchError(this.handleError<Organization>('updateOrganization'))

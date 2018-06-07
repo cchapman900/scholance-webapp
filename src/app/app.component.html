@@ -34,7 +34,14 @@
         class="btn btn-primary btn-margin"
         *ngIf="auth.isAuthenticated()"
         routerLink="users/{{auth.getAuthenticatedUserId()}}/update">
-        Update Profile
+        Edit Profile
+      </button>
+
+      <button
+        class="btn btn-primary btn-margin"
+        *ngIf="auth.isAuthenticated() && user?.userType == 'business' && user?.organization"
+        routerLink="organizations/{{user.organization._id}}/update">
+        Edit Organization
       </button>
 
     </div>

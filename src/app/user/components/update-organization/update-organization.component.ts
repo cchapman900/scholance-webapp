@@ -1,26 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { User } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
+import { Organization } from '../../models/organization.model';
 import {OrganizationService} from '../../services/organization.service';
+import {User} from '../../models/user.model';
+import {UserService} from '../../services/user.service';
 
 @Component({
-  selector: 'app-update-user',
-  templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.css']
+  selector: 'app-update-organization',
+  templateUrl: './update-organization.component.html',
+  styleUrls: ['./update-organization.component.css']
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateOrganizationComponent implements OnInit {
   user: User;
+  organization: Organization;
   submitted = false;
   onSubmit() { this.submitted = true; }
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService,
     private organizationService: OrganizationService,
-    private router: Router,
+    private userService: UserService,
     private location: Location
   ) { }
 
@@ -31,6 +32,7 @@ export class UpdateUserComponent implements OnInit {
   getUser(): void {
     this.userService.authenticatedUser$.subscribe((user) => {
       this.user = user;
+      this.organization = user.organization;
       console.log(user)
     })
   }
@@ -39,18 +41,10 @@ export class UpdateUserComponent implements OnInit {
     this.location.back();
   }
 
-  removeUserFromOrganization(): void {
-    this.userService.authenticatedUser$.subscribe((user) => {
-      this.organizationService.removeUserFromOrganization(this.user.organization._id, this.user._id)
-        .subscribe(() => {
-        })
-    })
-  }
-
   update(): void {
     console.log(this.user);
     this.submitted = true;
-    this.userService.updateUser(this.user)
+    this.organizationService.updateOrganization(this.organization)
       .subscribe(() => {
         // this.goBack()
       });
