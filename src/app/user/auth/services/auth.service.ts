@@ -8,7 +8,7 @@ import {UserService} from '../../services/user.service';
 @Injectable()
 export class AuthService {
 
-  requestedScopes = 'openid profile manage:project manage:entry';
+  requestedScopes = 'openid profile manage:project manage:entry manage:organization';
 
   // Configure Auth0
   auth0 = new auth0.WebAuth({
@@ -61,8 +61,6 @@ export class AuthService {
   public handleAuthentication(): void {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        const user_id = this.parseUserIdFromIdToken(authResult.idToken);
-        this.userService.setAuthenticatedUser(user_id);
         this.setSession(authResult);
       } else if (err) {
         this.router.navigate(['/home']);
@@ -73,6 +71,10 @@ export class AuthService {
   }
 
   private setSession(authResult): void {
+    const user_id = this.parseUserIdFromIdToken(authResult.idToken);
+    const scopes = authResult.scope || this.requestedScopes || '';
+    console.log(scopes);
+    this.userService.setAuthenticatedUser(user_id);
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify(
       (authResult.expiresIn * 1000) + new Date().getTime()
@@ -81,6 +83,7 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('scopes', scopes);
     this.router.navigate(['home']);
   }
 
@@ -128,6 +131,11 @@ export class AuthService {
       }
       cb(err, profile);
     });
+  }
+
+  public userHasScopes(scopes: Array<string>): boolean {
+    const grantedScopes = localStorage.getItem('scopes').split(' ');
+    return scopes.every(scope => grantedScopes.includes(scope));
   }
 
 }

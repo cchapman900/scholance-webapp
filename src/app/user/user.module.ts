@@ -10,6 +10,9 @@ import { UsersRoutingModule } from './users-routing.module';
 import {UpdateOrganizationComponent} from './components/update-organization/update-organization.component';
 import {OrganizationService} from './services/organization.service';
 import {CreateOrganizationComponent} from './components/create-organization/create-organization.component';
+import {AuthService} from './auth/services/auth.service';
+import {AuthGuardService} from './auth/services/auth-guard.service';
+import {ScopeGuardService} from './auth/services/scope-guard.service';
 
 @NgModule({
   imports: [
@@ -24,6 +27,9 @@ import {CreateOrganizationComponent} from './components/create-organization/crea
     UpdateOrganizationComponent
   ],
   providers: [
+    AuthService,
+    AuthGuardService,
+    ScopeGuardService,
     UserService,
     OrganizationService
   ]
