@@ -24,6 +24,19 @@ export class ProjectService extends SharedService {
    **************************************/
 
   /**
+   * LIST Projects
+   * @returns {Observable<Project[]>}
+   */
+  listProjects (): Observable<Project[]> {
+    const getProjectUrl = `${this.projectsServiceAPIUrl}/projects`;
+    return this.http.get<Project[]>(getProjectUrl)
+      .pipe(
+        tap(project => this.log(`fetched projects`)),
+        catchError(this.handleError<Project[]>('listProjects'))
+      );
+  }
+
+  /**
    * GET Project
    * @param {string} id
    * @returns {Observable<Project>}

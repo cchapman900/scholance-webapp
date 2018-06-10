@@ -7,6 +7,8 @@ import {AuthModule} from '../user/auth/auth.module';
 import {AuthService} from '../user/auth/services/auth.service';
 import {AuthGuardService} from '../user/auth/services/auth-guard.service';
 import {ProjectsRoutingModule} from './projects-routing.module';
+import { ListProjectsComponent } from './components/list-projects/list-projects.component';
+import { ViewProjectComponent } from './components/view-project/view-project.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import {ProjectsRoutingModule} from './projects-routing.module';
     ProjectsRoutingModule
   ],
   declarations: [
-    CreateProjectComponent],
+    CreateProjectComponent,
+    ListProjectsComponent,
+    ViewProjectComponent],
   providers: [
     AuthService,
     AuthGuardService,
