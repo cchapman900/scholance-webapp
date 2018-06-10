@@ -44,6 +44,13 @@
         Edit Organization
       </button>
 
+      <button
+        class="btn btn-primary btn-margin"
+        *ngIf="auth.isAuthenticated() && user?.userType == 'business'"
+        routerLink="projects/create">
+        Post a Project
+      </button>
+
     </div>
   </div>
 </nav>
