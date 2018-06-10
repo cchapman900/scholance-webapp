@@ -56,11 +56,39 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   createProject (project: Project): Observable<Project> {
-    const getProjectUrl = `${this.projectsServiceAPIUrl}/projects`;
-    return this.http.post<Project>(getProjectUrl, project, this.httpOptions)
+    const createProjectUrl = `${this.projectsServiceAPIUrl}/projects`;
+    return this.http.post<Project>(createProjectUrl, project, this.httpOptions)
       .pipe(
         tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
         catchError(this.handleError<Project>('createProject'))
+      );
+  }
+
+  /**
+   * UPDATE Project
+   * @param {Project} project
+   * @returns {Observable<Project>}
+   */
+  updateProject (project: Project): Observable<Project> {
+    const updateProjectUrl = `${this.projectsServiceAPIUrl}/projects/${project._id}`;
+    return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
+      .pipe(
+        tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
+        catchError(this.handleError<Project>('updateProject'))
+      );
+  }
+
+  /**
+   * DELETE Project
+   * @param {string} id
+   * @returns {Observable<Project>}
+   */
+  deleteProject (id: string): Observable<Project> {
+    const deleteProjectUrl = `${this.projectsServiceAPIUrl}/projects/${id}`;
+    return this.http.delete<Project>(deleteProjectUrl, this.httpOptions)
+      .pipe(
+        tap(deletedProject => this.log(`fetched project id=${deletedProject._id}`)),
+        catchError(this.handleError<Project>('deleteProject'))
       );
   }
 

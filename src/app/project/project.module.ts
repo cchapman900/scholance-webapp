@@ -9,6 +9,7 @@ import {AuthGuardService} from '../user/auth/services/auth-guard.service';
 import {ProjectsRoutingModule} from './projects-routing.module';
 import { ListProjectsComponent } from './components/list-projects/list-projects.component';
 import { ViewProjectComponent } from './components/view-project/view-project.component';
+import { UpdateProjectComponent } from './components/update-project/update-project.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { ViewProjectComponent } from './components/view-project/view-project.com
   declarations: [
     CreateProjectComponent,
     ListProjectsComponent,
-    ViewProjectComponent],
+    ViewProjectComponent,
+    UpdateProjectComponent],
   providers: [
     AuthService,
     AuthGuardService,

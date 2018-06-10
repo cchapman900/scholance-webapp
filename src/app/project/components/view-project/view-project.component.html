@@ -3,3 +3,11 @@
 </h1>
 <h3>{{project?.organization.name}}</h3>
 <p>{{project?.summary}}</p>
+
+<button
+  class="btn btn-primary"
+  *ngIf="user?._id == project?.liaison"
+  routerLink="update"
+>
+  Update Project
+</button>

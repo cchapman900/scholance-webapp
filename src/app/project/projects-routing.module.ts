@@ -6,6 +6,7 @@ import {AuthGuardService as AuthGuard} from '../user/auth/services/auth-guard.se
 import {ScopeGuardService as ScopeGuard} from '../user/auth/services/scope-guard.service';
 import {ListProjectsComponent} from './components/list-projects/list-projects.component';
 import {ViewProjectComponent} from './components/view-project/view-project.component';
+import {UpdateProjectComponent} from './components/update-project/update-project.component';
 
 const projectsRoutes: Routes = [
   {
@@ -20,6 +21,11 @@ const projectsRoutes: Routes = [
   {
     path: 'projects/:project_id',
     component: ViewProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:project_id/update',
+    component: UpdateProjectComponent,
     canActivate: [AuthGuard]
   }
 ];
