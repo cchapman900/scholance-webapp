@@ -4,34 +4,40 @@
       <a class="navbar-brand" href="#">Scholance</a>
 
       <button
-        class="btn btn-primary btn-margin"
+        class="btn btn-light btn-margin"
         routerLink="/">
           Home
       </button>
 
       <button
-        class="btn btn-primary btn-margin"
+        class="btn btn-light btn-margin"
+        routerLink="projects">
+        Browse Projects
+      </button>
+
+      <button
+        class="btn btn-light btn-margin"
         *ngIf="!auth.isAuthenticated()"
         routerLink="/login">
           Log In
       </button>
 
       <button
-        class="btn btn-primary btn-margin"
+        class="btn btn-light btn-margin"
         *ngIf="!auth.isAuthenticated()"
         routerLink="/register">
         Register
       </button>
 
       <button
-        class="btn btn-primary btn-margin"
+        class="btn btn-light btn-margin"
         *ngIf="auth.isAuthenticated()"
         (click)="auth.logout()">
           Log Out
       </button>
 
       <button
-        class="btn btn-primary btn-margin"
+        class="btn btn-light btn-margin"
         *ngIf="auth.isAuthenticated()"
         routerLink="users/{{auth.getAuthenticatedUserId()}}/update">
         Edit Profile
@@ -42,12 +48,6 @@
         *ngIf="auth.isAuthenticated() && user?.userType == 'business' && user?.organization"
         routerLink="organizations/{{user.organization._id}}/update">
         Edit Organization
-      </button>
-
-      <button
-        class="btn btn-primary btn-margin"
-        routerLink="projects">
-        Browse Projects
       </button>
 
       <button

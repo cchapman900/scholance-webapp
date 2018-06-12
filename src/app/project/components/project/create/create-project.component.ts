@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Project} from '../../models/project.model';
-import {User} from '../../../user/models/user.model';
-import {ProjectService} from '../../services/project.service';
-import {UserService} from '../../../user/services/user.service';
+import {Project} from '../../../models/project.model';
+import {User} from '../../../../user/models/user.model';
+import {ProjectService} from '../../../services/project.service';
+import {UserService} from '../../../../user/services/user.service';
 
 @Component({
   selector: 'app-create-project',

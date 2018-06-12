@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ProjectService} from '../../services/project.service';
+import {ProjectService} from '../../../services/project.service';
 import {ActivatedRoute} from '@angular/router';
-import {Project} from '../../models/project.model';
-import {User} from '../../../user/models/user.model';
-import {UserService} from '../../../user/services/user.service';
+import {Project} from '../../../models/project.model';
+import {User} from '../../../../user/models/user.model';
+import {UserService} from '../../../../user/services/user.service';
 
 @Component({
   selector: 'app-update-project',
@@ -28,7 +28,6 @@ export class UpdateProjectComponent implements OnInit {
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.liaison = user;
-        console.log(this.liaison.organization);
       })
   }
 
@@ -59,6 +58,10 @@ export class UpdateProjectComponent implements OnInit {
       .subscribe(() => {
         // this.goBack()
       });
+  }
+
+  deleteSupplementalResource(project_id: string, asset_id: string) {
+    this.projectService.deleteSupplementalResource(project_id, asset_id)
   }
 
 }

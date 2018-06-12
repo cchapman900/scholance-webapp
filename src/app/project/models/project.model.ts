@@ -1,3 +1,5 @@
+import {Asset} from './asset.model';
+
 export class Project {
   _id: string;
   title: string;
@@ -7,4 +9,5 @@ export class Project {
     _id: string,
     name: string
   };
+  supplementalResources?: [Asset]
 }

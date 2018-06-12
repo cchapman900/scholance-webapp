@@ -5,12 +5,14 @@ import {SharedService} from '../../shared/services/shared.service';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
+import {Asset} from '../models/asset.model';
+import {File} from '../models/file.model';
 
 @Injectable()
 export class ProjectService extends SharedService {
 
   private projectsServiceAPIUrl = 'https://lichslfej2.execute-api.us-east-1.amazonaws.com/dev';
-  public authenticatedUser$: Observable<User>;
+  public user: User;
 
   constructor(
     private http: HttpClient
@@ -89,6 +91,90 @@ export class ProjectService extends SharedService {
       .pipe(
         tap(deletedProject => this.log(`fetched project id=${deletedProject._id}`)),
         catchError(this.handleError<Project>('deleteProject'))
+      );
+  }
+
+  /**
+   * CREATE Asset
+   * @param {Asset} asset
+   * @returns {Observable<Project>}
+   */
+  createAsset (asset: Asset): Observable<Asset> {
+    const createAssetUrl = `${this.projectsServiceAPIUrl}/assets`;
+    return this.http.post<Asset>(createAssetUrl, asset, this.httpOptions)
+      .pipe(
+        tap(createdAsset => this.log(`fetched project id=${createdAsset._id}`)),
+        catchError(this.handleError<Asset>('createProject'))
+      );
+  }
+
+  /**
+   * CREATE Supplemental Resource
+   * @param {string} project_id
+   * @param {File} file
+   * @returns {Observable<Project>}
+   */
+  createSupplementalResourceFile (project_id: string, file: File): Observable<Asset> {
+    const uploadSupplementalResourceFileURI = `projects/${project_id}/supplemental-resources/file`;
+    return this.createFile(file, uploadSupplementalResourceFileURI);
+  }
+
+  /**
+   * CREATE Entry Asset File
+   * @param {string} project_id
+   * @param {File} file
+   * @returns {Observable<Project>}
+   */
+  createEntryAssetFile (project_id: string, user_id: string, file: File): Observable<Asset> {
+    const uploadSupplementalResourceFileURI = `projects/${project_id}/entries/${user_id}/assets/file`;
+    return this.createFile(file, uploadSupplementalResourceFileURI);
+  }
+
+  /**
+   * Helper method to upload file
+   * @param {File} file
+   * @param {string} location
+   * @returns {Observable<Asset>}
+   */
+  private createFile (file: File, location: string): Observable<Asset> {
+    const createFileUrl = `${this.projectsServiceAPIUrl}/${location}`;
+    return this.http.post<Asset>(createFileUrl, file, this.httpOptions)
+      .pipe(
+        tap((createdFile) =>  {
+          this.log(`fetched project id=${createdFile._id}`)
+        }),
+        catchError(this.handleError<Asset>('createProject'))
+      );
+  }
+
+  /**
+   * DELETE Supplemental Resource
+   * @param {string} project_id
+   * @param {string} asset_id
+   * @returns {Observable<Project>}
+   */
+  deleteSupplementalResource (project_id: string, asset_id: string) {
+    const deleteSupplementalResourceURI = `projects/${project_id}/supplemental-resources/${asset_id}`;
+    return this.deleteAsset(deleteSupplementalResourceURI)
+      .subscribe((asset) => {
+        console.log('test')
+      });
+  }
+
+  /**
+   * Helper method to delete Asset
+   * @param {string} uri
+   * @returns {Observable<Asset>}
+   */
+  private deleteAsset (uri: string): Observable<Asset> {
+    const fullURI = `${this.projectsServiceAPIUrl}/${uri}`;
+    console.log(fullURI);
+    return this.http.delete<Asset>(fullURI, this.httpOptions)
+      .pipe(
+        tap((deletedAsset) =>  {
+          this.log(`delete Asset id=${deletedAsset._id}`)
+        }),
+        catchError(this.handleError<Asset>('deleteAsset'))
       );
   }
 

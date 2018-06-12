@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Project} from '../../models/project.model';
-import {ProjectService} from '../../services/project.service';
+import {Project} from '../../../models/project.model';
+import {ProjectService} from '../../../services/project.service';
 import {ActivatedRoute} from '@angular/router';
-import {User} from '../../../user/models/user.model';
-import {UserService} from '../../../user/services/user.service';
+import {User} from '../../../../user/models/user.model';
+import {UserService} from '../../../../user/services/user.service';
 
 @Component({
   selector: 'app-view-project',

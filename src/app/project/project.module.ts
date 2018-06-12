@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateProjectComponent } from './components/create-project/create-project.component';
+import { CreateProjectComponent } from './components/project/create/create-project.component';
 import { ProjectService } from './services/project.service';
 import {FormsModule} from '@angular/forms';
 import {AuthModule} from '../user/auth/auth.module';
 import {AuthService} from '../user/auth/services/auth.service';
 import {AuthGuardService} from '../user/auth/services/auth-guard.service';
 import {ProjectsRoutingModule} from './projects-routing.module';
-import { ListProjectsComponent } from './components/list-projects/list-projects.component';
-import { ViewProjectComponent } from './components/view-project/view-project.component';
-import { UpdateProjectComponent } from './components/update-project/update-project.component';
+import { ListProjectsComponent } from './components/project/list/list-projects.component';
+import { ViewProjectComponent } from './components/project/view/view-project.component';
+import { UpdateProjectComponent } from './components/project/update/update-project.component';
+import { CreateAssetComponent } from './components/asset/create/create-asset.component';
+import { FileInputComponent } from './components/asset/create/file-input/file-input.component';
 
 @NgModule({
   imports: [
@@ -22,7 +24,10 @@ import { UpdateProjectComponent } from './components/update-project/update-proje
     CreateProjectComponent,
     ListProjectsComponent,
     ViewProjectComponent,
-    UpdateProjectComponent],
+    UpdateProjectComponent,
+    CreateAssetComponent,
+    FileInputComponent
+  ],
   providers: [
     AuthService,
     AuthGuardService,
