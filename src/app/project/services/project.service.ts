@@ -38,6 +38,10 @@ export class ProjectService extends SharedService {
       );
   }
 
+  ////////////////////////////////////
+  // PROJECT METHODS
+  ////////////////////////////////////
+
   /**
    * GET Project
    * @param {string} id
@@ -93,6 +97,46 @@ export class ProjectService extends SharedService {
         catchError(this.handleError<Project>('deleteProject'))
       );
   }
+
+
+  ////////////////////////////////////
+  // ENTRY METHODS
+  // An Entry is both an individual Student signup as well as the eventual submission to the project
+  ////////////////////////////////////
+
+  /**
+   * CREATE Entry
+   * @param {string} project_id
+   * @returns {Observable<Project>}
+   */
+  createEntry (project_id: string): Observable<Project> {
+    const createEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries`;
+    return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
+      .pipe(
+        tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
+        catchError(this.handleError<Project>('createEntry'))
+      );
+  }
+
+  /**
+   * DELETE Entry
+   * @param {string} project_id
+   * @param {string} user_id
+   * @returns {Observable<Project>}
+   */
+  deleteEntry (project_id: string, user_id: string): Observable<Project> {
+    const deleteEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries/${user_id}`;
+    return this.http.delete<Project>(deleteEntrytUrl, this.httpOptions)
+      .pipe(
+        tap(deletedEntry => this.log(`deleted entry for project id=${deletedEntry._id}`)),
+        catchError(this.handleError<Project>('deleteEntry'))
+      );
+  }
+
+
+  ////////////////////////////////////
+  // ASSET METHODS
+  ////////////////////////////////////
 
   /**
    * CREATE Asset

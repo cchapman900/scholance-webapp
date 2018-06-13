@@ -36,4 +36,22 @@ export class ViewProjectComponent implements OnInit {
       })
   }
 
+  projectSignup(): void {
+    this.projectService.createEntry(this.project._id)
+      .subscribe((project) => {
+        console.log(project)
+      })
+  }
+
+  projectSignoff(): void {
+    this.projectService.deleteEntry(this.project._id, this.user._id)
+      .subscribe((project) => {
+        console.log(project)
+      })
+  }
+
+  studentIsRegisteredForProject(): boolean {
+    return this.project.entries.some(entry => entry.student === this.user._id)
+  }
+
 }
