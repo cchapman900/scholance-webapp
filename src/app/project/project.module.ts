@@ -12,6 +12,7 @@ import { ViewProjectComponent } from './components/project/view/view-project.com
 import { UpdateProjectComponent } from './components/project/update/update-project.component';
 import { CreateAssetComponent } from './components/asset/create/create-asset.component';
 import { FileInputComponent } from './components/asset/create/file-input/file-input.component';
+import { UpdateEntryComponent } from './components/entry/update/update-entry.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { FileInputComponent } from './components/asset/create/file-input/file-in
     ViewProjectComponent,
     UpdateProjectComponent,
     CreateAssetComponent,
-    FileInputComponent
+    FileInputComponent,
+    UpdateEntryComponent
   ],
   providers: [
     AuthService,

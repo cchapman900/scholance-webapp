@@ -21,11 +21,13 @@
     Sign up for Project
   </button>
 
-  <button
-    class="btn btn-danger"
-    *ngIf="user?.userType === 'student' && studentIsRegisteredForProject()"
-    (click)="projectSignoff()"
-  >
-    Sign off of Project
-  </button>
+  <div *ngIf="user?.userType === 'student' && studentIsRegisteredForProject()">
+    <p><a routerLink="/projects/{{project._id}}/entries/{{user._id}}">Submit to Project</a> </p>
+    <button
+      class="btn btn-danger"
+      (click)="projectSignoff()"
+    >
+      Sign off of Project
+    </button>
+  </div>
 </div>

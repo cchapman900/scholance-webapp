@@ -40,6 +40,7 @@ export class UpdateProjectComponent implements OnInit {
 
   updateProject(): void {
     this.submitted = true;
+    // TODO: Is this really necessary?
     this.project.liaison = this.liaison._id;
     console.log(this.liaison.organization);
     this.project.organization = {

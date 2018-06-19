@@ -5,6 +5,7 @@ import {SharedService} from '../../shared/services/shared.service';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
+import {Entry} from '../models/entry.model';
 import {Asset} from '../models/asset.model';
 import {File} from '../models/file.model';
 
@@ -105,12 +106,42 @@ export class ProjectService extends SharedService {
   ////////////////////////////////////
 
   /**
+   * GET Entry
+   * @param {string} project_id
+   * @param {string} user_id
+   * @returns {Observable<Project>}
+   */
+  getEntry (project_id: string, user_id: string): Observable<Entry> {
+    const getEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries/${user_id}`;
+    return this.http.get<Entry>(getEntrytUrl, this.httpOptions)
+      .pipe(
+        tap(fetchedEntry => this.log(`fetched project id=${fetchedEntry._id}`)),
+        catchError(this.handleError<Entry>('getEntry'))
+      );
+  }
+
+  /**
    * CREATE Entry
    * @param {string} project_id
    * @returns {Observable<Project>}
    */
   createEntry (project_id: string): Observable<Project> {
     const createEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries`;
+    return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
+      .pipe(
+        tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
+        catchError(this.handleError<Project>('createEntry'))
+      );
+  }
+
+  /**
+   * UPDATE Entry
+   * @param {string} project_id
+   * @param {Entry} entry
+   * @returns {Observable<Project>}
+   */
+  updateEntry (project_id: string, entry: Entry): Observable<Project> {
+    const createEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries/${entry.student}`;
     return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
       .pipe(
         tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
