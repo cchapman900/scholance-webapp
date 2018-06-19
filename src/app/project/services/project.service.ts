@@ -201,6 +201,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   createEntryAssetFile (project_id: string, user_id: string, file: File): Observable<Asset> {
+    console.log(file);
     const uploadSupplementalResourceFileURI = `projects/${project_id}/entries/${user_id}/assets/file`;
     return this.createFile(file, uploadSupplementalResourceFileURI);
   }
@@ -223,27 +224,21 @@ export class ProjectService extends SharedService {
   }
 
   /**
-   * DELETE Supplemental Resource
+   * @param {string} assetType
    * @param {string} project_id
    * @param {string} asset_id
-   * @returns {Observable<Project>}
-   */
-  deleteSupplementalResource (project_id: string, asset_id: string) {
-    const deleteSupplementalResourceURI = `projects/${project_id}/supplemental-resources/${asset_id}`;
-    return this.deleteAsset(deleteSupplementalResourceURI)
-      .subscribe((asset) => {
-        console.log('test')
-      });
-  }
-
-  /**
-   * Helper method to delete Asset
-   * @param {string} uri
+   * @param {string} user_id (optional)
    * @returns {Observable<Asset>}
    */
-  private deleteAsset (uri: string): Observable<Asset> {
+  deleteAsset (assetType: string, project_id: string, asset_id: string, user_id?: string): Observable<Asset> {
+    let uri = '';
+    if (assetType === 'entry') {
+      uri = `projects/${project_id}/entries/${user_id}/assets/${asset_id}`;
+    } else if (assetType === 'supplementalResource') {
+      uri = `projects/${project_id}/supplemental-resources/${asset_id}`;
+    }
     const fullURI = `${this.projectsServiceAPIUrl}/${uri}`;
-    console.log(fullURI);
+    console.log(assetType);
     return this.http.delete<Asset>(fullURI, this.httpOptions)
       .pipe(
         tap((deletedAsset) =>  {

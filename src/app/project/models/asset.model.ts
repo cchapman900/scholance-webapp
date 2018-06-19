@@ -1,7 +1,7 @@
 export class Asset {
   _id: string;
   name: string;
-  assetType: string;
+  mediaType: string;
   uri?: string;
   text?: string;
 }
