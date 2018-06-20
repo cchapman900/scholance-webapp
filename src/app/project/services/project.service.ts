@@ -232,7 +232,7 @@ export class ProjectService extends SharedService {
    */
   deleteAsset (assetType: string, project_id: string, asset_id: string, user_id?: string): Observable<Asset> {
     let uri = '';
-    if (assetType === 'entry') {
+    if (assetType === 'entryAsset') {
       uri = `projects/${project_id}/entries/${user_id}/assets/${asset_id}`;
     } else if (assetType === 'supplementalResource') {
       uri = `projects/${project_id}/supplemental-resources/${asset_id}`;

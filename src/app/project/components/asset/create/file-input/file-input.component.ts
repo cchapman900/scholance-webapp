@@ -128,7 +128,7 @@ export class FileInputComponent implements OnInit {
       if (assetType === 'supplementalResource') {
         this.projectService.createSupplementalResourceFile(this.project._id, file)
           .subscribe();
-      } else if (assetType === 'entry') {
+      } else if (assetType === 'entryAsset') {
         this.projectService.createEntryAssetFile(this.project._id, this.user._id, file)
           .subscribe();
       }

@@ -10,10 +10,25 @@ import {Project} from '../../../models/project.model';
 export class CreateAssetComponent implements OnInit {
   @Input() project: Project;
   @Input() assetType: string;
+  selectedMediaType: string;
+  mediaTypes = [
+    '',
+    'image',
+    'text',
+    'link'
+    ];
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  private assetTypeDisplay(assetTypeString: string) {
+    return assetTypeString
+      // insert a space before all caps
+      .replace(/([A-Z])/g, ' $1')
+      // uppercase the first character
+      .replace(/^./, function(str){ return str.toUpperCase(); })
   }
 
 }

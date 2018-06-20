@@ -1,4 +1,14 @@
-<p>
-  Create an Asset
-</p>
-<app-file-input [project]="project" [assetType]="assetType"></app-file-input>
+<h5>
+  Add new {{assetTypeDisplay(assetType)}}
+</h5>
+
+<form class="row">
+  <div class="form-group col-md-10 offset-1">
+    <label for="mediaType">Asset Type</label>
+    <select [(ngModel)]="selectedMediaType" id="mediaType" name="mediaType" class="form-control">
+      <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
+    </select>
+  </div>
+</form>
+
+<app-file-input *ngIf="selectedMediaType === 'image'" [project]="project" [assetType]="assetType"></app-file-input>
