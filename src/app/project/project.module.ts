@@ -14,9 +14,15 @@ import { CreateAssetComponent } from './components/asset/create/create-asset.com
 import { FileInputComponent } from './components/asset/create/file-input/file-input.component';
 import { UpdateEntryComponent } from './components/entry/update/update-entry.component';
 import {ViewAssetComponent} from './components/asset/view/view-asset.component';
+import { LinkInputComponent } from './components/asset/create/link-input/link-input.component';
+import { ListEntriesComponent } from './components/entry/list/list-entries.component';
+import { ViewEntryComponent } from './components/entry/view/view-entry.component';
+import {SharedModule} from '../shared/shared.module';
+import { StudentProjectToolbarComponent } from './components/project/view/student-project-toolbar/student-project-toolbar.component';
 
 @NgModule({
   imports: [
+    SharedModule,
     CommonModule,
     FormsModule,
     AuthModule,
@@ -30,7 +36,11 @@ import {ViewAssetComponent} from './components/asset/view/view-asset.component';
     CreateAssetComponent,
     FileInputComponent,
     UpdateEntryComponent,
-    ViewAssetComponent
+    ViewAssetComponent,
+    LinkInputComponent,
+    ListEntriesComponent,
+    ViewEntryComponent,
+    StudentProjectToolbarComponent
   ],
   providers: [
     AuthService,

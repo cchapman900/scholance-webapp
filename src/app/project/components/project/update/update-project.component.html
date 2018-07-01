@@ -29,8 +29,8 @@
 
   <h4>Supplemental Resources</h4>
 
-  <app-view-asset *ngFor="let asset of project.supplementalResources" [project]="project" [asset]="asset" assetType="supplementalResouce"></app-view-asset>
-  <app-create-asset class="row card" [project]="project" [assetType]="'supplementalResource'"></app-create-asset>
+  <app-view-asset *ngFor="let asset of project.supplementalResources" [project_id]="project._id" [asset]="asset" assetType="supplementalResource"></app-view-asset>
+  <app-create-asset class="row card" [project_id]="project._id" [assetType]="'supplementalResource'"></app-create-asset>
 
 
   <div [hidden]="!submitted">

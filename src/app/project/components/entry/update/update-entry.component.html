@@ -30,8 +30,8 @@
 
   <h4>Assets</h4>
 
-  <app-view-asset *ngFor="let asset of entry.assets" [project]="project" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
-  <app-create-asset class="row card" [project]="project" [assetType]="'entryAsset'"></app-create-asset>
+  <app-view-asset *ngFor="let asset of entry.assets" [project_id]="project._id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
+  <app-create-asset class="row card" [project_id]="project._id" [assetType]="'entryAsset'"></app-create-asset>
 
 
   <div [hidden]="!submitted">

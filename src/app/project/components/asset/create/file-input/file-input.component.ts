@@ -13,10 +13,11 @@ import {UserService} from '../../../../../user/services/user.service';
 })
 export class FileInputComponent implements OnInit {
 
-  @Input() project: Project;
+  @Input() project_id: string;
   @Input() assetType: string;
   user: User;
-
+  image: string;
+  name: string;
   defaultImage = 'data:image/jpg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUA' +
     'AAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAA' +
     'AEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAGSgAwAEAAAAAQAAAGQAAAAA/+0AOFBob3Rv' +
@@ -83,8 +84,6 @@ export class FileInputComponent implements OnInit {
     '6w+AP/QH17/woLr/AOLo/wCHWHwB/wCgPr3/AIUF1/8AF0AfgmTkk0lfvb/w6w+AP/QH17/woLr/' +
     'AOLo/wCHWHwB/wCgPr3/AIUF1/8AF0Af/9X9UqKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/' +
     '2Q==';
-  image: string;
-  name: string;
 
   constructor(
     private projectService: ProjectService,
@@ -120,16 +119,17 @@ export class FileInputComponent implements OnInit {
   }
 
   uploadFile(assetType: string): void {
+    // TODO: Move this logic to the service
     if (this.image) {
       const file = {
         name: this.name,
         file: this.image
       };
       if (assetType === 'supplementalResource') {
-        this.projectService.createSupplementalResourceFile(this.project._id, file)
+        this.projectService.createSupplementalResourceFile(this.project_id, file)
           .subscribe();
       } else if (assetType === 'entryAsset') {
-        this.projectService.createEntryAssetFile(this.project._id, this.user._id, file)
+        this.projectService.createEntryAssetFile(this.project_id, this.user._id, file)
           .subscribe();
       }
 

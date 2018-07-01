@@ -1,0 +1,28 @@
+<h3 class="mb-4">
+  Project Submission for: {{entry?.student.name}}
+</h3>
+
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h4>Attached Assets for this Project Entry</h4>
+    <p *ngIf="entry?.assets.length === 0">There are currently no assets for this Project Submission</p>
+    <app-view-asset *ngFor="let asset of entry?.assets"
+                    [project_id]="project_id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
+    <br/>
+    <app-create-asset [assetType]="'entryAsset'" [project_id]="project_id"></app-create-asset>
+  </div>
+</div>
+
+
+<hr/>
+
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h4 (click)="showComments = ! showComments">Comments on this project entry</h4>
+    <div [hidden]="!showComments">
+      <app-view-comment *ngFor="let comment of entry?.comments"
+                        [parentUrl]="router.url" [comment]="comment"></app-view-comment>
+      <app-create-comment [parentUrl]="router.url"></app-create-comment>
+    </div>
+  </div>
+</div>

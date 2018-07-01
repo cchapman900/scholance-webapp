@@ -8,6 +8,7 @@ import {ListProjectsComponent} from './components/project/list/list-projects.com
 import {ViewProjectComponent} from './components/project/view/view-project.component';
 import {UpdateProjectComponent} from './components/project/update/update-project.component';
 import {UpdateEntryComponent} from './components/entry/update/update-entry.component';
+import {ViewEntryComponent} from './components/entry/view/view-entry.component';
 
 const projectsRoutes: Routes = [
   {
@@ -30,7 +31,12 @@ const projectsRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'projects/:project_id/entries/:user_id',
+    path: 'projects/:project_id/entries/:entry_id',
+    component: ViewEntryComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/:project_id/entries/:entry_id/update',
     component: UpdateEntryComponent,
     canActivate: [AuthGuard]
   }

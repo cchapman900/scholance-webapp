@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import {ProjectModule} from './project/project.module';
+import { ViewCommentComponent } from './shared/components/comment/view/view-comment.component';
 
 @NgModule({
   declarations: [

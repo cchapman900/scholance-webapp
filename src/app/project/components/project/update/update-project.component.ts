@@ -41,7 +41,7 @@ export class UpdateProjectComponent implements OnInit {
   updateProject(): void {
     this.submitted = true;
     // TODO: Is this really necessary?
-    this.project.liaison = this.liaison._id;
+    this.project.liaison._id = this.liaison._id;
     console.log(this.liaison.organization);
     this.project.organization = {
       _id: this.liaison.organization._id,
@@ -62,7 +62,7 @@ export class UpdateProjectComponent implements OnInit {
   }
 
   deleteSupplementalResource(project_id: string, asset_id: string) {
-    this.projectService.deleteSupplementalResource(project_id, asset_id)
+    this.projectService.deleteAsset('supplementalResource', project_id, asset_id)
   }
 
 }

@@ -31,7 +31,7 @@ export class CreateProjectComponent implements OnInit {
 
   create(): void {
     this.submitted = true;
-    this.project.liaison = this.liaison._id;
+    this.project.liaison._id = this.liaison._id;
     console.log(this.liaison.organization);
     this.project.organization = {
       _id: this.liaison.organization._id,

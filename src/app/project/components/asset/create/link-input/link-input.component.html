@@ -1,0 +1,18 @@
+<form>
+  <div class="row text-center">
+    <div class="col-5 offset-1 text-left">
+      <label for="name">Link Name</label>
+      <input type="text" class="form-control" [(ngModel)]="linkAsset.name" id="name" name="name"/>
+    </div>
+    <div class="col-5 text-left">
+      <label for="name">URL</label>
+      <input type="text" class="form-control" [(ngModel)]="linkAsset.uri" id="uri" name="uri"/>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button class="btn btn-primary" (click)="uploadLinkAsset()">Upload</button>
+    </div>
+  </div>
+</form>

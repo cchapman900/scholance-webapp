@@ -51,7 +51,7 @@ export class ViewProjectComponent implements OnInit {
   }
 
   studentIsRegisteredForProject(): boolean {
-    return this.project.entries.some(entry => entry.student === this.user._id)
+    return this.project.entries.some(entry => entry.student._id === this.user._id)
   }
 
 }

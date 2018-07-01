@@ -12,7 +12,7 @@ import {User} from '../../../../user/models/user.model';
   styleUrls: ['./view-asset.component.css']
 })
 export class ViewAssetComponent implements OnInit {
-  @Input() project: Project;
+  @Input() project_id: string;
   @Input() asset: Asset;
   @Input() assetType: string;
   user: User;

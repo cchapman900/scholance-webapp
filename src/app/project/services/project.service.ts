@@ -12,7 +12,7 @@ import {File} from '../models/file.model';
 @Injectable()
 export class ProjectService extends SharedService {
 
-  private projectsServiceAPIUrl = 'https://lichslfej2.execute-api.us-east-1.amazonaws.com/dev';
+  private projectsServiceDomain = 'https://lichslfej2.execute-api.us-east-1.amazonaws.com/dev';
   public user: User;
 
   constructor(
@@ -31,7 +31,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project[]>}
    */
   listProjects (): Observable<Project[]> {
-    const getProjectUrl = `${this.projectsServiceAPIUrl}/projects`;
+    const getProjectUrl = `${this.projectsServiceDomain}/projects`;
     return this.http.get<Project[]>(getProjectUrl)
       .pipe(
         tap(project => this.log(`fetched projects`)),
@@ -49,7 +49,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   getProject (id: string): Observable<Project> {
-    const getProjectUrl = `${this.projectsServiceAPIUrl}/projects/${id}`;
+    const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
     return this.http.get<Project>(getProjectUrl)
       .pipe(
         tap(project => this.log(`fetched project id=${id}`)),
@@ -63,7 +63,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   createProject (project: Project): Observable<Project> {
-    const createProjectUrl = `${this.projectsServiceAPIUrl}/projects`;
+    const createProjectUrl = `${this.projectsServiceDomain}/projects`;
     return this.http.post<Project>(createProjectUrl, project, this.httpOptions)
       .pipe(
         tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
@@ -77,7 +77,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   updateProject (project: Project): Observable<Project> {
-    const updateProjectUrl = `${this.projectsServiceAPIUrl}/projects/${project._id}`;
+    const updateProjectUrl = `${this.projectsServiceDomain}/projects/${project._id}`;
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
         tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
@@ -91,7 +91,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   deleteProject (id: string): Observable<Project> {
-    const deleteProjectUrl = `${this.projectsServiceAPIUrl}/projects/${id}`;
+    const deleteProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
     return this.http.delete<Project>(deleteProjectUrl, this.httpOptions)
       .pipe(
         tap(deletedProject => this.log(`fetched project id=${deletedProject._id}`)),
@@ -112,7 +112,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   getEntry (project_id: string, user_id: string): Observable<Entry> {
-    const getEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries/${user_id}`;
+    const getEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
     return this.http.get<Entry>(getEntrytUrl, this.httpOptions)
       .pipe(
         tap(fetchedEntry => this.log(`fetched project id=${fetchedEntry._id}`)),
@@ -126,7 +126,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   createEntry (project_id: string): Observable<Project> {
-    const createEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries`;
+    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries`;
     return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
       .pipe(
         tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
@@ -141,7 +141,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   updateEntry (project_id: string, entry: Entry): Observable<Project> {
-    const createEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries/${entry.student}`;
+    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry.student}`;
     return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
       .pipe(
         tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
@@ -156,7 +156,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   deleteEntry (project_id: string, user_id: string): Observable<Project> {
-    const deleteEntrytUrl = `${this.projectsServiceAPIUrl}/projects/${project_id}/entries/${user_id}`;
+    const deleteEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
     return this.http.delete<Project>(deleteEntrytUrl, this.httpOptions)
       .pipe(
         tap(deletedEntry => this.log(`deleted entry for project id=${deletedEntry._id}`)),
@@ -171,17 +171,56 @@ export class ProjectService extends SharedService {
 
   /**
    * CREATE Asset
+   *
+   * @param {string} assetType
+   * @param {string} project_id
    * @param {Asset} asset
+   * @param {string} user_id (optional)
    * @returns {Observable<Project>}
    */
-  createAsset (asset: Asset): Observable<Asset> {
-    const createAssetUrl = `${this.projectsServiceAPIUrl}/assets`;
+  createAsset (assetType: string, project_id: string, asset: Asset, user_id?: string): Observable<Asset> {
+    let createAssetUrl = '';
+    if (assetType === 'supplementalResource') {
+      createAssetUrl = `${this.projectsServiceDomain}/projects/${project_id}/supplemental-resources`;
+    } else if (assetType === 'entryAsset') {
+      createAssetUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}/assets`;
+    }
     return this.http.post<Asset>(createAssetUrl, asset, this.httpOptions)
       .pipe(
         tap(createdAsset => this.log(`fetched project id=${createdAsset._id}`)),
         catchError(this.handleError<Asset>('createProject'))
       );
   }
+
+  /**
+   * DELETE Asset
+   *
+   * @param {string} assetType
+   * @param {string} project_id
+   * @param {string} asset_id
+   * @param {string} user_id (optional)
+   * @returns {Observable<Asset>}
+   */
+  deleteAsset (assetType: string, project_id: string, asset_id: string, user_id?: string): Observable<Asset> {
+    let uri = '';
+    if (assetType === 'entryAsset') {
+      uri = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}/assets/${asset_id}`;
+    } else if (assetType === 'supplementalResource') {
+      uri = `${this.projectsServiceDomain}/projects/${project_id}/supplemental-resources/${asset_id}`;
+    }
+    return this.http.delete<Asset>(uri, this.httpOptions)
+      .pipe(
+        tap((deletedAsset) =>  {
+          this.log(`delete Asset id=${deletedAsset._id}`)
+        }),
+        catchError(this.handleError<Asset>('deleteAsset'))
+      );
+  }
+
+
+  ///////////////////////////////
+  // FILE ASSETS
+  ///////////////////////////////
 
   /**
    * CREATE Supplemental Resource
@@ -197,6 +236,7 @@ export class ProjectService extends SharedService {
   /**
    * CREATE Entry Asset File
    * @param {string} project_id
+   * @param {string} user_id
    * @param {File} file
    * @returns {Observable<Project>}
    */
@@ -213,38 +253,13 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Asset>}
    */
   private createFile (file: File, location: string): Observable<Asset> {
-    const createFileUrl = `${this.projectsServiceAPIUrl}/${location}`;
+    const createFileUrl = `${this.projectsServiceDomain}/${location}`;
     return this.http.post<Asset>(createFileUrl, file, this.httpOptions)
       .pipe(
         tap((createdFile) =>  {
           this.log(`fetched project id=${createdFile._id}`)
         }),
         catchError(this.handleError<Asset>('createProject'))
-      );
-  }
-
-  /**
-   * @param {string} assetType
-   * @param {string} project_id
-   * @param {string} asset_id
-   * @param {string} user_id (optional)
-   * @returns {Observable<Asset>}
-   */
-  deleteAsset (assetType: string, project_id: string, asset_id: string, user_id?: string): Observable<Asset> {
-    let uri = '';
-    if (assetType === 'entryAsset') {
-      uri = `projects/${project_id}/entries/${user_id}/assets/${asset_id}`;
-    } else if (assetType === 'supplementalResource') {
-      uri = `projects/${project_id}/supplemental-resources/${asset_id}`;
-    }
-    const fullURI = `${this.projectsServiceAPIUrl}/${uri}`;
-    console.log(assetType);
-    return this.http.delete<Asset>(fullURI, this.httpOptions)
-      .pipe(
-        tap((deletedAsset) =>  {
-          this.log(`delete Asset id=${deletedAsset._id}`)
-        }),
-        catchError(this.handleError<Asset>('deleteAsset'))
       );
   }
 

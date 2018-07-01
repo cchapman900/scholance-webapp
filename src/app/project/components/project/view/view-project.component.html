@@ -5,29 +5,43 @@
 <p>{{project?.summary}}</p>
 
 <div *ngIf="user && project">
-  <button
-    class="btn btn-primary"
-    *ngIf="user?._id === project?.liaison"
-    routerLink="update"
-  >
-    Update Project
-  </button>
 
-  <button
-    class="btn btn-primary"
-    *ngIf="user?.userType === 'student' && !studentIsRegisteredForProject()"
-    (click)="projectSignup()"
-  >
-    Sign up for Project
-  </button>
+  <div *ngIf="user?.userType === 'business' && user?._id === project?.liaison._id">
 
-  <div *ngIf="user?.userType === 'student' && studentIsRegisteredForProject()">
-    <p><a routerLink="/projects/{{project._id}}/entries/{{user._id}}">Submit to Project</a> </p>
     <button
-      class="btn btn-danger"
-      (click)="projectSignoff()"
+      class="btn btn-primary"
+      routerLink="update"
     >
-      Sign off of Project
+      Update Project
     </button>
+
+    <hr/>
+
+    <app-list-entries [entries]="project.entries"></app-list-entries>
+
   </div>
+
+
+  <div *ngIf="user?.userType === 'student'">
+
+    <button
+      class="btn btn-primary"
+      *ngIf="!studentIsRegisteredForProject()"
+      (click)="projectSignup()"
+    >
+      Sign up for Project
+    </button>
+
+    <div *ngIf="studentIsRegisteredForProject()">
+      <p><a routerLink="/projects/{{project._id}}/entries/{{user._id}}">Submit to Project</a> </p>
+      <button
+        class="btn btn-danger"
+        (click)="projectSignoff()"
+      >
+        Sign off of Project
+      </button>
+    </div>
+
+  </div>
+
 </div>

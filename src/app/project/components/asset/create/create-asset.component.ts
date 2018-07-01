@@ -8,13 +8,12 @@ import {Project} from '../../../models/project.model';
   styleUrls: ['./create-asset.component.css']
 })
 export class CreateAssetComponent implements OnInit {
-  @Input() project: Project;
+  @Input() project_id: string;
   @Input() assetType: string;
   selectedMediaType: string;
   mediaTypes = [
     '',
     'image',
-    'text',
     'link'
     ];
 

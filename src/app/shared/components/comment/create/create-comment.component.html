@@ -1,0 +1,13 @@
+<div class="card mt-1">
+  <div class="card-body">
+    <form #commentForm="ngForm">
+      <label for="text" class="small">post a comment</label>
+      <textarea [(ngModel)]="text" class="form-control" id="text" name="text"></textarea>
+      <div class="row">
+        <div class="col-2 pt-2 ml-auto">
+          <button class="btn btn-info" (click)="createComment()">Comment</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

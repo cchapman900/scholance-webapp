@@ -1,5 +1,5 @@
 export class Asset {
-  _id: string;
+  _id?: string;
   name: string;
   mediaType: string;
   uri?: string;
