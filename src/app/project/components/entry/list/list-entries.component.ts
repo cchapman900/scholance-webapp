@@ -8,6 +8,7 @@ import {Entry} from '../../../models/entry.model';
 })
 export class ListEntriesComponent implements OnInit {
   @Input() entries: Entry[];
+  @Input() liaison_id: string;
 
   constructor() { }
 

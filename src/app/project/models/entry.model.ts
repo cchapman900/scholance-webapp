@@ -9,6 +9,6 @@ export class Entry {
   };
   commentary?: string;
   assets?: [Asset];
-  status?: string;
+  submissionStatus?: string;
   comments?: [Comment]
 }

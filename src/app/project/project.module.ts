@@ -12,7 +12,6 @@ import { ViewProjectComponent } from './components/project/view/view-project.com
 import { UpdateProjectComponent } from './components/project/update/update-project.component';
 import { CreateAssetComponent } from './components/asset/create/create-asset.component';
 import { FileInputComponent } from './components/asset/create/file-input/file-input.component';
-import { UpdateEntryComponent } from './components/entry/update/update-entry.component';
 import {ViewAssetComponent} from './components/asset/view/view-asset.component';
 import { LinkInputComponent } from './components/asset/create/link-input/link-input.component';
 import { ListEntriesComponent } from './components/entry/list/list-entries.component';
@@ -35,7 +34,6 @@ import { StudentProjectToolbarComponent } from './components/project/view/studen
     UpdateProjectComponent,
     CreateAssetComponent,
     FileInputComponent,
-    UpdateEntryComponent,
     ViewAssetComponent,
     LinkInputComponent,
     ListEntriesComponent,

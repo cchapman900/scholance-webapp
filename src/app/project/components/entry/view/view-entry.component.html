@@ -7,22 +7,49 @@
     <h4>Attached Assets for this Project Entry</h4>
     <p *ngIf="entry?.assets.length === 0">There are currently no assets for this Project Submission</p>
     <app-view-asset *ngFor="let asset of entry?.assets"
-                    [project_id]="project_id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
+                    [project_id]="project?._id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
     <br/>
-    <app-create-asset [assetType]="'entryAsset'" [project_id]="project_id"></app-create-asset>
+    <app-create-asset *ngIf="user?.userType === 'student' && user?._id === entry?.student._id" [assetType]="'entryAsset'" [project_id]="project_id"></app-create-asset>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-6 offset-md-3 text-center">
+    <hr/>
+    <p>Submission status: <strong>{{entry?.submissionStatus}}</strong></p>
+    <button *ngIf="entry?.submissionStatus == 'active'"
+            class="btn btn-primary"
+            (click)="submitEntry()"
+    >Submit project entry</button>
+  </div>
+</div>
 
-<hr/>
+<div class="row" *ngIf="user?._id === liaison_id">
+  <div class="col-md-6 offset-md-3 text-center">
+    <hr/>
+    <div *ngIf="project?.status === 'complete'">
+      <p>This project is complete</p>
+    </div>
+    <div *ngIf="project?.status !== 'complete'">
+      <p>Select this submission</p>
+      <button class="btn btn-primary" (click)="selectEntry()">Select this implementation</button>
+    </div>
+  </div>
+</div>
+
+<hr class="my-5"/>
 
 <div class="row">
   <div class="col-md-10 offset-md-1">
-    <h4 (click)="showComments = ! showComments">Comments on this project entry</h4>
+    <h4>Comments on this project entry</h4>
     <div [hidden]="!showComments">
       <app-view-comment *ngFor="let comment of entry?.comments"
                         [parentUrl]="router.url" [comment]="comment"></app-view-comment>
       <app-create-comment [parentUrl]="router.url"></app-create-comment>
+      <p class="text-center comment-toggle" (click)="showComments = ! showComments">Hide comments</p>
+    </div>
+    <div [hidden]="showComments" class="text-center text-muted comment-toggle">
+      <p (click)="showComments = ! showComments">View {{entry?.comments?.length}} comments</p>
     </div>
   </div>
 </div>

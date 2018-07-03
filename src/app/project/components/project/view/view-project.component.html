@@ -15,6 +15,8 @@
       Update Project
     </button>
 
+    <p class="text-center">Project status: {{project.status}}</p>
+
     <hr/>
 
     <app-list-entries [entries]="project.entries"></app-list-entries>
@@ -22,26 +24,9 @@
   </div>
 
 
-  <div *ngIf="user?.userType === 'student'">
-
-    <button
-      class="btn btn-primary"
-      *ngIf="!studentIsRegisteredForProject()"
-      (click)="projectSignup()"
-    >
-      Sign up for Project
-    </button>
-
-    <div *ngIf="studentIsRegisteredForProject()">
-      <p><a routerLink="/projects/{{project._id}}/entries/{{user._id}}">Submit to Project</a> </p>
-      <button
-        class="btn btn-danger"
-        (click)="projectSignoff()"
-      >
-        Sign off of Project
-      </button>
-    </div>
-
-  </div>
+  <app-student-project-toolbar
+    *ngIf="user?.userType === 'student'"
+    [studentIsRegisteredForProject]="studentIsRegisteredForProject()" [project_id]="project._id" [user_id]="user._id">
+  </app-student-project-toolbar>
 
 </div>

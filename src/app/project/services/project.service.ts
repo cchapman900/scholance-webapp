@@ -99,6 +99,22 @@ export class ProjectService extends SharedService {
       );
   }
 
+  /**
+   * UPDATE Project Status
+   * @param {string} project_id
+   * @param {string} status
+   * @param {string} selectedEntry
+   * @returns {Observable<Project>}
+   */
+  updateProjectStatus (project_id: string, status: string, selectedEntry?: string): Observable<Project> {
+    const updateProjectStatusUrl = `${this.projectsServiceDomain}/projects/${project_id}/status`;
+    return this.http.put<Project>(updateProjectStatusUrl, {status: status, selectedEntry: selectedEntry}, this.httpOptions)
+      .pipe(
+        tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
+        catchError(this.handleError<Project>('updateProject'))
+      );
+  }
+
 
   ////////////////////////////////////
   // ENTRY METHODS
@@ -135,14 +151,15 @@ export class ProjectService extends SharedService {
   }
 
   /**
-   * UPDATE Entry
+   * SUBMIT Entry
    * @param {string} project_id
-   * @param {Entry} entry
+   * @param {string} entry_id
+   * @param {string} submissionStatus
    * @returns {Observable<Project>}
    */
-  updateEntry (project_id: string, entry: Entry): Observable<Project> {
-    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry.student}`;
-    return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
+  updateEntrySubmissionStatus (project_id: string, entry_id: string, submissionStatus: string): Observable<Project> {
+    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry_id}/submission-status`;
+    return this.http.patch<Project>(createEntrytUrl, {submissionStatus: submissionStatus}, this.httpOptions)
       .pipe(
         tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
         catchError(this.handleError<Project>('createEntry'))

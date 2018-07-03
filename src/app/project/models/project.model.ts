@@ -14,5 +14,7 @@ export class Project {
     name: string
   };
   entries?: [Entry];
-  supplementalResources?: [Asset]
+  supplementalResources?: [Asset];
+  status: string;
+  selectedEntry: Entry
 }
