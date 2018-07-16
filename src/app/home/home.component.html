@@ -1,6 +1,81 @@
-<h4 *ngIf="auth.isAuthenticated()">
-  You are logged in {{ user }}!
-</h4>
-<h4 *ngIf="!auth.isAuthenticated()">
-  You are not logged in! Please <a routerLink="/login">Log In</a> to continue.
-</h4>
+<div class="jumbotron"></div>
+<main class="container">
+  <h1 class="border-bottom mb-4">Open Educational Freelancing</h1>
+  <div class="row">
+    <div class="col-6 pb-3 rounded"
+         (mouseover)="showStudentContent = true"
+         (mouseleave)="showStudentContent = false"
+         [ngClass]="{'student-content': showStudentContent}">
+      <h2 class="student-text mb-3">For Students</h2>
+      <h4 class="mb-3">Open access to work any project. Use any work you do for your portfolio.</h4>
+      <ul>
+        <li>
+          <h5>No barrier-of-entry</h5>
+          <p>
+            Scholance breaks down a significant barrier-of-entry to getting access to meaningful experience. Rather than
+            committing yourself to a months-long unpaid internship, or a menial pre-entry-level job, or the grueling process
+            of becoming an established freelancer, Scholance lets you find the types of projects your interested in and get
+            started working on them right away. Build your portfolio with projects that are right for you.
+          </p>
+        </li>
+        <li>
+          <h5>Make things. Not lattes.</h5>
+          <p>
+            Wherever you are in your education, Scholance lets you get started immediately on the types of projects that are
+            right for you. There is no barrier of entry to getting started on projects, and whatever work you do is yours to
+            use for your portfolio.
+          </p>
+        </li>
+      </ul>
+      <div class="row" [hidden]="!showStudentContent">
+        <div class="col-md-6 mx-auto">
+          <button
+            *ngIf="!auth.isAuthenticated()"
+            class="btn btn-warning form-control"
+            routerLink="/register"
+            [queryParams]="{userType: 'student'}"
+          >Register as a Student</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 pb-3 rounded"
+         (mouseover)="showOrganizationContent = true"
+         (mouseleave)="showOrganizationContent = false"
+         [ngClass]="{'organization-content': showOrganizationContent}">
+      <h2 class="organization-text mb-3">For Businesses &amp; Organizations</h2>
+      <h4>Post projects for students to work on. Select the best of the submissions for your business use.</h4>
+      <ul>
+        <li>
+          <h5>Skip the commitment issues</h5>
+          <p>
+            Whether you're a one-person startup, non-profit or leading a Fortune 500, there's always more work to be
+            done than resources available allow. See what a pool of capable and enthusiastic candidates can accomplish
+            that a single entity may not. Rather than committing to the singularity of a traditional freelancer or the
+            daunting costs of professional consultants, Scholance gives you access to students from around the world to
+            work simultaneously on getting work done for your organization. Commit to a result only when it is there and
+            ready to go.
+          </p>
+        </li>
+        <li>
+          <h5>Tap into all of tomorrow's potential</h5>
+          <p>
+            Channel the creativity, fresh perspective, and dedication of students around the world for your
+            organization's needs.
+          </p>
+        </li>
+      </ul>
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <button class="btn btn-info form-control"
+                  *ngIf="!auth.isAuthenticated()"
+                  routerLink="/register"
+                  [queryParams]="{userType: 'business'}"
+                  [hidden]="!showOrganizationContent"
+          >
+            Register as a Business Liaison
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

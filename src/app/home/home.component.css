@@ -1,0 +1,26 @@
+.jumbotron {
+  margin-top: -30px;
+  height: 420px;
+  background: url(/assets/images/homepage-jumbotron.svg) no-repeat center top;
+  background-size: cover;
+}
+
+main {
+  margin-bottom: 20rem;
+}
+
+.student-text {
+  color: #aa7a00;
+}
+
+.organization-text {
+  color: #004b6b;
+}
+
+.student-content {
+  background-color: #FFF5DC;
+}
+
+.organization-content {
+  background-color: #EEFBFF;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Project} from '../../../models/project.model';
 import {ProjectService} from '../../../services/project.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 
@@ -13,11 +13,13 @@ import {UserService} from '../../../../user/services/user.service';
 export class ViewProjectComponent implements OnInit {
   project: Project;
   user: User;
+  showComments: boolean;
 
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    protected router: Router      // Currently assuming that webapp matches perfectly with API. Probably should fix soon.
   ) { }
 
   ngOnInit() {
@@ -26,7 +28,9 @@ export class ViewProjectComponent implements OnInit {
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.user = user;
-      })
+      });
+
+    this.showComments = false;
   }
 
   getProject(id: string): void {

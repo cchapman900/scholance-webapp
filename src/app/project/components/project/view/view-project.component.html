@@ -30,3 +30,20 @@
   </app-student-project-toolbar>
 
 </div>
+
+<hr class="my-5"/>
+
+<div class="row">
+  <div class="col-md-10 offset-md-1">
+    <h4>Comments on this project</h4>
+    <div [hidden]="!showComments">
+      <app-view-comment *ngFor="let comment of project?.comments"
+                        [parentUrl]="router.url" [comment]="comment"></app-view-comment>
+      <app-create-comment [parentUrl]="router.url"></app-create-comment>
+      <p class="text-center comment-toggle" (click)="showComments = ! showComments">Hide comments</p>
+    </div>
+    <div [hidden]="showComments" class="text-center text-muted comment-toggle">
+      <p (click)="showComments = ! showComments">View {{entry?.comments?.length}} comments</p>
+    </div>
+  </div>
+</div>
