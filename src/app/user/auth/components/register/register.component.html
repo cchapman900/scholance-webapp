@@ -1,54 +1,103 @@
 <div>
   <div class="row">
-    <div class="col-sm-6 offset-sm-3">
+    <div class="col-md-8 mx-auto">
       <h2>Register</h2>
 
-      <form>
+      <form #registerForm="ngForm">
 
-        <div class="form-group">
-          <label for="userType">User Type</label>
-          <select #userType name="userType" id="userType" class="form-control">
-            <option>(select your account type)</option>
-            <option value="student">Student</option>
-            <option value="business">Business</option>
-          </select>
+        <div class="row border rounded mt-5 py-2">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="userType">User Type</label>
+              <select [ngModel]="user.userType" #userType
+                      name="user.userType" id="userType" class="form-control">
+                <option [value]="">(select your account type)</option>
+                <option [value]="'student'">Student</option>
+                <option [value]="'business'">Business</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-8" ngClass="{'organization-content': user.userType == 'business'}">
+            <div *ngIf="userType.value == 'student'" class="student-content p-3 rounded">
+              <h4>Student</h4>
+              <p>
+                Sign up with your <strong>.edu</strong> email address and...
+              </p>
+              <ul>
+                <li>Sign up for projects</li>
+                <li>Work on projects</li>
+                <li>Use any project submission on your portfolio</li>
+              </ul>
+            </div>
+            <div *ngIf="userType.value == 'business'" class="organization-content p-3 rounded">
+              <h4>Business or Organization Liaison</h4>
+              <p>
+                Sign up with your <strong>company</strong> email address and...
+              </p>
+              <ul>
+                <li>Post projects</li>
+                <li>Manage projects</li>
+                <li>Select projects for your business use</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="name">Email</label>
-          <input
-            name="name"
-            id="name"
-            type="email"
-            class="form-control"
-            #email
-            placeholder="you@example.com">
-        </div>
+        <div *ngIf="userType.value != ''">
+          <hr/>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              name="name"
+              id="name"
+              type="text"
+              class="form-control"
+              #name
+              required
+            >
+          </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input
-            name="password"
-            id="password"
-            type="password"
-            class="form-control"
-            #password
-            placeholder="Enter your password">
+          <div class="form-group">
+            <label for="email">{{ userType.value == 'student' ? 'Student' : 'Company' }} Email</label>
+            <input
+              name="name"
+              id="email"
+              type="email"
+              class="form-control"
+              #email
+              placeholder="you@example.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              name="password"
+              id="password"
+              type="password"
+              class="form-control"
+              #password
+              placeholder="Enter your password"
+              required
+            >
+          </div>
+
+          <div class="row text-center">
+            <div class="col-sm-6 offset-3 text-center">
+              <button
+                type="submit"
+                class="btn btn-primary"
+                (click)="auth.signup(name.value, email.value, password.value, userType.value)">
+                Register
+              </button>
+            </div>
+          </div>
+
         </div>
 
       </form>
 
-    </div>
-  </div>
-
-  <div class="row text-center">
-    <div class="col-sm-6 offset-3 text-center">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        (click)="auth.signup(email.value, password.value, userType.value)">
-        Register
-      </button>
     </div>
   </div>
 </div>

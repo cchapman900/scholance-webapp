@@ -43,10 +43,11 @@ export class AuthService {
     });
   }
 
-  public signup(email: string, password: string, userType: string): void {
+  public signup(name: string, email: string, password: string, userType: string): void {
     this.auth0.redirect.signupAndLogin({
       connection: 'Username-Password-Authentication',
       email: email,
+      name: name,
       password: password,
       user_metadata: {user_type: userType}
     }, err => {
