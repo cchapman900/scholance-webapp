@@ -21,8 +21,7 @@ const projectsRoutes: Routes = [
   },
   {
     path: 'projects/:project_id',
-    component: ViewProjectComponent,
-    canActivate: [AuthGuard]
+    component: ViewProjectComponent
   },
   {
     path: 'projects/:project_id/update',

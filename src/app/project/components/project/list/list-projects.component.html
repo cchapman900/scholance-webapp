@@ -1,3 +1,25 @@
-<div *ngFor="let project of projects" class="row">
-  <h2><a routerLink="{{project._id}}"> {{project.title}}</a></h2>
+<div class="row">
+  <div class="col-md-3 bg-light border rounded">
+    <h4 class="mt-2">Filter</h4>
+  </div>
+  <div class="col-md-9">
+    <div *ngFor="let project of projects" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><a routerLink="{{project._id}}"> {{project.title}}</a></h5>
+        <div class="row mb-3">
+          <div class="col-2 offset-1 rounded">
+            <img src="assets/images/logo.svg" class="img-fluid">
+            {{project.organization.name}}
+          </div>
+          <div class="col-9">{{project.summary}}</div>
+        </div>
+        <div class="row">
+          <div class="col-2 offset-1"><span class="badge badge-info py-2" *ngIf="project.category">{{project.category}}</span></div>
+          <div class="col-3 small"><span *ngIf="project.deadline"><strong>Deadline:</strong> {{project.deadline}}</span> </div>
+          <div class="col-3 small">{{project.entries.length}} active registrants</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

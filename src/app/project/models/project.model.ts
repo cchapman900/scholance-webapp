@@ -16,6 +16,8 @@ export class Project {
   entries?: [Entry];
   supplementalResources?: [Asset];
   status: string;
+  category: string;
+  deadline: string;
   selectedEntry?: Entry;
   comments?: [Comment];
 }
