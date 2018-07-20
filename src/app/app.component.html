@@ -1,5 +1,4 @@
 <app-navbar></app-navbar>
-<router-outlet *ngIf="isHome"></router-outlet>
-<main class="container" *ngIf="!isHome">
+<div [ngClass]="{'container': !isFullWidth}">
   <router-outlet></router-outlet>
-</main>
+</div>

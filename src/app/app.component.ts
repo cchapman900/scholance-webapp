@@ -11,7 +11,7 @@ import {NavigationEnd, Router} from '@angular/router';
 })
 export class AppComponent {
   user: User;
-  isHome: boolean;
+  isFullWidth: boolean;
 
   constructor(
     public auth: AuthService,
@@ -32,7 +32,12 @@ export class AppComponent {
     // Taken from https://stackoverflow.com/questions/42538251/angular-2-get-current-route/42538483
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        this.isHome = this.router.url === '/';
+        if (this.router.url === '/' || this.router.url.startsWith('/dashboard')) {
+          console.log(this.router.url)
+          this.isFullWidth = true;
+        } else {
+          this.isFullWidth = false;
+        }
       }
     });
   }

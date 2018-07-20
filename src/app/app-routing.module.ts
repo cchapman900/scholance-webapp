@@ -6,12 +6,15 @@ import {RegisterComponent} from './user/auth/components/register/register.compon
 import {LoginComponent} from './user/auth/components/login/login.component';
 import {HomeComponent} from './home/home.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {DashboardHomeComponent} from './dashboard/home/dashboard-home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, children: [
+      { path: '', component: DashboardHomeComponent}
+    ]},
   { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: '' }
 ];

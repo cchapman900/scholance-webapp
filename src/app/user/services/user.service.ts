@@ -13,6 +13,7 @@ export class UserService extends SharedService {
 
   private usersServiceAPIUrl = 'https://5jnzq5gaii.execute-api.us-east-1.amazonaws.com/dev';
   public authenticatedUser$: Observable<User>;
+  public authenticatedUser: User; // Trying this out instead of having to do the subscriber
 
   constructor(
     private http: HttpClient
@@ -27,6 +28,10 @@ export class UserService extends SharedService {
   setAuthenticatedUser (id: string): void {
     console.log('Setting user for ' + id);
     this.authenticatedUser$ = this.getUser(id);
+    this.authenticatedUser$
+      .subscribe((user) => {
+        this.authenticatedUser = user;
+      })
   }
 
 
