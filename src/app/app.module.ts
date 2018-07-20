@@ -12,11 +12,11 @@ import { HomeComponent } from './home/home.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { ProjectModule} from './project/project.module';
-import { ViewCommentComponent } from './shared/components/comment/view/view-comment.component';
 import { NavbarComponent} from './shared/components/navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardHomeComponent } from './dashboard/home/dashboard-home.component';
 import { DashboardSidebarComponent } from './dashboard/sidebar/dashboard-sidebar.component';
+import { ProfileComponent } from './dashboard/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,8 @@ import { DashboardSidebarComponent } from './dashboard/sidebar/dashboard-sidebar
     NavbarComponent,
     DashboardComponent,
     DashboardHomeComponent,
-    DashboardSidebarComponent
+    DashboardSidebarComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

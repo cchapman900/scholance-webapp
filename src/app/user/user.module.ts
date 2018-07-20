@@ -5,26 +5,26 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 
 import { UserService } from './services/user.service';
-import { UpdateUserComponent } from './components/update-user/update-user.component';
-import { UsersRoutingModule } from './users-routing.module';
-import {UpdateOrganizationComponent} from './components/update-organization/update-organization.component';
+import { UpdateUserComponent } from './components/user/update/update-user.component';
+import {UpdateOrganizationComponent} from './components/organization/update-organization/update-organization.component';
 import {OrganizationService} from './services/organization.service';
-import {CreateOrganizationComponent} from './components/create-organization/create-organization.component';
+import {CreateOrganizationComponent} from './components/organization/create-organization/create-organization.component';
 import {AuthService} from './auth/services/auth.service';
 import {AuthGuardService} from './auth/services/auth-guard.service';
 import {ScopeGuardService} from './auth/services/scope-guard.service';
+import { ViewUserComponent } from './components/user/view/view-user.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    AuthModule,
-    UsersRoutingModule
+    AuthModule
   ],
   declarations: [
-    UpdateUserComponent,
     CreateOrganizationComponent,
-    UpdateOrganizationComponent
+    UpdateOrganizationComponent,
+    ViewUserComponent,
+    UpdateUserComponent
   ],
   providers: [
     AuthService,
@@ -32,6 +32,10 @@ import {ScopeGuardService} from './auth/services/scope-guard.service';
     ScopeGuardService,
     UserService,
     OrganizationService
+  ],
+  exports: [
+    ViewUserComponent,
+    UpdateUserComponent
   ]
 })
 export class UserModule { }

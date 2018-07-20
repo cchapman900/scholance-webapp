@@ -7,13 +7,49 @@ import {LoginComponent} from './user/auth/components/login/login.component';
 import {HomeComponent} from './home/home.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {DashboardHomeComponent} from './dashboard/home/dashboard-home.component';
+import {UpdateOrganizationComponent} from './user/components/organization/update-organization/update-organization.component';
+import {ScopeGuardService as ScopeGuard} from './user/auth/services/scope-guard.service';
+import {CreateOrganizationComponent} from './user/components/organization/create-organization/create-organization.component';
+import {UpdateUserComponent} from './user/components/user/update/update-user.component';
+import {AuthGuardService as AuthGuard} from './user/auth/services/auth-guard.service';
+import {ProfileComponent} from './dashboard/profile/profile.component';
+import {ViewUserComponent} from './user/components/user/view/view-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: DashboardComponent, children: [
-      { path: '', component: DashboardHomeComponent}
+      { path: '', component: DashboardHomeComponent},
+      { path: 'profile', component: ProfileComponent, children: [
+          {
+            path: '',
+            component: ViewUserComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'update',
+            component: UpdateUserComponent,
+            canActivate: [AuthGuard]
+          },
+          {
+            path: 'organizations/create',
+            component: CreateOrganizationComponent,
+            canActivate: [ScopeGuard],
+            data: {
+              expectedScopes: ['manage:organization']
+            }
+          },
+          {
+            path: 'organizations/update',
+            component: UpdateOrganizationComponent,
+            canActivate: [ScopeGuard],
+            data: {
+              expectedScopes: ['manage:organization']
+            }
+          }
+        ]
+      }
     ]},
   { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: '' }

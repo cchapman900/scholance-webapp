@@ -33,7 +33,6 @@ export class AppComponent {
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (this.router.url === '/' || this.router.url.startsWith('/dashboard')) {
-          console.log(this.router.url)
           this.isFullWidth = true;
         } else {
           this.isFullWidth = false;

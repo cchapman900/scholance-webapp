@@ -31,16 +31,14 @@
     <div *ngIf="!user.organization">
       <p>You don't yet have an organization associated with your account.</p>
       <button
-        class="btn btn-primary btn-margin"
-        routerLink="/organizations/create">
+        class="btn btn-primary btn-margin">
         Set up your organization
       </button>
     </div>
     <div *ngIf="user.organization">
       <h4 class="text-muted">{{user.organization.name}} - <a class="small" href="http://{{user.organization.domain}}" target="_blank">{{user.organization.domain}}</a> </h4>
       <button
-        class="btn btn-primary btn-margin"
-        routerLink="/organizations/{{user.organization._id}}/update">
+        class="btn btn-primary btn-margin">
         Edit Organization
       </button>
       <button

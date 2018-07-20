@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {OrganizationService} from '../../services/organization.service';
-import {User} from '../../models/user.model';
-import {Organization} from '../../models/organization.model';
-import {UserService} from '../../services/user.service';
+import {OrganizationService} from '../../../services/organization.service';
+import {User} from '../../../models/user.model';
+import {Organization} from '../../../models/organization.model';
+import {UserService} from '../../../services/user.service';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 

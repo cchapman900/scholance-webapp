@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Organization } from '../../models/organization.model';
-import {OrganizationService} from '../../services/organization.service';
-import {User} from '../../models/user.model';
-import {UserService} from '../../services/user.service';
+import { Organization } from '../../../models/organization.model';
+import {OrganizationService} from '../../../services/organization.service';
+import {User} from '../../../models/user.model';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-update-organization',
