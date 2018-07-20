@@ -18,8 +18,8 @@ import { ListEntriesComponent } from './components/entry/list/list-entries.compo
 import { ViewEntryComponent } from './components/entry/view/view-entry.component';
 import {SharedModule} from '../shared/shared.module';
 import { StudentProjectToolbarComponent } from './components/project/view/student-project-toolbar/student-project-toolbar.component';
-import {LiaisonWorkbenchComponent} from './components/workbench/liaison-workbench/liaison-workbench.component';
-import { WorkbenchComponent } from './components/workbench/workbench.component';
+import {LiaisonWorkbenchComponent} from '../dashboard/workbench/liaison-workbench/liaison-workbench.component';
+import { WorkbenchComponent } from '../dashboard/workbench/workbench.component';
 
 @NgModule({
   imports: [

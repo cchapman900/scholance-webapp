@@ -1,41 +1,47 @@
-<h1>
-  {{project?.title}}
-</h1>
-<h3>{{project?.organization.name}}</h3>
+<h2>
+  {{project?.title}} <span class="badge badge-info ml-5">{{project?.category}}</span>
+</h2>
+<h5>Project Summary</h5>
 <p>{{project?.summary}}</p>
+<h5>Full Details</h5>
+<p>{{project?.fullDescription}}</p>
 
-<div *ngIf="user && project">
+<hr/>
 
-  <div *ngIf="user?.userType === 'business' && user?._id === project?.liaison._id">
+<h5>About {{project?.organization.name}}</h5>
+<p>&lt; Company description &gt;</p>
 
-    <button
-      class="btn btn-primary"
-      routerLink="update"
-    >
-      Update Project
-    </button>
+<hr/>
 
-    <p class="text-center">Project status: {{project.status}}</p>
+<h5>Project Specs</h5>
+<ul>
+  <li *ngFor="let spec of project?.specs">{{spec}}</li>
+</ul>
 
-    <hr/>
+<h5>Deadline</h5>
+<p>{{project?.deadline}}</p>
 
-    <app-list-entries [entries]="project.entries"></app-list-entries>
+<h5>Deliverables</h5>
+<ul>
+  <li *ngFor="let deliverable of project?.deliverables">
+    <p>{{deliverable.name}}</p>
+  </li>
+</ul>
 
-  </div>
+<hr/>
 
+<h5>Supplemental Resources</h5>
+<ul>
+  <li *ngFor="let supplementalResource of project?.supplementalResources">
+    <p>{{supplementalResource.name}}</p>
+  </li>
+</ul>
 
-  <app-student-project-toolbar
-    *ngIf="user?.userType === 'student'"
-    [studentIsRegisteredForProject]="studentIsRegisteredForProject()" [project_id]="project._id" [user_id]="user._id">
-  </app-student-project-toolbar>
-
-</div>
-
-<hr class="my-5"/>
+<hr/>
 
 <div class="row">
   <div class="col-md-10 offset-md-1">
-    <h4>Comments on this project</h4>
+    <h4>Project discussion board</h4>
     <div [hidden]="!showComments">
       <app-view-comment *ngFor="let comment of project?.comments"
                         [parentUrl]="router.url" [comment]="comment"></app-view-comment>

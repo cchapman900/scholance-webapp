@@ -5,6 +5,7 @@ export class Project {
   _id: string;
   title: string;
   summary: string;
+  fullDescription: string;
   liaison: {
     _id: string,
     name: string
@@ -16,6 +17,12 @@ export class Project {
   entries?: [Entry];
   supplementalResources?: [Asset];
   status: string;
+  specs: [string];
+  deliverables: [{
+    name: string,
+    description: string,
+    acceptedFormats: [string]
+  }];
   category: string;
   deadline: string;
   selectedEntry?: Entry;

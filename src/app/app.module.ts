@@ -13,12 +13,14 @@ import { AppRoutingModule } from './app-routing.module';
 import {ProjectModule} from './project/project.module';
 import { ViewCommentComponent } from './shared/components/comment/view/view-comment.component';
 import {NavbarComponent} from './shared/components/navbar/navbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
