@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faUser, faHome } from '@fortawesome/free-solid-svg-icons';
+import {UserService} from '../../user/services/user.service';
 
 @Component({
   selector: 'app-dashboard-sidebar',
@@ -10,7 +11,9 @@ export class DashboardSidebarComponent implements OnInit {
   faUser = faUser;
   faHome = faHome;
 
-  constructor() { }
+  constructor(
+    public userService: UserService
+  ) { }
 
   ngOnInit() {
   }

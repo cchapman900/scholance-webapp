@@ -13,6 +13,12 @@
           Profile
         </a>
       </li>
+      <li *ngIf="userService.authenticatedUser?.userType === 'business'" class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/organization" routerLinkActive="active">
+          <fa-icon [icon]="faUser"></fa-icon>
+          My Organization
+        </a>
+      </li>
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">

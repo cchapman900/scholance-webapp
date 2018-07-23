@@ -1,0 +1,20 @@
+<h2>Organization</h2>
+<div *ngIf="!userService.authenticatedUser?.organization">
+  <p>You don't yet have an organization associated with your account.</p>
+  <button
+    class="btn btn-primary btn-margin">
+    Set up your organization
+  </button>
+</div>
+<div *ngIf="userService.authenticatedUser?.organization">
+  <h4 class="text-muted">{{userService.authenticatedUser?.organization.name}} - <a class="small" href="http://{{userService.authenticatedUser.organization.domain}}" target="_blank">{{userService.authenticatedUser.organization.domain}}</a> </h4>
+  <button
+    class="btn btn-primary btn-margin">
+    Edit Organization
+  </button>
+  <button
+    class="btn btn-danger btn-margin"
+    (click)="removeUserFromOrganization()">
+    Remove myself from this Organization
+  </button>
+</div>

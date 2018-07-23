@@ -13,37 +13,22 @@ import {UserService} from '../../../services/user.service';
   styleUrls: ['./update-organization.component.css']
 })
 export class UpdateOrganizationComponent implements OnInit {
-  user: User;
   organization: Organization;
-  submitted = false;
-  onSubmit() { this.submitted = true; }
 
   constructor(
     private route: ActivatedRoute,
     private organizationService: OrganizationService,
-    private userService: UserService,
+    public userService: UserService,
     private location: Location
   ) { }
 
-  ngOnInit() {
-    this.getUser()
-  }
-
-  getUser(): void {
-    this.userService.authenticatedUser$.subscribe((user) => {
-      this.user = user;
-      this.organization = user.organization;
-      console.log(user)
-    })
-  }
+  ngOnInit() {}
 
   goBack(): void {
     this.location.back();
   }
 
   update(): void {
-    console.log(this.user);
-    this.submitted = true;
     this.organizationService.updateOrganization(this.organization)
       .subscribe(() => {
         // this.goBack()

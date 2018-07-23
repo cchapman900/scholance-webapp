@@ -64,7 +64,7 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
       } else if (err) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/dashboard']);
         console.log(err);
         alert(`Error: ${err.error}. Check the console for further details.`);
       }
@@ -85,7 +85,7 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     localStorage.setItem('scopes', scopes);
-    this.router.navigate(['home']);
+    this.router.navigate(['/dashboard']);
   }
 
   public logout(): void {
