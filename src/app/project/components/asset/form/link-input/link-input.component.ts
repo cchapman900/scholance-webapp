@@ -4,6 +4,7 @@ import {User} from '../../../../../user/models/user.model';
 import {UserService} from '../../../../../user/services/user.service';
 import {ProjectService} from '../../../../services/project.service';
 import {Asset} from '../../../../models/asset.model';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-link-input',
@@ -11,6 +12,9 @@ import {Asset} from '../../../../models/asset.model';
   styleUrls: ['./link-input.component.css']
 })
 export class LinkInputComponent implements OnInit {
+  linkInputForm = this.formBuilder.group({
+
+  });
 
   @Input() project_id: string;
   @Input() assetType: string;
@@ -19,7 +23,8 @@ export class LinkInputComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private userService: UserService
+    private userService: UserService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {

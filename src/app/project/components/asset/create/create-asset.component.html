@@ -1,15 +1,1 @@
-<form class="row">
-  <div class="col-md-6">
-    <h5>
-      Add new {{assetTypeDisplay(assetType)}}
-    </h5>
-  </div>
-  <div class="form-group col-md-6">
-    <select [(ngModel)]="selectedMediaType" id="mediaType" name="mediaType" class="form-control">
-      <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
-    </select>
-  </div>
-</form>
-
-<app-file-input *ngIf="selectedMediaType === 'image'" [project_id]="project_id" [assetType]="assetType"></app-file-input>
-<app-link-input *ngIf="selectedMediaType === 'link'" [project_id]="project_id" [assetType]="assetType"></app-link-input>
+<app-asset-form></app-asset-form>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {ViewCommentComponent} from './components/comment/view/view-comment.component';
 import { CreateCommentComponent } from './components/comment/create/create-comment.component';
 import { CommentService } from './services/comment.service';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [

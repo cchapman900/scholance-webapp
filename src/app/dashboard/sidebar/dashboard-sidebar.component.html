@@ -27,5 +27,19 @@
         <span data-feather="plus-circle"></span>
       </a>
     </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/dashboard/projects/active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          Active
+        </a>
+      </li>
+    </ul>
+    <ul class="nav flex-column" *ngIf="userService.authenticatedUser?.userType === 'business'">
+      <li class="nav-item">
+        <button class="btn btn-info mx-auto btn-sm" routerLink="/projects/create">
+          Post a project
+        </button>
+      </li>
+    </ul>
   </div>
 </nav>

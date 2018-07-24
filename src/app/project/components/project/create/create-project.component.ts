@@ -3,6 +3,7 @@ import {Project} from '../../../models/project.model';
 import {User} from '../../../../user/models/user.model';
 import {ProjectService} from '../../../services/project.service';
 import {UserService} from '../../../../user/services/user.service';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-project',
@@ -11,9 +12,6 @@ import {UserService} from '../../../../user/services/user.service';
 })
 export class CreateProjectComponent implements OnInit {
   project: Project;
-  liaison: User;
-  submitted = false;
-  onSubmit() { this.submitted = true; }
 
   constructor(
     private projectService: ProjectService,
@@ -22,20 +20,13 @@ export class CreateProjectComponent implements OnInit {
 
   ngOnInit() {
     this.project = new Project();
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.liaison = user;
-        console.log(this.liaison.organization);
-      })
   }
 
   create(): void {
-    this.submitted = true;
-    this.project.liaison._id = this.liaison._id;
-    console.log(this.liaison.organization);
+    this.project.liaison._id = this.userService.authenticatedUser._id;
     this.project.organization = {
-      _id: this.liaison.organization._id,
-      name: this.liaison.organization.name
+      _id: this.userService.authenticatedUser.organization._id,
+      name: this.userService.authenticatedUser.organization.name
     };
     this.projectService.createProject(this.project)
       .subscribe(() => {

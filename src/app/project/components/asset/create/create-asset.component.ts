@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Input} from '@angular/core';
 import {Project} from '../../../models/project.model';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-create-asset',
@@ -8,6 +9,9 @@ import {Project} from '../../../models/project.model';
   styleUrls: ['./create-asset.component.css']
 })
 export class CreateAssetComponent implements OnInit {
+  assetForm = this.formBuilder.group({
+
+  });
   @Input() project_id: string;
   @Input() assetType: string;
   selectedMediaType: string;
@@ -17,7 +21,9 @@ export class CreateAssetComponent implements OnInit {
     'link'
     ];
 
-  constructor() { }
+  constructor(
+    private formBuilder: FormBuilder
+  ) { }
 
   ngOnInit() {
   }

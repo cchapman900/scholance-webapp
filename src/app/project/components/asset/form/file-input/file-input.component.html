@@ -1,4 +1,4 @@
-<form>
+<form [formGroup]="fileInputForm">
   <div class="row text-center">
     <div class="col-3">
       <img src="{{ image ? image : defaultImage }}" width="100" height="100"/>
@@ -8,7 +8,7 @@
     </div>
     <div class="col-5 text-left">
       <label for="name">File Name</label>
-      <input type="text" class="form-control" [(ngModel)]="name" id="name" name="name"/>
+      <input type="text" class="form-control" id="name" name="name"/>
     </div>
   </div>
   <div class="row">

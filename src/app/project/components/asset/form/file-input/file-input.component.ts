@@ -5,6 +5,7 @@ import {Input} from '@angular/core';
 import {Project} from '../../../../models/project.model';
 import {User} from '../../../../../user/models/user.model';
 import {UserService} from '../../../../../user/services/user.service';
+import {FormBuilder} from '@angular/forms';
 
 @Component({
   selector: 'app-file-input',
@@ -12,6 +13,9 @@ import {UserService} from '../../../../../user/services/user.service';
   styleUrls: ['./file-input.component.css']
 })
 export class FileInputComponent implements OnInit {
+  fileInputForm = this.formBuilder.group({
+
+  });
 
   @Input() project_id: string;
   @Input() assetType: string;
@@ -87,7 +91,8 @@ export class FileInputComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private userService: UserService
+    private userService: UserService,
+    private formBuilder: FormBuilder
   ) { }
 
   ngOnInit() {
