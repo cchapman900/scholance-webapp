@@ -8,6 +8,8 @@ import {ListProjectsComponent} from './components/project/list/list-projects.com
 import {ViewProjectComponent} from './components/project/view/view-project.component';
 import {UpdateProjectComponent} from './components/project/update/update-project.component';
 import {ViewEntryComponent} from './components/entry/view/view-entry.component';
+import {WorkbenchComponent} from './components/workbench/workbench.component';
+import {ListEntriesComponent} from './components/entry/list/list-entries.component';
 
 const projectsRoutes: Routes = [
   {
@@ -32,7 +34,16 @@ const projectsRoutes: Routes = [
     path: 'projects/:project_id/entries/:entry_id',
     component: ViewEntryComponent,
     canActivate: [AuthGuard]
-  }
+  },
+  { path: 'workbench', component: WorkbenchComponent, canActivate: [AuthGuard], children: [
+      { path: 'projects/:project_id', component: ViewProjectComponent },
+      { path: 'projects/:project_id/submissions', children: [
+          { path: '', component: ListEntriesComponent },
+          { path: ':entry_id', component: ViewEntryComponent }
+        ]
+      }
+    ]
+  },
 ];
 
 @NgModule({

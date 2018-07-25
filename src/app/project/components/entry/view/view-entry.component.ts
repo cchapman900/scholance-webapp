@@ -15,39 +15,30 @@ export class ViewEntryComponent implements OnInit {
   project: Project;
   entry: Entry;
   showComments: boolean;
-  user: User;
-  liaison_id: string;
+  project_id: string;
 
   constructor(
     private projectService: ProjectService,
-    private userService: UserService,
+    public userService: UserService,
     private route: ActivatedRoute,
     protected router: Router      // Currently assuming that webapp matches perfectly with API. Probably should fix soon.
   ) { }
 
   ngOnInit() {
-    const project_id = this.route.snapshot.paramMap.get('project_id');
+    this.project_id = this.route.parent.snapshot.paramMap.get('project_id');
     const entry_id = this.route.snapshot.paramMap.get('entry_id');
-    this.getProject(project_id);
-    this.getEntry(project_id, entry_id);
-    this.getUser();
+    // this.getProject(project_id);
+    // this.getEntry(project_id, entry_id);
+    // this.getUser();
 
     this.showComments = false;
   }
 
-  getUser(): void {
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.user = user;
-      })
-  }
-
-  getProject(project_id): void {
+  getProject(project_id: string): void {
     this.projectService.getProject(project_id)
       .subscribe((project) => {
-        console.log(project);
-        this.liaison_id = project.liaison._id;
-      });
+        this.project = project;
+      })
   }
 
   getEntry(project_id: string, entry_id: string): void {
@@ -58,14 +49,14 @@ export class ViewEntryComponent implements OnInit {
   }
 
   selectEntry(): void {
-    this.projectService.updateProjectStatus(this.project._id, 'complete', this.entry.student._id)
+    this.projectService.updateProjectStatus(this.project_id, 'complete', this.entry.student._id)
       .subscribe((project) => {
         console.log(project)
       })
   }
 
   submitEntry(): void {
-    this.projectService.updateEntrySubmissionStatus(this.project._id, this.entry.student._id, 'submitted')
+    this.projectService.updateEntrySubmissionStatus(this.project_id, this.entry.student._id, 'submitted')
       .subscribe(() => {
       });
   }

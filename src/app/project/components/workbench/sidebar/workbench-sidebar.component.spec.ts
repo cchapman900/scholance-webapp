@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LiaisonWorkbenchComponent } from './liaison-workbench.component';
+import { WorkbenchSidebarComponent } from './workbench-sidebar.component';
 
-describe('LiaisonWorkbenchComponent', () => {
-  let component: LiaisonWorkbenchComponent;
-  let fixture: ComponentFixture<LiaisonWorkbenchComponent>;
+describe('WorkbenchSidebarComponent', () => {
+  let component: WorkbenchSidebarComponent;
+  let fixture: ComponentFixture<WorkbenchSidebarComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LiaisonWorkbenchComponent ]
+      declarations: [ WorkbenchSidebarComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LiaisonWorkbenchComponent);
+    fixture = TestBed.createComponent(WorkbenchSidebarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

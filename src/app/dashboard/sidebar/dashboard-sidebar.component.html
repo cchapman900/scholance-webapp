@@ -23,20 +23,19 @@
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
       <span>My Projects</span>
-      <a class="d-flex align-items-center text-muted" href="#">
-        <span data-feather="plus-circle"></span>
-      </a>
     </h6>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a class="nav-link" routerLink="/dashboard/projects/active" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          Active
-        </a>
+        <ul class="nav flex-column ml-4">
+          <li class="nav-item" *ngFor="let project of userService.authenticatedUser?.projects">
+            <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
+          </li>
+        </ul>
       </li>
     </ul>
-    <ul class="nav flex-column" *ngIf="userService.authenticatedUser?.userType === 'business'">
-      <li class="nav-item">
-        <button class="btn btn-info mx-auto btn-sm" routerLink="/projects/create">
+    <ul class="nav flex-column mt-4" *ngIf="userService.authenticatedUser?.userType === 'business'">
+      <li class="nav-item px-4">
+        <button class="btn btn-info mx-auto btn-sm form-control" routerLink="/projects/create">
           Post a project
         </button>
       </li>

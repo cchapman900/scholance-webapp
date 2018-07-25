@@ -5,7 +5,10 @@ import {UserService} from '../../user/services/user.service';
 @Component({
   selector: 'app-dashboard-sidebar',
   templateUrl: './dashboard-sidebar.component.html',
-  styleUrls: ['./dashboard-sidebar.component.css']
+  styleUrls: [
+    '../../../assets/css/sidebar.css',
+    './dashboard-sidebar.component.css'
+  ]
 })
 export class DashboardSidebarComponent implements OnInit {
   faUser = faUser;

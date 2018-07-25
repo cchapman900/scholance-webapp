@@ -7,9 +7,9 @@
     <h4>Attached Assets for this Project Entry</h4>
     <p *ngIf="entry?.assets.length === 0">There are currently no assets for this Project Submission</p>
     <app-view-asset *ngFor="let asset of entry?.assets"
-                    [project_id]="project?._id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
+                    [project_id]="project_id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
     <br/>
-    <app-create-asset *ngIf="user?.userType === 'student' && user?._id === entry?.student._id" [assetType]="'entryAsset'" [project_id]="project_id"></app-create-asset>
+    <app-create-asset *ngIf="userService.authenticatedUser?.userType === 'student' && userService.authenticatedUser?._id === entry?.student._id" [assetType]="'entryAsset'" [project_id]="project_id"></app-create-asset>
   </div>
 </div>
 
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="user?._id === liaison_id">
+<div class="row" *ngIf="userService.authenticatedUser?._id === project?.liaison._id">
   <div class="col-md-6 offset-md-3 text-center">
     <hr/>
     <div *ngIf="project?.status === 'complete'">
