@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Input} from '@angular/core';
 import {Asset} from '../../../models/asset.model';
 import {ProjectService} from '../../../services/project.service';
-import {Project} from '../../../models/project.model';
 import {UserService} from '../../../../user/services/user.service';
 import {User} from '../../../../user/models/user.model';
+import { faLink } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-asset',
@@ -15,6 +15,7 @@ export class ViewAssetComponent implements OnInit {
   @Input() project_id: string;
   @Input() asset: Asset;
   @Input() assetType: string;
+  faLink = faLink;
   user: User;
 
   constructor(

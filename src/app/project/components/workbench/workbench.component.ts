@@ -23,6 +23,7 @@ export class WorkbenchComponent implements OnInit {
 
   ngOnInit() {
     const project_id = this.route.firstChild.snapshot.paramMap.get('project_id');
+    console.log(this.route.snapshot);
     this.getProject(project_id);
   }
 

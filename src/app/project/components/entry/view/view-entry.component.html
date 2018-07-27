@@ -2,25 +2,22 @@
   Project Submission for: {{entry?.student.name}}
 </h3>
 
+<div class="row" *ngIf="entry?.commentary">
+  <div class="col-10 mx-auto">
+    <h4>Commentary about this submission</h4>
+    <p>{{entry.commentary}}</p>
+  </div>
+</div>
+
+<hr/>
+
 <div class="row">
-  <div class="col-md-10 offset-md-1">
-    <h4>Attached Assets for this Project Entry</h4>
+  <div class="col-md-10 mx-auto">
+    <h4>Attached Deliverables for this Project Entry</h4>
     <p *ngIf="entry?.assets.length === 0">There are currently no assets for this Project Submission</p>
     <app-view-asset *ngFor="let asset of entry?.assets"
                     [project_id]="project_id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
     <br/>
-    <app-create-asset *ngIf="userService.authenticatedUser?.userType === 'student' && userService.authenticatedUser?._id === entry?.student._id" [assetType]="'entryAsset'" [project_id]="project_id"></app-create-asset>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 offset-md-3 text-center">
-    <hr/>
-    <p>Submission status: <strong>{{entry?.submissionStatus}}</strong></p>
-    <button *ngIf="entry?.submissionStatus == 'active'"
-            class="btn btn-primary"
-            (click)="submitEntry()"
-    >Submit project entry</button>
   </div>
 </div>
 

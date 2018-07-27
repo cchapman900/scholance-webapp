@@ -1,11 +1,11 @@
 <h3 class="mb-4">Project Submissions</h3>
-<p *ngIf="entries.length === 0">
+<p *ngIf="entries?.length === 0">
   There are no submissions yet for this project
 </p>
 <div class="row border p-3" *ngFor="let entry of entries">
   <div class="col-3">
     <h4>
-      <a routerLink="{{entry.student._id}}">{{entry.student.name}}</a>
+      <a routerLink="{{entry?.student._id}}">{{entry?.student.name}}</a>
     </h4>
   </div>
 </div>

@@ -4,4 +4,5 @@ export class Asset {
   mediaType: string;
   uri?: string;
   text?: string;
+  commentary?: string;
 }

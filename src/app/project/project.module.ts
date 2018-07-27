@@ -23,6 +23,7 @@ import {WorkbenchSidebarComponent} from './components/workbench/sidebar/workbenc
 import { ProjectFormComponent } from './components/project/form/project-form.component';
 import { AssetFormComponent } from './components/asset/form/asset-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { WorkbenchSubmissionComponent } from './components/workbench/submission/workbench-submission.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     WorkbenchComponent,
     ProjectFormComponent,
     AssetFormComponent,
-    WorkbenchSidebarComponent
+    WorkbenchSidebarComponent,
+    WorkbenchSubmissionComponent
   ],
   providers: [
     AuthService,

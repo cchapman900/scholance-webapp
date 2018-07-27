@@ -19,9 +19,16 @@
           Project Overview
         </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/workbench/projects/{{project?._id}}/submissions" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+      <li class="nav-item" *ngIf="userService.authenticatedUser?.userType === 'business'">
+        <a class="nav-link" routerLink="/workbench/projects/{{project?._id}}/submissions" routerLinkActive="active">
           Project Submissions
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="userService.authenticatedUser?.userType === 'student'">
+        <a class="nav-link"
+           routerLink="/workbench/projects/{{project?._id}}/submission"
+           routerLinkActive="active">
+          My Submission
         </a>
       </li>
     </ul>
