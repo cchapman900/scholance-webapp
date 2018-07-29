@@ -1,9 +1,36 @@
 <div class="row">
   <div class="col-2">
-    <img [src]="userService.authenticatedUser?.photo || 'assets/images/user-icon.png'" class="img-fluid">
+    <img [src]="user?.photo || 'assets/images/user-icon.png'" class="img-fluid">
   </div>
   <div class="col-10">
-    <h4>{{userService.authenticatedUser?.name}}</h4>
-    <p>{{userService.authenticatedUser?.about}}</p>
+    <div class="row">
+      <h4>{{user?.name}}</h4>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p><strong>About Me</strong><br/>{{user?.about}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <a *ngIf="user?.linkedin" href="{{ user?.linkedin }}" target="_blank">
+          <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 text-center">
+    <a class="btn btn-info"
+       routerLink="update"
+       *ngIf="showUpdateButton"
+    >
+      Update my profile
+    </a>
   </div>
 </div>
+
+<hr/>
+
+<app-view-user-liaison *ngIf="user?.userType === 'business'" [user]="user"></app-view-user-liaison>

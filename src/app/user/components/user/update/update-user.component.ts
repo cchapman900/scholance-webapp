@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { Location } from '@angular/common';
 import {FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms'
 
-import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import {OrganizationService} from '../../../services/organization.service';
 
@@ -15,7 +14,10 @@ import {OrganizationService} from '../../../services/organization.service';
 export class UpdateUserComponent implements OnInit {
   userForm = new FormGroup({
     name: new FormControl(''),
-    email: new FormControl('')
+    email: new FormControl(''),
+    about: new FormControl(''),
+    position: new FormControl(''),
+    linkedin: new FormControl('')
   });
   submitted = false;
   onSubmit() { this.submitted = true; }
@@ -31,8 +33,12 @@ export class UpdateUserComponent implements OnInit {
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.userForm = this.formBuilder.group({
+          _id: [user._id],
           name: [user.name, Validators.required],
-          email: [user.email, Validators.email]
+          email: [user.email, Validators.email],
+          about: [user.about],
+          position: [user.position],
+          linkedin: [user.linkedin] // TODO: Add validation to verify this is a linkedin
         });
       });
   }
@@ -45,11 +51,10 @@ export class UpdateUserComponent implements OnInit {
 
   update(): void {
     this.submitted = true;
-    console.log(this.userForm)
-    // this.userService.updateUser(this.user)
-    //   .subscribe(() => {
-    //     // this.goBack()
-    //   });
+    this.userService.updateUser(this.userForm.value)
+      .subscribe(() => {
+        this.goBack()
+      });
   }
 
 }

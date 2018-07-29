@@ -60,6 +60,7 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   updateUser (user: User): Observable<User> {
+    console.log(user);
     const updateUserUrl = `${this.usersServiceAPIUrl}/users/${user._id}`;
     console.log(this.httpOptions);
     return this.http.put<User>(updateUserUrl, user, this.httpOptions)

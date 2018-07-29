@@ -1,6 +1,12 @@
+///<reference path="../../../node_modules/@fortawesome/free-brands-svg-icons/index.d.ts"/>
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
+
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {library} from '@fortawesome/fontawesome-svg-core';
+import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+library.add(faLinkedin);
 
 import { AuthModule } from './auth/auth.module';
 
@@ -14,19 +20,24 @@ import {AuthGuardService} from './auth/services/auth-guard.service';
 import {ScopeGuardService} from './auth/services/scope-guard.service';
 import { ViewUserComponent } from './components/user/view/view-user.component';
 import { ViewOrganizationComponent } from './components/organization/view/view-organization.component';
+import {RouterModule} from '@angular/router';
+import { ViewUserLiaisonComponent } from './components/user/view/liaison/view-user-liaison.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    AuthModule
+    RouterModule,
+    AuthModule,
+    FontAwesomeModule
   ],
   declarations: [
     CreateOrganizationComponent,
     UpdateOrganizationComponent,
     ViewUserComponent,
     UpdateUserComponent,
-    ViewOrganizationComponent
+    ViewOrganizationComponent,
+    ViewUserLiaisonComponent
   ],
   providers: [
     AuthService,

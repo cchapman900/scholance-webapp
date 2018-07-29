@@ -1,0 +1,13 @@
+<div class="row text-center" *ngIf="!user?.organization">
+  <div class="col-12">
+    <p>You don't yet have an organization associated with your account.</p>
+    <button class="btn btn-info">Set yor organization up here</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12" *ngIf="user?.organization">
+    <h4>Organization: {{user?.organization.name}}</h4>
+    <p *ngIf="user?.position">Position: {{user?.position}}</p>
+  </div>
+</div>

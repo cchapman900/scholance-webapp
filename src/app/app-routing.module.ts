@@ -54,6 +54,12 @@ const routes: Routes = [
       },
     ]
   },
+  // These should probably be in a Users Routing module
+  { path: 'users', children: [
+      { path: ':user_id', component: ViewUserComponent },
+      { path: ':user_id/update', component: UpdateUserComponent, canActivate: [AuthGuard] }
+    ]
+  },
   { path: 'callback', component: CallbackComponent },
   { path: '**', redirectTo: '' }
 ];

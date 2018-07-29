@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faUser, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHome, faBuilding } from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../user/services/user.service';
 
 @Component({
@@ -13,6 +13,7 @@ import {UserService} from '../../user/services/user.service';
 export class DashboardSidebarComponent implements OnInit {
   faUser = faUser;
   faHome = faHome;
+  faBuilding = faBuilding;
 
   constructor(
     public userService: UserService
