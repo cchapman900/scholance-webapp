@@ -4,9 +4,12 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {library} from '@fortawesome/fontawesome-svg-core';
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faLinkedin, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
+
 library.add(faLinkedin);
+library.add(faTwitter);
+library.add(faInstagram);
 
 import { AuthModule } from './auth/auth.module';
 
@@ -22,6 +25,8 @@ import { ViewUserComponent } from './components/user/view/view-user.component';
 import { ViewOrganizationComponent } from './components/organization/view/view-organization.component';
 import {RouterModule} from '@angular/router';
 import { ViewUserLiaisonComponent } from './components/user/view/liaison/view-user-liaison.component';
+import { ViewUserStudentComponent } from './components/user/view/student/view-user-student.component';
+import { OrganizationFormComponent } from './components/organization/form/organization-form.component';
 
 @NgModule({
   imports: [
@@ -37,7 +42,9 @@ import { ViewUserLiaisonComponent } from './components/user/view/liaison/view-us
     ViewUserComponent,
     UpdateUserComponent,
     ViewOrganizationComponent,
-    ViewUserLiaisonComponent
+    ViewUserLiaisonComponent,
+    ViewUserStudentComponent,
+    OrganizationFormComponent
   ],
   providers: [
     AuthService,

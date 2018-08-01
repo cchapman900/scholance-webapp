@@ -9,7 +9,13 @@ export class User {
   about?: string;
   userType?: string;
   organization?: Organization;
+  school?: string;
+  academicFocus?: string;
+  interests?: string;
   position?: string;
   projects?: [Project];
-  linkedin: string
+  linkedin: string;
+  twitter: string;
+  website: string;
+  instagram: string;
 }

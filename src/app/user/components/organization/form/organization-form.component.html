@@ -1,0 +1,63 @@
+<form [formGroup]="organizationForm" *ngIf="organizationForm">
+  <div class="row">
+    <div class="col-md-2">
+      <img [src]="organization?.logo || 'assets/images/user-icon.png'" class="img-fluid">
+    </div>
+    <div class="col-md-10">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" formControlName="name" id="name">
+      </div>
+
+      <div class="form-group">
+        <label for="industry">Industry</label>
+        <input type="text" class="form-control" formControlName="industry" id="industry">
+      </div>
+
+      <div class="form-group">
+        <label for="about">About the Organization</label>
+        <textarea class="form-control" formControlName="about" id="about"></textarea>
+      </div>
+
+      <h4 class="mt-5">Links</h4>
+
+      <div class="form-group">
+
+        <div class="row">
+          <div class="col-1 text-right">
+            <label for="domain" class="small">Company Website</label>
+          </div>
+          <div class="col-11 input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">www.</span>
+            </div>
+            <input type="text" class="form-control" formControlName="domain" id="domain">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1 text-right">
+            <label for="linkedin" class="icon"><fa-icon [icon]="['fab', 'linkedin']"></fa-icon></label>
+          </div>
+          <div class="col-11">
+            <input type="text" class="form-control" formControlName="linkedin" id="linkedin">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-1 text-right">
+            <label for="twitter" class="icon"><fa-icon [icon]="['fab', 'twitter']"></fa-icon></label>
+          </div>
+          <div class="col-11">
+            <input type="text" class="form-control" formControlName="twitter" id="twitter">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-12 text-center">
+    <button (click)="save()" class="btn btn-success">Save</button>
+  </div>
+</form>

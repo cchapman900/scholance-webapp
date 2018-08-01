@@ -13,7 +13,7 @@
           Profile
         </a>
       </li>
-      <li *ngIf="userService.authenticatedUser?.userType === 'business'" class="nav-item">
+      <li *ngIf="userService.authenticatedUser?.userType === 'business' && userService.authenticatedUser.organization" class="nav-item">
         <a class="nav-link" routerLink="/dashboard/organization" routerLinkActive="active">
           <fa-icon [icon]="faBuilding"></fa-icon>
           My Organization

@@ -1,20 +1,68 @@
-<h2>Organization</h2>
-<div *ngIf="!userService.authenticatedUser?.organization">
-  <p>You don't yet have an organization associated with your account.</p>
-  <button
-    class="btn btn-primary btn-margin">
-    Set up your organization
-  </button>
-</div>
-<div *ngIf="userService.authenticatedUser?.organization">
-  <h4 class="text-muted">{{userService.authenticatedUser?.organization.name}} - <a class="small" href="http://{{userService.authenticatedUser.organization.domain}}" target="_blank">{{userService.authenticatedUser.organization.domain}}</a> </h4>
-  <button
-    class="btn btn-primary btn-margin">
-    Edit Organization
-  </button>
-  <button
-    class="btn btn-danger btn-margin"
-    (click)="removeUserFromOrganization()">
-    Remove myself from this Organization
-  </button>
+<div class="row">
+  <div class="col-2">
+    <img [src]="organization?.logo || 'assets/images/user-icon.png'" class="img-fluid">
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <h4>{{organization?.name}}</h4>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p><strong>Industry:</strong> {{organization?.industry}}</p>
+      </div>
+      <div class="col-12">
+        <p><strong>About the Organization</strong><br/>{{organization?.about}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-2">
+        <a *ngIf="organization?.linkedin" href="{{ organization?.linkedin }}" target="_blank">
+          <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
+        </a>
+        <a *ngIf="organization?.twitter" href="{{ organization?.twitter }}" target="_blank">
+          <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
+        </a>
+        <a *ngIf="organization?.domain" href="https://{{ organization?.domain }}" target="_blank">
+          <span class="small">Company Website</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 text-center">
+    <a class="btn btn-info"
+       routerLink="update"
+       *ngIf="showUpdateButton"
+    >
+      Update organization
+    </a>
+    <hr/>
+  </div>
+
+  <div class="col-10 mx-auto">
+    <h4>Members of this Organization</h4>
+      <div class="card"
+           style="width: 8rem; cursor: pointer"
+           *ngFor="let liaison of organization?.liaisons"
+           routerLink="/users/{{liaison._id}}">
+        <div class="card-body">
+          <img [src]="liaison.photo || 'assets/images/user-icon.png'" class="card-img-top">
+          <div class="small card-text text-center">
+            <div
+              *ngIf="userService.authenticatedUser && userService.authenticatedUser?._id != liaison._id">
+              <p>
+                <strong>{{liaison.name}}</strong>
+                <br/>
+                {{liaison.position}}
+              </p>
+            </div>
+            <div *ngIf="userService.authenticatedUser?._id == liaison._id">
+              <span class="badge badge-success">You</span>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
 </div>

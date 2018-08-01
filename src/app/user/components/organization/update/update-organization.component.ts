@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Organization } from '../../../models/organization.model';
 import {OrganizationService} from '../../../services/organization.service';
-import {User} from '../../../models/user.model';
 import {UserService} from '../../../services/user.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Organization} from '../../../models/organization.model';
 
 @Component({
   selector: 'app-update-organization',
@@ -19,20 +19,17 @@ export class UpdateOrganizationComponent implements OnInit {
     private route: ActivatedRoute,
     private organizationService: OrganizationService,
     public userService: UserService,
-    private location: Location
-  ) { }
+    private formBuilder: FormBuilder
+  ) {
+    this.userService.authenticatedUser$
+      .subscribe((user) => {
+        this.organizationService.getOrganization(user.organization._id)
+          .subscribe((organization) => {
+            this.organization = organization;
+          });
+        });
+  }
 
   ngOnInit() {}
-
-  goBack(): void {
-    this.location.back();
-  }
-
-  update(): void {
-    this.organizationService.updateOrganization(this.organization)
-      .subscribe(() => {
-        // this.goBack()
-      });
-  }
 
 }

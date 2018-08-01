@@ -28,7 +28,25 @@
             <input type="text" class="form-control" formControlName="position" id="position">
           </div>
 
-          <h4 class="mt-5">Social Links</h4>
+          <!-- Student-only fields -->
+          <div *ngIf="userService.authenticatedUser?.userType === 'student'">
+            <div class="form-group">
+              <label for="school">School</label>
+              <input type="text" class="form-control" formControlName="school" id="school">
+
+              <br/>
+
+              <label for="academicFocus">Academic Focus</label>
+              <input type="text" class="form-control" formControlName="academicFocus" id="academicFocus">
+
+              <br/>
+
+              <label for="interests">Academic &amp; Professional Interests</label>
+              <input type="text" class="form-control" formControlName="interests" id="interests">
+            </div>
+          </div>
+
+          <h4 class="mt-5">Links</h4>
 
           <div class="form-group">
             <div class="row">
@@ -37,6 +55,34 @@
               </div>
               <div class="col-11">
                 <input type="text" class="form-control" formControlName="linkedin" id="linkedin">
+              </div>
+            </div>
+            <div *ngIf="userService.authenticatedUser?.userType === 'student'">
+              <div class="row">
+                <div class="col-1 text-right">
+                  <label for="twitter" class="icon"><fa-icon [icon]="['fab', 'twitter']"></fa-icon></label>
+                </div>
+                <div class="col-11">
+                  <input type="text" class="form-control" formControlName="twitter" id="twitter">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-1 text-right">
+                  <label for="instagram" class="icon"><fa-icon [icon]="['fab', 'instagram']"></fa-icon></label>
+                </div>
+                <div class="col-11">
+                  <input type="text" class="form-control" formControlName="instagram" id="instagram">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-1 text-right">
+                  <label for="website" class="small">Personal Website</label>
+                </div>
+                <div class="col-11">
+                  <input type="text" class="form-control" formControlName="website" id="website">
+                </div>
               </div>
             </div>
           </div>

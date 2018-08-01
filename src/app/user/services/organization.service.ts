@@ -74,7 +74,7 @@ export class OrganizationService extends SharedService {
     const updateOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization._id}`;
     return this.http.put<Organization>(updateOrganizationUrl, organization, this.httpOptions)
       .pipe(
-        tap(updatedOrganization => this.log(`fetched user=${updatedOrganization}`)),
+        tap(updatedOrganization => this.log(`updated organization=${updatedOrganization}`)),
         catchError(this.handleError<Organization>('updateOrganization'))
       );
   }
@@ -91,7 +91,7 @@ export class OrganizationService extends SharedService {
     return this.http.post<Organization>(addUserToOrganizationUrl, null, this.httpOptions)
       .pipe(
         tap(updatedOrganization => this.log(`fetched user=${updatedOrganization}`)),
-        catchError(this.handleError<Organization>('updateOrganization'))
+        catchError(this.handleError<Organization>('addUserToOrganization'))
       );
   }
 

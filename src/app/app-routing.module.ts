@@ -20,35 +20,31 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'dashboard', component: DashboardComponent, children: [
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
       { path: '', component: DashboardHomeComponent},
       { path: 'profile', component: ProfileComponent, children: [
           {
             path: '',
-            component: ViewUserComponent,
-            canActivate: [AuthGuard]
+            component: ViewUserComponent
           },
           {
             path: 'update',
-            component: UpdateUserComponent,
-            canActivate: [AuthGuard]
+            component: UpdateUserComponent
           }
         ]
       },
-      { path: 'organization', component: ViewOrganizationComponent, children: [
-          { path: 'create',
-            component: CreateOrganizationComponent,
-            canActivate: [ScopeGuard],
-            data: {
-              expectedScopes: ['manage:organization']
-            }
+      { path: 'organization', canActivate: [ScopeGuard], data: {expectedScopes: ['manage:organization']}, children: [
+          {
+            path: '',
+            component: ViewOrganizationComponent,
           },
-          { path: 'update',
+          {
+            path: 'create',
+            component: CreateOrganizationComponent,
+          },
+          {
+            path: 'update',
             component: UpdateOrganizationComponent,
-            canActivate: [ScopeGuard],
-            data: {
-              expectedScopes: ['manage:organization']
-            }
           }
         ]
       },
@@ -58,6 +54,11 @@ const routes: Routes = [
   { path: 'users', children: [
       { path: ':user_id', component: ViewUserComponent },
       { path: ':user_id/update', component: UpdateUserComponent, canActivate: [AuthGuard] }
+    ]
+  },
+  { path: 'organizations', children: [
+      {path: 'create', component: CreateOrganizationComponent},
+      {path: ':organization_id', component: ViewOrganizationComponent},
     ]
   },
   { path: 'callback', component: CallbackComponent },

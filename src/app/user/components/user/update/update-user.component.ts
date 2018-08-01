@@ -17,7 +17,13 @@ export class UpdateUserComponent implements OnInit {
     email: new FormControl(''),
     about: new FormControl(''),
     position: new FormControl(''),
-    linkedin: new FormControl('')
+    school: new FormControl(''),
+    academicFocus: new FormControl(''),
+    interests: new FormControl(''),
+    linkedin: new FormControl(''),
+    twitter: new FormControl(''),
+    website: new FormControl(''),
+    instagram: new FormControl(''),
   });
   submitted = false;
   onSubmit() { this.submitted = true; }
@@ -38,7 +44,13 @@ export class UpdateUserComponent implements OnInit {
           email: [user.email, Validators.email],
           about: [user.about],
           position: [user.position],
-          linkedin: [user.linkedin] // TODO: Add validation to verify this is a linkedin
+          school: [user.school],
+          academicFocus: [user.academicFocus],
+          interests: [user.interests],
+          linkedin: [user.linkedin], // TODO: Add validation to verify this is a linkedin
+          website: [user.website],
+          twitter: [user.twitter],
+          instagram: [user.instagram],
         });
       });
   }

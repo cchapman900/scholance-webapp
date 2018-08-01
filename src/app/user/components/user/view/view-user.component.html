@@ -17,6 +17,15 @@
         <a *ngIf="user?.linkedin" href="{{ user?.linkedin }}" target="_blank">
           <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
         </a>
+        <a *ngIf="user?.twitter" href="{{ user?.twitter }}" target="_blank">
+          <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
+        </a>
+        <a *ngIf="user?.instagram" href="{{ user?.instagram }}" target="_blank">
+          <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
+        </a>
+        <a *ngIf="user?.website" href="{{ user?.website }}" target="_blank">
+          <span class="small">Personal Website</span>
+        </a>
       </div>
     </div>
   </div>
@@ -34,3 +43,4 @@
 <hr/>
 
 <app-view-user-liaison *ngIf="user?.userType === 'business'" [user]="user"></app-view-user-liaison>
+<app-view-user-student *ngIf="user?.userType === 'student'" [user]="user"></app-view-user-student>
