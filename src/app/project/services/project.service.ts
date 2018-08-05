@@ -52,7 +52,10 @@ export class ProjectService extends SharedService {
     const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
     return this.http.get<Project>(getProjectUrl)
       .pipe(
-        tap(project => this.log(`fetched project id=${id}`)),
+        tap(project => {
+          localStorage.setItem('project', JSON.stringify(project));
+          this.log(`fetched project id=${id}`)
+        }),
         catchError(this.handleError<Project>('getProject'))
       );
   }
@@ -80,7 +83,10 @@ export class ProjectService extends SharedService {
     const updateProjectUrl = `${this.projectsServiceDomain}/projects/${project._id}`;
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
-        tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
+        tap(createdProject => {
+          localStorage.removeItem('project');
+          this.log(`fetched project id=${createdProject._id}`)
+        }),
         catchError(this.handleError<Project>('updateProject'))
       );
   }

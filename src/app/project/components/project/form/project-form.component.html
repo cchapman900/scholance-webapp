@@ -55,7 +55,7 @@
       </p>
     </div>
     <div class="col-md-9" formArrayName="specs">
-      <div class="row mb-2" id="specs" *ngFor="let spec of specs.controls; let i=index">
+      <div class="row mb-2 p-3 border rounded" id="specs" *ngFor="let spec of specs.controls; let i=index">
         <div class="col-10">
           <input type="text" class="form-control" [formControlName]="i">
         </div>
@@ -76,12 +76,20 @@
       <label for="deliverables">Deliverables</label>
     </div>
     <div class="col-md-9" formArrayName="deliverables">
-      <div class="row mb-2" id="deliverables" *ngFor="let deliverable of deliverables.controls; let i=index">
-        <div class="col-10">
-          <input type="text" class="form-control" [formControlName]="i">
+      <div class="row mb-2 p-3 border rounded" id="deliverables" *ngFor="let deliverable of deliverables.controls; let i=index" [formGroupName]="i">
+        <div class="col-5 small">
+          <label for="deliverableName{{i}}">Name</label>
+          <input type="text" class="form-control" formControlName="name" id="deliverableName{{i}}">
+        </div>
+        <div class="col-5 small">
+          <label for="mediaType{{i}}">Accepted Formats</label>
+          <select type="text" class="form-control" formControlName="mediaType" id="mediaType{{i}}">
+            <option></option>
+            <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
+          </select>
         </div>
         <div class="col-2 text-right">
-          <button *ngIf="i == deliverables.length - 1 && deliverable.value !== ''" class="btn btn-sm ml-auto btn-info" (click)="addDeliverable()">
+          <button *ngIf="i == deliverables.length - 1 && deliverable.value.name !== ''" class="btn btn-sm ml-auto btn-info" (click)="addDeliverable()">
             <fa-icon [icon]="faPlus"></fa-icon>
           </button>
           <button *ngIf="deliverables.length != 1" class="btn btn-sm mr-auto btn-danger" (click)="removeDeliverable(i)">

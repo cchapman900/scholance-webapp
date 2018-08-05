@@ -16,10 +16,11 @@ export class CreateProjectComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private userService: UserService
-  ) { }
+  ) {
+    this.project = new Project();
+  }
 
   ngOnInit() {
-    this.project = new Project();
   }
 
   create(): void {

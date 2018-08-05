@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 
 @Component({
@@ -7,6 +7,9 @@ import {FormBuilder} from '@angular/forms';
   styleUrls: ['./asset-form.component.css']
 })
 export class AssetFormComponent implements OnInit {
+  @Input() project_id: string;
+  @Input() assetType: string;
+
   assetForm = this.formBuilder.group({
     mediaType: ['']
   });
@@ -16,6 +19,14 @@ export class AssetFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  private assetTypeDisplay(assetTypeString: string) {
+    return assetTypeString
+    // insert a space before all caps
+      .replace(/([A-Z])/g, ' $1')
+      // uppercase the first character
+      .replace(/^./, function(str){ return str.toUpperCase(); })
   }
 
 }

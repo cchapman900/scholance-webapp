@@ -20,11 +20,12 @@ export class UpdateProjectComponent implements OnInit {
     private projectService: ProjectService,
     private userService: UserService,
     private route: ActivatedRoute
-  ) { }
-
-  ngOnInit() {
+  ) {
     const id = this.route.snapshot.paramMap.get('project_id');
     this.getProject(id);
+  }
+
+  ngOnInit() {
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.liaison = user;
@@ -32,10 +33,16 @@ export class UpdateProjectComponent implements OnInit {
   }
 
   getProject(id: string): void {
-    this.projectService.getProject(id)
-      .subscribe((project) => {
-        this.project = project;
-      })
+    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
+    if (cachedProject && cachedProject._id === id) {
+      console.log('project loaded from cache');
+      this.project = cachedProject;
+    } else {
+      this.projectService.getProject(id)
+        .subscribe((project) => {
+          this.project = project;
+        })
+    }
   }
 
   updateProject(): void {

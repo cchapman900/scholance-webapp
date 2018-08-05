@@ -1,28 +1,14 @@
 <div *ngIf="project">
   <div [hidden]="submitted">
     <h1>Update Project</h1>
-    <app-project-form></app-project-form>
+    <app-project-form [project]="project" [action]="'update'"></app-project-form>
   </div>
 
   <hr/>
 
   <h4>Supplemental Resources</h4>
 
-  <app-view-asset *ngFor="let asset of project.supplementalResources" [project_id]="project._id" [asset]="asset" assetType="supplementalResource"></app-view-asset>
+  <app-view-asset *ngFor="let asset of project.supplementalResources" [project_id]="project._id" [asset]="asset" [assetType]="'supplementalResource'"></app-view-asset>
   <app-create-asset class="row card" [project_id]="project._id" [assetType]="'supplementalResource'"></app-create-asset>
 
-
-  <div [hidden]="!submitted">
-    <h2>You submitted the following:</h2>
-    <div class="row">
-      <div class="col-xs-3">Title</div>
-      <div class="col-xs-9  pull-left">{{ project.title }}</div>
-    </div>
-    <div class="row">
-      <div class="col-xs-3">Summary</div>
-      <div class="col-xs-9 pull-left">{{ project.summary }}</div>
-    </div>
-    <br>
-    <button class="btn btn-primary" (click)="submitted=false">Edit</button>
-  </div>
 </div>

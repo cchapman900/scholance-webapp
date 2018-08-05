@@ -28,12 +28,4 @@ export class CreateAssetComponent implements OnInit {
   ngOnInit() {
   }
 
-  private assetTypeDisplay(assetTypeString: string) {
-    return assetTypeString
-      // insert a space before all caps
-      .replace(/([A-Z])/g, ' $1')
-      // uppercase the first character
-      .replace(/^./, function(str){ return str.toUpperCase(); })
-  }
-
 }

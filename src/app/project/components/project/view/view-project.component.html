@@ -9,7 +9,7 @@
 <hr/>
 
 <h5>About {{project?.organization.name}}</h5>
-<p>&lt; Company description &gt;</p>
+<p>{{project?.organization.about}}</p>
 
 <hr/>
 
@@ -24,7 +24,7 @@
 <h5>Deliverables</h5>
 <ul>
   <li *ngFor="let deliverable of project?.deliverables">
-    <p>{{deliverable.name}}</p>
+    <p>{{deliverable.name}} <span class="badge badge-info">{{deliverable.mediaType}}</span> </p>
   </li>
 </ul>
 
@@ -43,13 +43,23 @@
   <div class="col-md-10 offset-md-1">
     <h4>Project discussion board</h4>
     <div [hidden]="!showComments">
+      <p style="cursor: pointer" class="text-center comment-toggle" (click)="showComments = ! showComments">
+        Hide comments
+        <fa-icon [icon]="faCaretUp"></fa-icon>
+      </p>
       <app-view-comment *ngFor="let comment of project?.comments"
                         [parentUrl]="router.url" [comment]="comment"></app-view-comment>
       <app-create-comment [parentUrl]="router.url"></app-create-comment>
-      <p class="text-center comment-toggle" (click)="showComments = ! showComments">Hide comments</p>
+      <p style="cursor: pointer" class="text-center comment-toggle" (click)="showComments = ! showComments">
+        Hide comments
+        <fa-icon [icon]="faCaretUp"></fa-icon>
+      </p>
     </div>
     <div [hidden]="showComments" class="text-center text-muted comment-toggle">
-      <p (click)="showComments = ! showComments">View {{entry?.comments?.length}} comments</p>
+      <p style="cursor: pointer" (click)="showComments = ! showComments">
+        View {{project?.comments?.length}} comment<span *ngIf="project?.comments.length != 1">s</span>
+        <fa-icon [icon]="faCaretDown"></fa-icon>
+      </p>
     </div>
   </div>
 </div>

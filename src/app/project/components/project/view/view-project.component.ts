@@ -4,6 +4,7 @@ import {ProjectService} from '../../../services/project.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
+import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-project',
@@ -11,6 +12,8 @@ import {UserService} from '../../../../user/services/user.service';
   styleUrls: ['./view-project.component.css']
 })
 export class ViewProjectComponent implements OnInit {
+  faCaretDown = faCaretDown;
+  faCaretUp = faCaretUp;
   project: Project;
   user: User;
   showComments: boolean;
@@ -34,10 +37,16 @@ export class ViewProjectComponent implements OnInit {
   }
 
   getProject(id: string): void {
-    this.projectService.getProject(id)
-      .subscribe((project) => {
-        this.project = project;
-      })
+    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
+    if (cachedProject && cachedProject._id === id) {
+      console.log('project loaded from cache');
+      this.project = cachedProject;
+    } else {
+      this.projectService.getProject(id)
+        .subscribe((project) => {
+          this.project = project;
+        })
+    }
   }
 
   studentIsRegisteredForProject(): boolean {

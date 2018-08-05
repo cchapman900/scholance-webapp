@@ -18,8 +18,7 @@ export class UpdateOrganizationComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private organizationService: OrganizationService,
-    public userService: UserService,
-    private formBuilder: FormBuilder
+    public userService: UserService
   ) {
     this.userService.authenticatedUser$
       .subscribe((user) => {

@@ -22,7 +22,6 @@ export class OrganizationFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.organization);
     this.organizationForm = this.formBuilder.group({
       _id: [this.organization._id],
       name: [this.organization.name, Validators.required],
