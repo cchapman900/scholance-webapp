@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs/observable';
-import { of } from 'rxjs/observable/of';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
@@ -45,12 +45,20 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   getUser (id: string): Observable<User> {
-    const getUserUrl = `${this.usersServiceAPIUrl}/users/${id}`;
-    return this.http.get<User>(getUserUrl)
-      .pipe(
-        tap(user => this.log(`fetched user id=${id}`)),
-        catchError(this.handleError<User>('getUser'))
-      );
+    const cachedUser = <User>JSON.parse(localStorage.getItem('user'));
+    if (cachedUser && cachedUser._id === id) {
+      return Observable.of(cachedUser);
+    } else {
+      const getUserUrl = `${this.usersServiceAPIUrl}/users/${id}`;
+      return this.http.get<User>(getUserUrl)
+        .pipe(
+          tap(user => {
+            localStorage.setItem('user', JSON.stringify(user));
+            this.log(`fetched user id=${id}`)
+          }),
+          catchError(this.handleError<User>('getUser'))
+        );
+    }
   }
 
 
@@ -65,7 +73,10 @@ export class UserService extends SharedService {
     console.log(this.httpOptions);
     return this.http.put<User>(updateUserUrl, user, this.httpOptions)
       .pipe(
-        tap(updatedUser => this.log(`fetched user=${updatedUser}`)),
+        tap(updatedUser => {
+          this.log(`fetched user=${updatedUser}`);
+          localStorage.removeItem('user');
+        }),
         catchError(this.handleError<User>('updateUser'))
       );
   }

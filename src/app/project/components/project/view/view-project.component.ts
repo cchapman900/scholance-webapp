@@ -37,16 +37,10 @@ export class ViewProjectComponent implements OnInit {
   }
 
   getProject(id: string): void {
-    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
-    if (cachedProject && cachedProject._id === id) {
-      console.log('project loaded from cache');
-      this.project = cachedProject;
-    } else {
-      this.projectService.getProject(id)
-        .subscribe((project) => {
-          this.project = project;
-        })
-    }
+    this.projectService.getProject(id)
+      .subscribe((project) => {
+        this.project = project;
+      })
   }
 
   studentIsRegisteredForProject(): boolean {

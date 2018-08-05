@@ -33,39 +33,10 @@ export class UpdateProjectComponent implements OnInit {
   }
 
   getProject(id: string): void {
-    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
-    if (cachedProject && cachedProject._id === id) {
-      console.log('project loaded from cache');
-      this.project = cachedProject;
-    } else {
-      this.projectService.getProject(id)
-        .subscribe((project) => {
-          this.project = project;
-        })
-    }
-  }
-
-  updateProject(): void {
-    this.submitted = true;
-    // TODO: Is this really necessary?
-    this.project.liaison._id = this.liaison._id;
-    console.log(this.liaison.organization);
-    this.project.organization = {
-      _id: this.liaison.organization._id,
-      name: this.liaison.organization.name
-    };
-    this.projectService.updateProject(this.project)
-      .subscribe(() => {
-        // this.goBack()
-      });
-  }
-
-  deleteProject(): void {
-    this.submitted = true;
-    this.projectService.deleteProject(this.project._id)
-      .subscribe(() => {
-        // this.goBack()
-      });
+    this.projectService.getProject(id)
+      .subscribe((project) => {
+        this.project = project;
+      })
   }
 
   deleteSupplementalResource(project_id: string, asset_id: string) {

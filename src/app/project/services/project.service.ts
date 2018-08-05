@@ -3,6 +3,7 @@ import {Project} from '../models/project.model';
 import {User} from '../../user/models/user.model';
 import {SharedService} from '../../shared/services/shared.service';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import {HttpClient} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {Entry} from '../models/entry.model';
@@ -49,15 +50,21 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   getProject (id: string): Observable<Project> {
-    const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
-    return this.http.get<Project>(getProjectUrl)
-      .pipe(
-        tap(project => {
-          localStorage.setItem('project', JSON.stringify(project));
-          this.log(`fetched project id=${id}`)
-        }),
-        catchError(this.handleError<Project>('getProject'))
-      );
+    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
+    if (cachedProject && cachedProject._id === id) {
+      console.log('project loaded from cache');
+      return Observable.of(cachedProject);
+    } else {
+      const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
+      return this.http.get<Project>(getProjectUrl)
+        .pipe(
+          tap(project => {
+            localStorage.setItem('project', JSON.stringify(project));
+            this.log(`fetched project id=${id}`)
+          }),
+          catchError(this.handleError<Project>('getProject'))
+        );
+    }
   }
 
   /**

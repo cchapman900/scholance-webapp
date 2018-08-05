@@ -12,7 +12,8 @@ export class Project {
   };
   organization: {
     _id: string,
-    name: string
+    name: string,
+    about: string
   };
   entries?: [Entry];
   supplementalResources?: [Asset];
