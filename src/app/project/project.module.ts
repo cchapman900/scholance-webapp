@@ -10,7 +10,6 @@ import {ProjectsRoutingModule} from './projects-routing.module';
 import { ListProjectsComponent } from './components/project/list/list-projects.component';
 import { ViewProjectComponent } from './components/project/view/view-project.component';
 import { UpdateProjectComponent } from './components/project/update/update-project.component';
-import { CreateAssetComponent } from './components/asset/create/create-asset.component';
 import { FileInputComponent } from './components/asset/form/file-input/file-input.component';
 import {ViewAssetComponent} from './components/asset/view/view-asset.component';
 import { LinkInputComponent } from './components/asset/form/link-input/link-input.component';
@@ -39,7 +38,6 @@ import { WorkbenchSubmissionComponent } from './components/workbench/submission/
     ListProjectsComponent,
     ViewProjectComponent,
     UpdateProjectComponent,
-    CreateAssetComponent,
     FileInputComponent,
     ViewAssetComponent,
     LinkInputComponent,

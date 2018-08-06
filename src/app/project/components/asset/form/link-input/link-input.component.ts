@@ -13,13 +13,14 @@ import {FormBuilder} from '@angular/forms';
 })
 export class LinkInputComponent implements OnInit {
   linkInputForm = this.formBuilder.group({
-
+    name: [''],
+    uri: [''],
+    text: [''],
+    mediaType: ['link']
   });
 
   @Input() project_id: string;
   @Input() assetType: string;
-  user: User;
-  linkAsset: Asset;
 
   constructor(
     private projectService: ProjectService,
@@ -28,17 +29,11 @@ export class LinkInputComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.user = user;
-      });
-
-    this.linkAsset = new Asset();
-    this.linkAsset.mediaType = 'link';
   }
 
   uploadLinkAsset() {
-    this.projectService.createAsset(this.assetType, this.project_id, this.linkAsset, this.user._id)
+    // console.log(this.linkInputForm.value);
+    this.projectService.createAsset(this.assetType, this.project_id, this.linkInputForm.value, this.userService.authenticatedUser._id)
       .subscribe((response) => {
         console.log(response);
       });

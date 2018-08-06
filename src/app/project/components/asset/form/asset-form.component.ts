@@ -9,6 +9,12 @@ import {FormBuilder} from '@angular/forms';
 export class AssetFormComponent implements OnInit {
   @Input() project_id: string;
   @Input() assetType: string;
+  selectedMediaType: string;
+  mediaTypes = [
+    '',
+    'image',
+    'link'
+  ];
 
   assetForm = this.formBuilder.group({
     mediaType: ['']

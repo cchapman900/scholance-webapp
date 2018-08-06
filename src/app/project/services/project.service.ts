@@ -217,7 +217,10 @@ export class ProjectService extends SharedService {
     }
     return this.http.post<Asset>(createAssetUrl, asset, this.httpOptions)
       .pipe(
-        tap(createdAsset => this.log(`fetched project id=${createdAsset._id}`)),
+        tap(createdAsset => {
+          localStorage.removeItem('project');
+          this.log(`fetched project id=${createdAsset._id}`)
+        }),
         catchError(this.handleError<Asset>('createProject'))
       );
   }

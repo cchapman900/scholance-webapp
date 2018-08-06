@@ -5,11 +5,12 @@
     </h5>
   </div>
   <div class="form-group col-md-6">
-    <select id="mediaType" name="mediaType" class="form-control">
+    <select id="mediaType" name="mediaType" class="form-control" formControlName="mediaType">
       <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
     </select>
   </div>
 </form>
-
-<app-file-input *ngIf="selectedMediaType === 'image'" [project_id]="project_id" [assetType]="assetType"></app-file-input>
-<app-link-input *ngIf="selectedMediaType === 'link'" [project_id]="project_id" [assetType]="assetType"></app-link-input>
+<div *ngIf="assetForm.value.mediaType" class="mb-5">
+  <app-file-input *ngIf="assetForm.value.mediaType === 'image'" [project_id]="project_id" [assetType]="assetType"></app-file-input>
+  <app-link-input *ngIf="assetForm.value.mediaType === 'link'" [project_id]="project_id" [assetType]="assetType"></app-link-input>
+</div>

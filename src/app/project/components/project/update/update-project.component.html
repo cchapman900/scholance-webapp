@@ -6,9 +6,11 @@
 
   <hr/>
 
-  <h4>Supplemental Resources</h4>
+  <div *ngIf="project._id" class="mb-5">
+    <h4>Supplemental Resources</h4>
 
-  <app-view-asset *ngFor="let asset of project.supplementalResources" [project_id]="project._id" [asset]="asset" [assetType]="'supplementalResource'"></app-view-asset>
-  <app-create-asset class="row card" [project_id]="project._id" [assetType]="'supplementalResource'"></app-create-asset>
+    <app-view-asset *ngFor="let asset of project.supplementalResources" [project_id]="project._id" [asset]="asset" [assetType]="'supplementalResource'"></app-view-asset>
+    <app-asset-form class="row card" [project_id]="project._id" [assetType]="'supplementalResource'"></app-asset-form>
+  </div>
 
 </div>
