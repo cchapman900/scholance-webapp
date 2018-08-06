@@ -39,8 +39,11 @@ export class UpdateProjectComponent implements OnInit {
       })
   }
 
-  deleteSupplementalResource(project_id: string, asset_id: string) {
-    this.projectService.deleteAsset('supplementalResource', project_id, asset_id)
+  deleteSupplementalResource(asset_id: string) {
+    this.projectService.deleteAsset('supplementalResource', this.project._id, asset_id)
+      .subscribe((response) => {
+        console.log(response)
+      })
   }
 
 }

@@ -4,11 +4,17 @@
       <img src="{{ image ? image : defaultImage }}" width="100" height="100"/>
     </div>
     <div class="col-3">
-      <input type="file" accept="image/*" (change)="changeListener($event)">
+      <input type="file" accept="image/*" formControlName="file" (change)="changeListener($event)">
     </div>
     <div class="col-5 text-left">
       <label for="name">File Name</label>
-      <input type="text" class="form-control" id="name" name="name"/>
+      <input type="text" class="form-control" id="name" formControlName="name"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <label for="text">Comments on this file</label>
+      <textarea class="form-control" id="text" formControlName="text"></textarea>
     </div>
   </div>
   <div class="row">

@@ -8,7 +8,8 @@
         </a>
       </div>
     </div>
-    <div class="col-md-8">
-      {{asset.commentary}}
+    <div class="col-md-8" *ngIf="asset.text">
+      <p><strong>About this item</strong></p>
+      {{asset.text}}
     </div>
 </div>

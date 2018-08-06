@@ -45,20 +45,14 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   getUser (id: string): Observable<User> {
-    const cachedUser = <User>JSON.parse(localStorage.getItem('user'));
-    if (cachedUser && cachedUser._id === id) {
-      return Observable.of(cachedUser);
-    } else {
-      const getUserUrl = `${this.usersServiceAPIUrl}/users/${id}`;
-      return this.http.get<User>(getUserUrl)
-        .pipe(
-          tap(user => {
-            localStorage.setItem('user', JSON.stringify(user));
-            this.log(`fetched user id=${id}`)
-          }),
-          catchError(this.handleError<User>('getUser'))
-        );
-    }
+    const getUserUrl = `${this.usersServiceAPIUrl}/users/${id}`;
+    return this.http.get<User>(getUserUrl)
+      .pipe(
+        tap(user => {
+          this.log(`fetched user id=${id}`)
+        }),
+        catchError(this.handleError<User>('getUser'))
+      );
   }
 
 
@@ -75,7 +69,6 @@ export class UserService extends SharedService {
       .pipe(
         tap(updatedUser => {
           this.log(`fetched user=${updatedUser}`);
-          localStorage.removeItem('user');
         }),
         catchError(this.handleError<User>('updateUser'))
       );

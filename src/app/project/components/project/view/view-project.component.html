@@ -1,6 +1,20 @@
-<h2>
-  {{project?.title}} <span class="badge badge-info ml-5">{{project?.category}}</span>
-</h2>
+<div class="row align-content-center">
+  <div class="col-9">
+    <h2>
+      {{project?.title}} <span class="badge badge-info ml-5">{{project?.category}}</span>
+    </h2>
+  </div>
+  <div class="col-3 text-right" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
+    <button *ngIf="!studentIsRegisteredForProject()"
+            class="btn btn-success btn-sm" (click)="studentSignup()">
+      Sign up for this project
+    </button>
+    <button *ngIf="studentIsRegisteredForProject()"
+            class="btn btn-danger btn-sm" (click)="studentSignoff()">
+      Sign off of this project
+    </button>
+  </div>
+</div>
 <h5>Project Summary</h5>
 <p>{{project?.summary}}</p>
 <h5>Full Details</h5>
@@ -44,12 +58,16 @@
 
   <hr/>
 
-  <h5>Supplemental Resources</h5>
-  <ul>
-    <li *ngFor="let supplementalResource of project?.supplementalResources">
-      <p>{{supplementalResource.name}}</p>
-    </li>
-  </ul>
+  <div class="col-md-3">
+    <h5>Supplemental Resources</h5>
+  </div>
+  <div class="col-md-9">
+    <ul>
+      <li *ngFor="let supplementalResource of project?.supplementalResources">
+        <p>{{supplementalResource.name}}</p>
+      </li>
+    </ul>
+  </div>
 
 </div>
 

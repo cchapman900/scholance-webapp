@@ -9,7 +9,17 @@
   <div *ngIf="project._id" class="mb-5">
     <h4>Supplemental Resources</h4>
 
-    <app-view-asset *ngFor="let asset of project.supplementalResources" [project_id]="project._id" [asset]="asset" [assetType]="'supplementalResource'"></app-view-asset>
+    <div class="row align-items-center" *ngFor="let asset of project.supplementalResources">
+      <div class="col-11">
+        <app-view-asset [project_id]="project._id" [asset]="asset" [assetType]="'supplementalResource'">
+        </app-view-asset>
+      </div>
+      <div class="col-1">
+        <button class="btn btn-danger btn-sm form-control" (click)="deleteSupplementalResource(asset._id)">
+          Delete
+        </button>
+      </div>
+    </div>
     <app-asset-form class="row card" [project_id]="project._id" [assetType]="'supplementalResource'"></app-asset-form>
   </div>
 

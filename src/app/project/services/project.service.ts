@@ -50,21 +50,14 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   getProject (id: string): Observable<Project> {
-    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
-    if (cachedProject && cachedProject._id === id) {
-      console.log('project loaded from cache');
-      return Observable.of(cachedProject);
-    } else {
-      const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
-      return this.http.get<Project>(getProjectUrl)
-        .pipe(
-          tap(project => {
-            localStorage.setItem('project', JSON.stringify(project));
-            this.log(`fetched project id=${id}`)
-          }),
-          catchError(this.handleError<Project>('getProject'))
-        );
-    }
+    const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
+    return this.http.get<Project>(getProjectUrl)
+      .pipe(
+        tap(project => {
+          this.log(`fetched project id=${id}`)
+        }),
+        catchError(this.handleError<Project>('getProject'))
+      );
   }
 
   /**
@@ -91,7 +84,6 @@ export class ProjectService extends SharedService {
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
         tap(createdProject => {
-          localStorage.removeItem('project');
           this.log(`fetched project id=${createdProject._id}`)
         }),
         catchError(this.handleError<Project>('updateProject'))
@@ -189,7 +181,7 @@ export class ProjectService extends SharedService {
     const deleteEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
     return this.http.delete<Project>(deleteEntrytUrl, this.httpOptions)
       .pipe(
-        tap(deletedEntry => this.log(`deleted entry for project id=${deletedEntry._id}`)),
+        tap(deletedEntry => this.log(`deleted entry for project id=${deletedEntry}`)),
         catchError(this.handleError<Project>('deleteEntry'))
       );
   }
@@ -218,7 +210,6 @@ export class ProjectService extends SharedService {
     return this.http.post<Asset>(createAssetUrl, asset, this.httpOptions)
       .pipe(
         tap(createdAsset => {
-          localStorage.removeItem('project');
           this.log(`fetched project id=${createdAsset._id}`)
         }),
         catchError(this.handleError<Asset>('createProject'))
@@ -234,17 +225,18 @@ export class ProjectService extends SharedService {
    * @param {string} user_id (optional)
    * @returns {Observable<Asset>}
    */
-  deleteAsset (assetType: string, project_id: string, asset_id: string, user_id?: string): Observable<Asset> {
+  deleteAsset (assetType: string, project_id: string, asset_id: string, user_id?: string) {
     let uri = '';
     if (assetType === 'entryAsset') {
       uri = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}/assets/${asset_id}`;
     } else if (assetType === 'supplementalResource') {
       uri = `${this.projectsServiceDomain}/projects/${project_id}/supplemental-resources/${asset_id}`;
     }
-    return this.http.delete<Asset>(uri, this.httpOptions)
+    return this.http.delete(uri, this.httpOptions)
       .pipe(
         tap((deletedAsset) =>  {
-          this.log(`delete Asset id=${deletedAsset._id}`)
+          console.log('Deleted Asset');
+          this.log(`delete Asset id=${deletedAsset}`)
         }),
         catchError(this.handleError<Asset>('deleteAsset'))
       );
@@ -287,6 +279,7 @@ export class ProjectService extends SharedService {
    */
   private createFile (file: File, location: string): Observable<Asset> {
     const createFileUrl = `${this.projectsServiceDomain}/${location}`;
+    console.log(file);
     return this.http.post<Asset>(createFileUrl, file, this.httpOptions)
       .pipe(
         tap((createdFile) =>  {

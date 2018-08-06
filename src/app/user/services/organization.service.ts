@@ -40,20 +40,14 @@ export class OrganizationService extends SharedService {
    * @returns {Observable<Organization>}
    */
   getOrganization (id: string): Observable<Organization> {
-    const cachedOrganization = <Organization>JSON.parse(localStorage.getItem('organization'));
-    if (cachedOrganization && cachedOrganization._id === id) {
-      return of(cachedOrganization)
-    } else {
-      const getOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${id}`;
-      return this.http.get<Organization>(getOrganizationUrl)
-        .pipe(
-          tap(organization => {
-            localStorage.setItem('organization', JSON.stringify(organization));
-            this.log(`fetched organization id=${id}`)
-          }),
-          catchError(this.handleError<Organization>('getOrganization'))
-        );
-    }
+    const getOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${id}`;
+    return this.http.get<Organization>(getOrganizationUrl)
+      .pipe(
+        tap(organization => {
+          this.log(`fetched organization id=${id}`)
+        }),
+        catchError(this.handleError<Organization>('getOrganization'))
+      );
   }
 
 
@@ -84,7 +78,6 @@ export class OrganizationService extends SharedService {
       .pipe(
         tap(updatedOrganization => {
           this.log(`updated organization=${updatedOrganization}`);
-          localStorage.removeItem('organization');
         }),
         catchError(this.handleError<Organization>('updateOrganization'))
       );
@@ -103,7 +96,6 @@ export class OrganizationService extends SharedService {
       .pipe(
         tap(updatedOrganization => {
           this.log(`fetched user=${updatedOrganization}`);
-          localStorage.removeItem('organization');
         }),
         catchError(this.handleError<Organization>('addUserToOrganization'))
       );
@@ -122,7 +114,6 @@ export class OrganizationService extends SharedService {
       .pipe(
         tap(updatedOrganization => {
           this.log(`fetched user=${updatedOrganization}`);
-          localStorage.removeItem('organization');
         }),
         catchError(this.handleError<Organization>('updateOrganization'))
       );

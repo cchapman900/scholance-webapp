@@ -13,15 +13,9 @@ import {FormBuilder} from '@angular/forms';
   styleUrls: ['./file-input.component.css']
 })
 export class FileInputComponent implements OnInit {
-  fileInputForm = this.formBuilder.group({
-
-  });
-
   @Input() project_id: string;
   @Input() assetType: string;
-  user: User;
   image: string;
-  name: string;
   defaultImage = 'data:image/jpg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/4QCMRXhpZgAATU0AKgAAAAgABQESAAMAAAABAAEAAAEaAAUA' +
     'AAABAAAASgEbAAUAAAABAAAAUgEoAAMAAAABAAIAAIdpAAQAAAABAAAAWgAAAAAAAABIAAAAAQAA' +
     'AEgAAAABAAOgAQADAAAAAQABAACgAgAEAAAAAQAAAGSgAwAEAAAAAQAAAGQAAAAA/+0AOFBob3Rv' +
@@ -89,18 +83,20 @@ export class FileInputComponent implements OnInit {
     'AOLo/wCHWHwB/wCgPr3/AIUF1/8AF0Af/9X9UqKKKACiiigAooooAKKKKACiiigAooooAKKKKAP/' +
     '2Q==';
 
+
+  fileInputForm = this.formBuilder.group({
+    file: [''],
+    name: [''],
+    text: ['']
+  });
+
   constructor(
     private projectService: ProjectService,
     private userService: UserService,
     private formBuilder: FormBuilder
   ) { }
 
-  ngOnInit() {
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.user = user;
-      })
-  }
+  ngOnInit() {}
 
   changeListener($event): void {
     this.readThis($event.target);
@@ -127,14 +123,16 @@ export class FileInputComponent implements OnInit {
     // TODO: Move this logic to the service
     if (this.image) {
       const file = {
-        name: this.name,
+        name: this.fileInputForm.value.name,
+        text: this.fileInputForm.value.text,
         file: this.image
       };
+      // console.log(assetType);
       if (assetType === 'supplementalResource') {
         this.projectService.createSupplementalResourceFile(this.project_id, file)
           .subscribe();
       } else if (assetType === 'entryAsset') {
-        this.projectService.createEntryAssetFile(this.project_id, this.user._id, file)
+        this.projectService.createEntryAssetFile(this.project_id, this.userService.authenticatedUser._id, file)
           .subscribe();
       }
 
