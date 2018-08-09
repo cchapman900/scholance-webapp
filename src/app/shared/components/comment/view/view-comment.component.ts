@@ -10,8 +10,13 @@ import {CommentService} from '../../../services/comment.service';
   styleUrls: ['./view-comment.component.css']
 })
 export class ViewCommentComponent implements OnInit {
+  // TODO: I think eventually this should be put into each service. THey should just know how to add their own comments. This is kind crazy
   @Input() comment: Comment;
-  @Input() parentUrl: string;
+  @Input() objectIds: {
+    project_id?: string,
+    entry_id?: string
+  };
+  @Input() commentType: string;
   user: User;
 
   constructor(
@@ -31,7 +36,7 @@ export class ViewCommentComponent implements OnInit {
   }
 
   deleteComment(): void {
-    this.commentService.deleteComment(this.parentUrl, this.comment._id)
+    this.commentService.deleteComment(this.commentType, this.objectIds, this.comment._id)
       .subscribe(() => {
         console.log('deleted comment');
       })

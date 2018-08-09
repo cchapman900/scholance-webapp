@@ -65,7 +65,7 @@ export class ViewEntryComponent implements OnInit {
   }
 
   submitEntry(): void {
-    this.projectService.updateEntrySubmissionStatus(this.project_id, this.entry.student._id, 'submitted')
+    this.projectService.updateEntrySubmissionStatus(this.project_id, this.entry)
       .subscribe(() => {
       });
   }

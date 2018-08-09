@@ -27,7 +27,8 @@ export class CreateProjectComponent implements OnInit {
     this.project.liaison._id = this.userService.authenticatedUser._id;
     this.project.organization = {
       _id: this.userService.authenticatedUser.organization._id,
-      name: this.userService.authenticatedUser.organization.name
+      name: this.userService.authenticatedUser.organization.name,
+      about: this.userService.authenticatedUser.organization.about
     };
     this.projectService.createProject(this.project)
       .subscribe(() => {

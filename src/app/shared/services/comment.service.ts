@@ -25,12 +25,21 @@ export class CommentService extends SharedService {
 
   /**
    * CREATE Comment
-   * @param {string} parentUrl
+   * @param {string} commentType
+   * @param {any} objectIds
    * @param {string} text
    * @returns {Observable<Project>}
    */
-  createComment (parentUrl: string, text: string): Observable<Comment> {
-    const createCommentUrl = `${this.projectsServiceDomain}/${parentUrl}/comments`;
+  createComment (commentType: string, objectIds: {project_id?: string, entry_id?: string}, text: string): Observable<Comment> {
+    let createCommentUrl = '';
+    if (commentType === 'project') {
+      createCommentUrl = `${this.projectsServiceDomain}/projects/${objectIds.project_id}/comments`;
+    } else if (commentType === 'entry') {
+      createCommentUrl = `${this.projectsServiceDomain}/projects/${objectIds.project_id}/entries/${objectIds.entry_id}/comments`;
+    } else {
+      this.handleError('invalid comment type');
+      return;
+    }
     return this.http.post<Comment>(createCommentUrl, {text: text}, this.httpOptions)
       .pipe(
         tap(createdComment => this.log(`fetched comment=${text}`)),
@@ -40,16 +49,26 @@ export class CommentService extends SharedService {
 
   /**
    * DELETE Comment
-   * @param {string} parentUrl
-   * @param {Comment} commentId
+   * @param {string} commentType
+   * @param {any} objectIds
+   * @param {string} comment_id
    * @returns {Observable<Project>}
    */
-  deleteComment (parentUrl: string, commentId: string): Observable<Comment> {
-    const deleteCommentUrl = `${this.projectsServiceDomain}${parentUrl}/comments/${commentId}`;
+  deleteComment (commentType: string, objectIds: {project_id?: string, entry_id?: string}, comment_id: string): Observable<Comment> {
+    let deleteCommentUrl = '';
+    if (commentType === 'project') {
+      deleteCommentUrl = `${this.projectsServiceDomain}/projects/${objectIds.project_id}/comments/${comment_id}`;
+    } else if (commentType === 'entry') {
+      deleteCommentUrl = `${this.projectsServiceDomain}/projects/${objectIds.project_id}/entries/${objectIds.entry_id}/comments/${comment_id}`;
+    } else {
+      this.handleError('invalid comment type');
+      return;
+    }
+
     return this.http.delete<Comment>(deleteCommentUrl, this.httpOptions)
       .pipe(
-        tap(createdComment => this.log(`fetched comment id=${commentId}`)),
-        catchError(this.handleError<Comment>('createComment'))
+        tap(createdComment => this.log(`fetched comment id=${comment_id}`)),
+        catchError(this.handleError<Comment>('delete'))
       );
   }
 

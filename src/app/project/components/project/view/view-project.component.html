@@ -81,9 +81,9 @@
         Hide comments
         <fa-icon [icon]="faCaretUp"></fa-icon>
       </p>
+      <p class="text-center text-muted small" *ngIf="project?.comments.length === 0">There are no comments to display</p>
       <app-view-comment *ngFor="let comment of project?.comments"
-                        [parentUrl]="router.url" [comment]="comment"></app-view-comment>
-      <app-create-comment [parentUrl]="router.url"></app-create-comment>
+                        [commentType]="'project'" [objectIds]="{project_id: project?._id}" [comment]="comment"></app-view-comment>
       <p style="cursor: pointer" class="text-center comment-toggle" (click)="showComments = ! showComments">
         Hide comments
         <fa-icon [icon]="faCaretUp"></fa-icon>
@@ -95,5 +95,6 @@
         <fa-icon [icon]="faCaretDown"></fa-icon>
       </p>
     </div>
+    <app-create-comment [commentType]="'project'" [objectIds]="{project_id: project?._id}"></app-create-comment>
   </div>
 </div>

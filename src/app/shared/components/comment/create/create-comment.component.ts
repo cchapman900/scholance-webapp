@@ -8,7 +8,11 @@ import {Comment} from '../../../models/comment.model';
   styleUrls: ['./create-comment.component.css']
 })
 export class CreateCommentComponent implements OnInit {
-  @Input() parentUrl: string;
+  @Input() objectIds: {
+    project_id?: string,
+    entry_id?: string
+  };
+  @Input() commentType: string;
   text: string;
 
   constructor(
@@ -19,7 +23,7 @@ export class CreateCommentComponent implements OnInit {
   }
 
   createComment(): void {
-    this.commentService.createComment(this.parentUrl, this.text)
+    this.commentService.createComment(this.commentType, this.objectIds, this.text)
       .subscribe((response) => {
         console.log(response);
       });
