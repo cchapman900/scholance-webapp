@@ -26,10 +26,19 @@ export class ViewEntryComponent implements OnInit {
 
   ngOnInit() {
     this.project_id = this.route.parent.snapshot.paramMap.get('project_id');
-    const entry_id = this.route.snapshot.paramMap.get('entry_id');
     this.getProject(this.project_id);
-    this.getEntry(this.project_id, entry_id);
     // this.getUser();
+
+    const entry_id = this.route.snapshot.paramMap.get('entry_id');
+    if (!entry_id) {
+      // this.showUpdateButton = true;
+      this.userService.authenticatedUser$
+        .subscribe((user) => {
+          this.getEntry(this.project_id, user._id);
+        })
+    } else {
+      this.getEntry(this.project_id, entry_id);
+    }
 
     this.showComments = false;
   }

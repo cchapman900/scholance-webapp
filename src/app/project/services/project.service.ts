@@ -46,18 +46,27 @@ export class ProjectService extends SharedService {
 
   /**
    * GET Project
+   *
    * @param {string} id
+   * @param {boolean} cacheProject
    * @returns {Observable<Project>}
    */
-  getProject (id: string): Observable<Project> {
+  getProject (id: string, cacheProject = true): Observable<Project> {
+    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
     const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
-    return this.http.get<Project>(getProjectUrl)
-      .pipe(
-        tap(project => {
-          this.log(`fetched project id=${id}`)
-        }),
-        catchError(this.handleError<Project>('getProject'))
-      );
+    if (cachedProject._id === id && cacheProject) {
+      console.log('Project loaded from cache');
+      return Observable.of(cachedProject);
+    } else {
+      return this.http.get<Project>(getProjectUrl)
+        .pipe(
+          tap(project => {
+            localStorage.setItem('project', JSON.stringify(project));
+            this.log(`fetched project id=${id}`)
+          }),
+          catchError(this.handleError<Project>('getProject'))
+        );
+    }
   }
 
   /**
@@ -133,8 +142,8 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   getEntry (project_id: string, user_id: string): Observable<Entry> {
-    const getEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
-    return this.http.get<Entry>(getEntrytUrl, this.httpOptions)
+    const getEntryUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
+    return this.http.get<Entry>(getEntryUrl, this.httpOptions)
       .pipe(
         tap(fetchedEntry => this.log(`fetched project id=${fetchedEntry._id}`)),
         catchError(this.handleError<Entry>('getEntry'))
@@ -158,13 +167,12 @@ export class ProjectService extends SharedService {
   /**
    * SUBMIT Entry
    * @param {string} project_id
-   * @param {string} entry_id
-   * @param {string} submissionStatus
+   * @param {object} entry
    * @returns {Observable<Project>}
    */
-  updateEntrySubmissionStatus (project_id: string, entry_id: string, submissionStatus: string): Observable<Project> {
-    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry_id}/submission-status`;
-    return this.http.patch<Project>(createEntrytUrl, {submissionStatus: submissionStatus}, this.httpOptions)
+  updateEntrySubmissionStatus (project_id: string, entry): Observable<Project> {
+    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry._id}`;
+    return this.http.put<Project>(createEntrytUrl, entry, this.httpOptions)
       .pipe(
         tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
         catchError(this.handleError<Project>('createEntry'))

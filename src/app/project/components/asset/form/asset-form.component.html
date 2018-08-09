@@ -1,13 +1,15 @@
 <form [formGroup]="assetForm">
-  <div class="col-md-6">
-    <h5>
-      Add new {{assetTypeDisplay(assetType)}}
-    </h5>
-  </div>
-  <div class="form-group col-md-6">
-    <select id="mediaType" name="mediaType" class="form-control" formControlName="mediaType">
-      <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
-    </select>
+  <div class="row">
+    <div class="col-md-6">
+      <p>
+        Add new {{assetTypeDisplay(assetType)}}
+      </p>
+    </div>
+    <div class="form-group col-md-6">
+      <select id="mediaType" name="mediaType" class="form-control" formControlName="mediaType">
+        <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
+      </select>
+    </div>
   </div>
 </form>
 <div *ngIf="assetForm.value.mediaType" class="mb-5">

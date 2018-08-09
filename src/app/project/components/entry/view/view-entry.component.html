@@ -1,5 +1,5 @@
-<h3 class="mb-4">
-  Project Submission for: {{entry?.student.name}}
+<h3 class="mb-4" *ngIf="entry">
+  {{ entry?.student._id == userService.authenticatedUser._id ? 'My Project Submission' : 'Project Submission for: '+entry?.student.name }}
 </h3>
 
 <div class="row" *ngIf="entry?.commentary">
@@ -8,8 +8,6 @@
     <p>{{entry.commentary}}</p>
   </div>
 </div>
-
-<hr/>
 
 <div class="row">
   <div class="col-md-10 mx-auto">
@@ -21,18 +19,13 @@
   </div>
 </div>
 
-<div class="row" *ngIf="userService.authenticatedUser?._id === project?.liaison._id">
-  <div class="col-md-6 offset-md-3 text-center">
-    <hr/>
-    <div *ngIf="project?.status === 'complete'">
-      <p>This project is complete</p>
-    </div>
-    <div *ngIf="project?.status !== 'complete'">
-      <p>Select this submission</p>
-      <button class="btn btn-primary" (click)="selectEntry()">Select this implementation</button>
-    </div>
-  </div>
+<hr/>
+
+<div *ngIf="entry">
+  <app-liaison-entry-work-area [project]="project" *ngIf="userService.authenticatedUser?._id === project?.liaison._id"></app-liaison-entry-work-area>
+  <app-student-entry-work-area [project]="project" [entry]="entry" *ngIf="userService.authenticatedUser?._id === entry?.student._id"></app-student-entry-work-area>
 </div>
+
 
 <hr class="my-5"/>
 

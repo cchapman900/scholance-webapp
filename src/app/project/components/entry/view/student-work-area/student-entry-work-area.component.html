@@ -1,0 +1,33 @@
+<div class="row border p-3 mb-5">
+  <div class="col-12">
+    <form [formGroup]="entryForm">
+      <div class="form-group row mb-4">
+        <div class="col-10 mx-auto">
+          <label for="commentary">Submission Commentary</label>
+          <textarea class="form-control" id="commentary" formControlName="commentary"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group row mb-4">
+        <div class="col-6 mx-auto">
+          <label for="submissionStatus">Submission Status</label>
+          <select class="form-control" id="submissionStatus" formControlName="submissionStatus">
+            <option *ngFor="let submissionStatus of submissionStatuses" [ngValue]="submissionStatus">{{submissionStatus}}</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row text-center">
+        <div class="col-md-3 mx-auto">
+          <button class="btn btn-success form-control" (click)="saveEntry()">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row border p-3">
+  <div class="col-md-10 mx-auto">
+    <app-asset-form [project_id]="project._id" [assetType]="'entryAsset'"></app-asset-form>
+  </div>
+</div>
