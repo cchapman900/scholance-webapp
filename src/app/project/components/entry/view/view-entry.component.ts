@@ -58,13 +58,6 @@ export class ViewEntryComponent implements OnInit {
       })
   }
 
-  selectEntry(): void {
-    this.projectService.updateProjectStatus(this.project_id, 'complete', this.entry.student._id)
-      .subscribe((project) => {
-        console.log(project)
-      })
-  }
-
   deleteAsset(assetType: string, project_id: string, asset_id: string, index: number) {
     this.projectService.deleteAsset(assetType, project_id, asset_id, this.userService.authenticatedUser._id)
       .subscribe(() => {

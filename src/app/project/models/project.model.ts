@@ -25,6 +25,6 @@ export class Project {
   }];
   category: string;
   deadline: string;
-  selectedEntry?: Entry;
+  selectedEntry?: string;
   comments?: [Comment];
 }

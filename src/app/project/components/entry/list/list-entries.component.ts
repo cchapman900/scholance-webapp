@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Entry} from '../../../models/entry.model';
 import {ProjectService} from '../../../services/project.service';
 import {ActivatedRoute} from '@angular/router';
+import {Project} from '../../../models/project.model';
 
 @Component({
   selector: 'app-list-entries',
@@ -10,6 +11,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ListEntriesComponent implements OnInit {
   entries: Entry[];
+  project: Project;
 
   constructor(
     public projectService: ProjectService,
@@ -24,6 +26,7 @@ export class ListEntriesComponent implements OnInit {
   getEntries(projectId) {
     this.projectService.getProject(projectId)
       .subscribe((project) => {
+        this.project = project;
         this.entries = project.entries;
       })
   }

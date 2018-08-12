@@ -1,8 +1,10 @@
 <div class="row">
     <div class="col-md-3">
       <h5>{{asset.name}}</h5>
-      <div class="ml-4">
-        <img *ngIf="asset.mediaType === 'image'" width="100rem" [src]="asset.uri">
+      <div>
+        <a *ngIf="asset.mediaType === 'image'" [href]="asset.uri" target="_blank">
+          <img class="img-fluid" [src]="asset.uri">
+        </a>
         <a *ngIf="asset.mediaType === 'link'" [href]="'http://'+asset.uri" target="_blank">
           <fa-icon [icon]="faLink" ></fa-icon>
         </a>

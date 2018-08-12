@@ -130,7 +130,10 @@ export class ProjectService extends SharedService {
     const updateProjectStatusUrl = `${this.projectsServiceDomain}/projects/${project_id}/status`;
     return this.http.put<Project>(updateProjectStatusUrl, {status: status, selectedEntry: selectedEntry}, this.httpOptions)
       .pipe(
-        tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
+        tap(createdProject => {
+          this.log('Successfully updated project status')
+          localStorage.removeItem('project')
+        }),
         catchError(this.handleError<Project>('updateProject'))
       );
   }
@@ -233,7 +236,7 @@ export class ProjectService extends SharedService {
     return this.http.post<Asset>(createAssetUrl, asset, this.httpOptions)
       .pipe(
         tap(createdAsset => {
-          this.log(`fetched project id=${createdAsset._id}`);
+          this.log('Successfully created ' + assetType, 'success');
         }),
         catchError(this.handleError<Asset>('createProject'))
       );
@@ -305,7 +308,7 @@ export class ProjectService extends SharedService {
     return this.http.post<Asset>(createFileUrl, file, this.httpOptions)
       .pipe(
         tap((createdFile) =>  {
-          this.log(`fetched project id=${createdFile._id}`)
+          this.log('Successfully created file asset')
         }),
         catchError(this.handleError<Asset>('createProject'))
       );
