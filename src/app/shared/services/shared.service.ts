@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {of} from 'rxjs/observable/of';
 import {Observable} from 'rxjs/Observable';
 import {HttpHeaders} from '@angular/common/http';
+import {MessageService} from '../../messages/message.service';
 
 
 @Injectable()
@@ -14,7 +15,7 @@ export class SharedService {
     })
   };
 
-  constructor() { }
+  constructor(protected messageService: MessageService) { }
 
   /**
    * Handle Http operation that failed.
@@ -36,9 +37,9 @@ export class SharedService {
     };
   }
 
-  /** Log a UserService message with the MessageService */
-  protected log(message: string) {
-    // this.messageService.add('HeroService: ' + message);
+  /** Log a message with the MessageService */
+  protected log(message: string, alertClass = null) {
+    this.messageService.add(message, alertClass);
   }
 
 }

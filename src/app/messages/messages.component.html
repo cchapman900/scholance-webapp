@@ -1,0 +1,13 @@
+<div *ngIf="messageService.messages.length" class="message row mb-3">
+  <div class="col-12 alert alert-{{messageService.alertClass || 'info'}} alert-dismissible fade show" role="alert">
+
+    <strong>Messages</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="messageService.clear()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <hr/>
+    <div *ngFor='let message of messageService.messages'> {{message}} </div>
+
+  </div>
+
+</div>

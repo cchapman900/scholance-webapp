@@ -9,6 +9,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Entry} from '../models/entry.model';
 import {Asset} from '../models/asset.model';
 import {File} from '../models/file.model';
+import { MessageService } from '../../messages/message.service';
 
 @Injectable()
 export class ProjectService extends SharedService {
@@ -17,9 +18,10 @@ export class ProjectService extends SharedService {
   public user: User;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    protected messageService: MessageService
   ) {
-    super();
+    super(messageService);
   }
 
 
@@ -35,7 +37,7 @@ export class ProjectService extends SharedService {
     const getProjectUrl = `${this.projectsServiceDomain}/projects`;
     return this.http.get<Project[]>(getProjectUrl)
       .pipe(
-        tap(project => this.log(`fetched projects`)),
+        tap(project => { }),
         catchError(this.handleError<Project[]>('listProjects'))
       );
   }
@@ -52,17 +54,17 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   getProject (id: string, cacheProject = true): Observable<Project> {
-    const cachedProject = <Project>JSON.parse(localStorage.getItem('project'));
+    const cachedProject = localStorage.getItem('project');
+    const parsedProject = JSON.parse(cachedProject);
     const getProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
-    if (cachedProject._id === id && cacheProject) {
+    if (cachedProject && parsedProject._id === id && cacheProject) {
       console.log('Project loaded from cache');
-      return Observable.of(cachedProject);
+      return Observable.of(parsedProject);
     } else {
       return this.http.get<Project>(getProjectUrl)
         .pipe(
           tap(project => {
             localStorage.setItem('project', JSON.stringify(project));
-            this.log(`fetched project id=${id}`)
           }),
           catchError(this.handleError<Project>('getProject'))
         );
@@ -78,7 +80,9 @@ export class ProjectService extends SharedService {
     const createProjectUrl = `${this.projectsServiceDomain}/projects`;
     return this.http.post<Project>(createProjectUrl, project, this.httpOptions)
       .pipe(
-        tap(createdProject => this.log(`fetched project id=${createdProject._id}`)),
+        tap(() => {
+          this.log(`Project successfully created`)
+        }),
         catchError(this.handleError<Project>('createProject'))
       );
   }
@@ -92,8 +96,8 @@ export class ProjectService extends SharedService {
     const updateProjectUrl = `${this.projectsServiceDomain}/projects/${project._id}`;
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
-        tap(createdProject => {
-          this.log(`fetched project id=${createdProject._id}`)
+        tap(() => {
+          this.log(`Project successfully updated`)
         }),
         catchError(this.handleError<Project>('updateProject'))
       );
@@ -108,7 +112,9 @@ export class ProjectService extends SharedService {
     const deleteProjectUrl = `${this.projectsServiceDomain}/projects/${id}`;
     return this.http.delete<Project>(deleteProjectUrl, this.httpOptions)
       .pipe(
-        tap(deletedProject => this.log(`fetched project id=${deletedProject._id}`)),
+        tap(deletedProject => {
+          this.log('Project successfully deleted')
+        }),
         catchError(this.handleError<Project>('deleteProject'))
       );
   }
@@ -145,7 +151,7 @@ export class ProjectService extends SharedService {
     const getEntryUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
     return this.http.get<Entry>(getEntryUrl, this.httpOptions)
       .pipe(
-        tap(fetchedEntry => this.log(`fetched project id=${fetchedEntry._id}`)),
+        tap(() => { }),
         catchError(this.handleError<Entry>('getEntry'))
       );
   }
@@ -159,22 +165,28 @@ export class ProjectService extends SharedService {
     const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries`;
     return this.http.post<Project>(createEntrytUrl, null, this.httpOptions)
       .pipe(
-        tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
+        tap(() => {
+          this.log('You have successfully signed up for this project', 'success');
+          localStorage.removeItem('project')
+
+        }),
         catchError(this.handleError<Project>('createEntry'))
       );
   }
 
   /**
-   * SUBMIT Entry
+   * UPDATE Entry
    * @param {string} project_id
    * @param {object} entry
    * @returns {Observable<Project>}
    */
-  updateEntrySubmissionStatus (project_id: string, entry): Observable<Project> {
-    const createEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry._id}`;
-    return this.http.put<Project>(createEntrytUrl, entry, this.httpOptions)
+  updateEntry (project_id: string, entry): Observable<Project> {
+    const updateEntryUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${entry._id}`;
+    return this.http.put<Project>(updateEntryUrl, entry, this.httpOptions)
       .pipe(
-        tap(createdEntry => this.log(`fetched project id=${createdEntry._id}`)),
+        tap(() => {
+          this.log('You have successfully updated your project submission', 'success')
+        }),
         catchError(this.handleError<Project>('createEntry'))
       );
   }
@@ -186,10 +198,13 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   deleteEntry (project_id: string, user_id: string): Observable<Project> {
-    const deleteEntrytUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
-    return this.http.delete<Project>(deleteEntrytUrl, this.httpOptions)
+    const deleteEntryUrl = `${this.projectsServiceDomain}/projects/${project_id}/entries/${user_id}`;
+    return this.http.delete<Project>(deleteEntryUrl, this.httpOptions)
       .pipe(
-        tap(deletedEntry => this.log(`deleted entry for project id=${deletedEntry}`)),
+        tap(deletedEntry => {
+          this.log('You have successfully signed off of this project', 'success')
+          localStorage.removeItem('project')
+        }),
         catchError(this.handleError<Project>('deleteEntry'))
       );
   }
@@ -218,7 +233,7 @@ export class ProjectService extends SharedService {
     return this.http.post<Asset>(createAssetUrl, asset, this.httpOptions)
       .pipe(
         tap(createdAsset => {
-          this.log(`fetched project id=${createdAsset._id}`)
+          this.log(`fetched project id=${createdAsset._id}`);
         }),
         catchError(this.handleError<Asset>('createProject'))
       );
@@ -242,9 +257,8 @@ export class ProjectService extends SharedService {
     }
     return this.http.delete(uri, this.httpOptions)
       .pipe(
-        tap((deletedAsset) =>  {
-          console.log('Deleted Asset');
-          this.log(`delete Asset id=${deletedAsset}`)
+        tap(() =>  {
+          this.log('Asset deleted', 'success')
         }),
         catchError(this.handleError<Asset>('deleteAsset'))
       );

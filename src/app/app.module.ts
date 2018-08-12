@@ -4,6 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TitleCasePipe } from '@angular/common';
 
 import { UserModule } from './user/user.module';
 
@@ -17,6 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardHomeComponent } from './dashboard/home/dashboard-home.component';
 import { DashboardSidebarComponent } from './dashboard/sidebar/dashboard-sidebar.component';
 import { ProfileComponent } from './dashboard/profile/profile.component';
+import { MessageService } from './messages/message.service';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,7 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
     DashboardComponent,
     DashboardHomeComponent,
     DashboardSidebarComponent,
-    ProfileComponent
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +38,10 @@ import { ProfileComponent } from './dashboard/profile/profile.component';
     UserModule,
     ProjectModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [TitleCasePipe, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

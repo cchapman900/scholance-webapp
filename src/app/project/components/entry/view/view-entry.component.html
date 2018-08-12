@@ -4,33 +4,43 @@
 
 <div class="row" *ngIf="entry?.commentary">
   <div class="col-10 mx-auto">
-    <h4>Commentary about this submission</h4>
+    <h5>Commentary about this submission</h5>
     <p>{{entry.commentary}}</p>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-10 mx-auto">
-    <h4>Attached Deliverables for this Project Entry</h4>
+  <div class="col-10 mx-auto">
+    <h5>Attached Deliverables for this Project Entry</h5>
     <p *ngIf="entry?.assets.length === 0">There are currently no assets for this Project Submission</p>
-    <app-view-asset *ngFor="let asset of entry?.assets"
-                    [project_id]="project_id" [asset]="asset" [assetType]="'entryAsset'"></app-view-asset>
+    <div *ngFor="let asset of entry?.assets; let i = index" class="row border rounded my-2 p-3">
+      <div class="col-10">
+        <app-view-asset [project_id]="project_id" [asset]="asset" [assetType]="assetType"></app-view-asset>
+      </div>
+      <div class="col-2">
+        <button *ngIf="userService.authenticatedUser._id === entry.student._id"
+                (click)="deleteAsset(assetType, project_id, asset._id, i)"
+                class="btn btn-sm btn-danger form-control">Delete</button>
+      </div>
+    </div>
     <br/>
   </div>
 </div>
 
 <hr/>
 
-<div *ngIf="entry">
-  <app-liaison-entry-work-area [project]="project" *ngIf="userService.authenticatedUser?._id === project?.liaison._id"></app-liaison-entry-work-area>
-  <app-student-entry-work-area [project]="project" [entry]="entry" *ngIf="userService.authenticatedUser?._id === entry?.student._id"></app-student-entry-work-area>
+<div *ngIf="entry" class="row">
+  <div class="col-10 mx-auto">
+    <app-liaison-entry-work-area [project]="project" *ngIf="userService.authenticatedUser?._id === project?.liaison._id"></app-liaison-entry-work-area>
+    <app-student-entry-work-area [project]="project" [entry]="entry" *ngIf="userService.authenticatedUser?._id === entry?.student._id"></app-student-entry-work-area>
+  </div>
 </div>
 
 
 <hr class="my-5"/>
 
 <div class="row">
-  <div class="col-md-10 offset-md-1">
+  <div class="col-md-10 mx-auto">
     <h4>Comments on this project entry</h4>
     <div [hidden]="!showComments">
       <app-view-comment *ngFor="let comment of entry?.comments"

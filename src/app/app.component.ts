@@ -32,7 +32,7 @@ export class AppComponent {
     // Taken from https://stackoverflow.com/questions/42538251/angular-2-get-current-route/42538483
     router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (this.router.url === '/' || this.router.url.startsWith('/dashboard')) {
+        if (this.router.url === '/' || this.router.url.startsWith('/dashboard') || this.router.url.startsWith('/workbench')) {
           this.isFullWidth = true;
         } else {
           this.isFullWidth = false;

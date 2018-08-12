@@ -130,10 +130,14 @@ export class FileInputComponent implements OnInit {
       // console.log(assetType);
       if (assetType === 'supplementalResource') {
         this.projectService.createSupplementalResourceFile(this.project_id, file)
-          .subscribe();
+          .subscribe(() => {
+            location.reload();
+          });
       } else if (assetType === 'entryAsset') {
         this.projectService.createEntryAssetFile(this.project_id, this.userService.authenticatedUser._id, file)
-          .subscribe();
+          .subscribe(() => {
+            location.reload();
+          });
       }
 
     }

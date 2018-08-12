@@ -7,6 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 import {SharedService} from '../../shared/services/shared.service';
+import {MessageService} from '../../messages/message.service';
 
 @Injectable()
 export class UserService extends SharedService {
@@ -16,9 +17,10 @@ export class UserService extends SharedService {
   public authenticatedUser: User; // Trying this out instead of having to do the subscriber
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    protected messageService: MessageService
   ) {
-    super();
+    super(messageService);
   }
 
   /**
@@ -48,9 +50,7 @@ export class UserService extends SharedService {
     const getUserUrl = `${this.usersServiceAPIUrl}/users/${id}`;
     return this.http.get<User>(getUserUrl)
       .pipe(
-        tap(user => {
-          this.log(`fetched user id=${id}`)
-        }),
+        tap(user => { }),
         catchError(this.handleError<User>('getUser'))
       );
   }
@@ -62,9 +62,7 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   updateUser (user: User): Observable<User> {
-    console.log(user);
     const updateUserUrl = `${this.usersServiceAPIUrl}/users/${user._id}`;
-    console.log(this.httpOptions);
     return this.http.put<User>(updateUserUrl, user, this.httpOptions)
       .pipe(
         tap(updatedUser => {

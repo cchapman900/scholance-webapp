@@ -3,6 +3,7 @@ import {Project} from '../../../../models/project.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Entry} from '../../../../models/entry.model';
 import {ProjectService} from '../../../../services/project.service';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-student-entry-work-area',
@@ -14,7 +15,8 @@ export class StudentEntryWorkAreaComponent implements OnInit {
   @Input() entry: Entry;
 
   submissionStatuses = [
-    'active',
+    'in progress',
+    'draft',
     'submitted'
   ];
 
@@ -22,7 +24,8 @@ export class StudentEntryWorkAreaComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    public titlecase: TitleCasePipe
   ) { }
 
   ngOnInit() {
@@ -31,11 +34,15 @@ export class StudentEntryWorkAreaComponent implements OnInit {
       commentary: [this.entry.commentary || ''],
       submissionStatus: [this.entry.submissionStatus]
     });
-    console.log(this.entry);
   }
 
-  saveEntry() {
-    this.projectService.updateEntrySubmissionStatus(this.project._id, this.entryForm.value)
+  onSubmit() {
+    if (this.entryForm.value.submissionStatus === 'submitted' &&
+      !confirm('By setting this submission to "submitted", it will be live to the organization liaison. Are you sure?')) {
+      this.entryForm.value.submissionStatus = 'draft';
+      return;
+    }
+    this.projectService.updateEntry(this.project._id, this.entryForm.value)
       .subscribe((response) => {
         console.log(response);
       })

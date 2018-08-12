@@ -46,6 +46,7 @@ export class ViewProjectComponent implements OnInit {
     this.projectService.createEntry(this.project._id)
       .subscribe((response) => {
         console.log(response);
+        this.router.navigate(['workbench', 'projects', this.project._id])
       })
   }
 
@@ -53,6 +54,7 @@ export class ViewProjectComponent implements OnInit {
     this.projectService.deleteEntry(this.project._id, this.userService.authenticatedUser._id)
       .subscribe((response) => {
         console.log(response);
+        this.router.navigate(['projects', this.project._id])
       })
   }
 

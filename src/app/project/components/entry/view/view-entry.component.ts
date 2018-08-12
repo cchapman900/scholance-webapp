@@ -16,6 +16,7 @@ export class ViewEntryComponent implements OnInit {
   entry: Entry;
   showComments: boolean;
   project_id: string;
+  assetType = 'entryAsset';
 
   constructor(
     private projectService: ProjectService,
@@ -64,9 +65,10 @@ export class ViewEntryComponent implements OnInit {
       })
   }
 
-  submitEntry(): void {
-    this.projectService.updateEntrySubmissionStatus(this.project_id, this.entry)
+  deleteAsset(assetType: string, project_id: string, asset_id: string, index: number) {
+    this.projectService.deleteAsset(assetType, project_id, asset_id, this.userService.authenticatedUser._id)
       .subscribe(() => {
+        this.entry.assets.splice(index, 1);
       });
   }
 
