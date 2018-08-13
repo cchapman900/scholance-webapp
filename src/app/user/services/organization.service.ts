@@ -6,14 +6,17 @@ import {HttpClient} from '@angular/common/http';
 import {Organization} from '../models/organization.model';
 import {SharedService} from '../../shared/services/shared.service';
 import {User} from '../models/user.model';
+import {MessageService} from '../../messages/message.service';
 
 @Injectable()
 export class OrganizationService extends SharedService {
 
   private usersServiceAPIUrl = 'https://5jnzq5gaii.execute-api.us-east-1.amazonaws.com/dev';
 
-  constructor(private http: HttpClient) {
-    super();
+  constructor(
+    private http: HttpClient,
+    protected messageService: MessageService) {
+    super(messageService);
   }
 
 

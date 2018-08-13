@@ -15,7 +15,9 @@ export class SharedService {
     })
   };
 
-  constructor(protected messageService: MessageService) { }
+  constructor(
+    protected messageService: MessageService
+  ) { }
 
   /**
    * Handle Http operation that failed.

@@ -1,18 +1,28 @@
 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
   <div class="sidebar-sticky">
     <ul class="nav flex-column">
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           <fa-icon [icon]="faHome"></fa-icon>
           Home
         </a>
       </li>
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/dashboard/profile" routerLinkActive="active">
           <fa-icon [icon]="faUser"></fa-icon>
           Profile
         </a>
       </li>
+
+      <li *ngIf="userService.authenticatedUser?.userType === 'student'" class="nav-item">
+        <a class="nav-link" routerLink="/users/{{userService.authenticatedUser?._id}}/portfolio" routerLinkActive="active">
+          <fa-icon [icon]="faAddressCard"></fa-icon>
+          Portfolio
+        </a>
+      </li>
+
       <li *ngIf="userService.authenticatedUser?.userType === 'business' && userService.authenticatedUser.organization" class="nav-item">
         <a class="nav-link" routerLink="/dashboard/organization" routerLinkActive="active">
           <fa-icon [icon]="faBuilding"></fa-icon>

@@ -5,6 +5,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs/Observable';
 import {Comment} from '../models/comment.model';
 import {UserService} from '../../user/services/user.service';
+import {MessageService} from '../../messages/message.service';
 
 @Injectable()
 export class CommentService extends SharedService {
@@ -13,9 +14,10 @@ export class CommentService extends SharedService {
 
   constructor(
     private http: HttpClient,
-    private userService: UserService
+    private userService: UserService,
+    protected messageService: MessageService
   ) {
-    super();
+    super(messageService);
   }
 
 

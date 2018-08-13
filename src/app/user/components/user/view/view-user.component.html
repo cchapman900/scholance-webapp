@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="user" class="row">
   <div class="col-2">
     <img [src]="user?.photo || 'assets/images/user-icon.png'" class="img-fluid">
   </div>
@@ -6,30 +6,39 @@
     <div class="row">
       <h4>{{user?.name}}</h4>
     </div>
+
+    <app-view-user-student *ngIf="user?.userType === 'student'" [user]="user"></app-view-user-student>
+    <app-view-user-liaison *ngIf="user?.userType === 'business'" [user]="user"></app-view-user-liaison>
+
     <div class="row">
-      <div class="col-12">
-        <p><strong>About Me</strong><br/>{{user?.about}}</p>
+      <div class="col-3 text-right">
+        <strong>About Me</strong>
+      </div>
+      <div class="col-9">
+        {{user?.about}}
       </div>
     </div>
 
     <div class="row">
-      <div class="col-2">
-        <a *ngIf="user?.linkedin" href="{{ user?.linkedin }}" target="_blank">
+      <div class="col-12 text-center">
+        <a *ngIf="user?.linkedin" href="{{ user?.linkedin }}" target="_blank" class="mx-1 social-link">
           <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
         </a>
-        <a *ngIf="user?.twitter" href="{{ user?.twitter }}" target="_blank">
+        <a *ngIf="user?.twitter" href="{{ user?.twitter }}" target="_blank" class="mx-1 social-link">
           <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
         </a>
-        <a *ngIf="user?.instagram" href="{{ user?.instagram }}" target="_blank">
+        <a *ngIf="user?.instagram" href="{{ user?.instagram }}" target="_blank" class="mx-1 social-link">
           <fa-icon [icon]="['fab', 'instagram']"></fa-icon>
         </a>
-        <a *ngIf="user?.website" href="{{ user?.website }}" target="_blank">
+        <a *ngIf="user?.website" href="{{ user?.website }}" target="_blank" class="mx-1 social-link">
           <span class="small">Personal Website</span>
         </a>
       </div>
     </div>
   </div>
+</div>
 
+<div class="row">
   <div class="col-12 text-center">
     <a class="btn btn-info"
        routerLink="update"
@@ -39,8 +48,3 @@
     </a>
   </div>
 </div>
-
-<hr/>
-
-<app-view-user-liaison *ngIf="user?.userType === 'business'" [user]="user"></app-view-user-liaison>
-<app-view-user-student *ngIf="user?.userType === 'student'" [user]="user"></app-view-user-student>

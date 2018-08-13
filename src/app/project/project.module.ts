@@ -56,6 +56,9 @@ import { StudentEntryWorkAreaComponent } from './components/entry/view/student-w
     AuthService,
     AuthGuardService,
     ProjectService
+  ],
+  exports: [
+    ViewEntryComponent
   ]
 })
 export class ProjectModule { }

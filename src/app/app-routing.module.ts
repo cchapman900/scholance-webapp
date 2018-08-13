@@ -15,6 +15,7 @@ import {AuthGuardService as AuthGuard} from './user/auth/services/auth-guard.ser
 import {ProfileComponent} from './dashboard/profile/profile.component';
 import {ViewUserComponent} from './user/components/user/view/view-user.component';
 import {ViewOrganizationComponent} from './user/components/organization/view/view-organization.component';
+import {PortfolioComponent} from './user/components/portfolio/portfolio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -53,7 +54,8 @@ const routes: Routes = [
   // These should probably be in a Users Routing module
   { path: 'users', children: [
       { path: ':user_id', component: ViewUserComponent },
-      { path: ':user_id/update', component: UpdateUserComponent, canActivate: [AuthGuard] }
+      { path: ':user_id/update', component: UpdateUserComponent, canActivate: [AuthGuard] },
+      { path: ':user_id/portfolio', component: PortfolioComponent }
     ]
   },
   { path: 'organizations', children: [

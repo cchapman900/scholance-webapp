@@ -1,0 +1,42 @@
+<app-view-user></app-view-user>
+
+<hr/>
+
+<h3>Completed Projects</h3>
+<div *ngFor="let project of projects" class="row border rounded p-4 mb-4">
+  <div class="col-12">
+    <div class="row">
+      <div class="col-md-4">
+        <h5>{{project.title}}</h5>
+        <p>{{project.organization.name}}</p>
+      </div>
+    </div>
+    <hr/>
+  </div>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12">
+        <h5>About my submission</h5>
+        <p>{{getStudentEntry(project).commentary}}</p>
+      </div>
+    </div>
+    <br/>
+    <div class="row">
+      <div class="col-12">
+        <h5>Deliverables</h5>
+      </div>
+      <div class="col-3 card m-3" *ngFor="let asset of getStudentEntry(project).assets">
+        <div class="card-body">
+          <div class="card-title">
+            <h6>{{asset.name}}</h6>
+          </div>
+          <p class="card-text" *ngIf="asset.mediaType === 'text'">{{asset.text}}</p>
+        </div>
+        <img *ngIf="asset.mediaType === 'image'" class="card-img-bottom" [src]="asset.uri">
+        <a target="_blank" [href]="'https://'+asset.uri">
+          <img *ngIf="asset.mediaType === 'link'"  class="card-img-bottom" src="/assets/images/link.svg">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

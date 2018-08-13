@@ -27,6 +27,8 @@ import {RouterModule} from '@angular/router';
 import { ViewUserLiaisonComponent } from './components/user/view/liaison/view-user-liaison.component';
 import { ViewUserStudentComponent } from './components/user/view/student/view-user-student.component';
 import { OrganizationFormComponent } from './components/organization/form/organization-form.component';
+import { PortfolioComponent } from './components/portfolio/portfolio.component';
+import {ProjectModule} from '../project/project.module';
 
 @NgModule({
   imports: [
@@ -34,7 +36,8 @@ import { OrganizationFormComponent } from './components/organization/form/organi
     ReactiveFormsModule,
     RouterModule,
     AuthModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    ProjectModule
   ],
   declarations: [
     CreateOrganizationComponent,
@@ -44,7 +47,8 @@ import { OrganizationFormComponent } from './components/organization/form/organi
     ViewOrganizationComponent,
     ViewUserLiaisonComponent,
     ViewUserStudentComponent,
-    OrganizationFormComponent
+    OrganizationFormComponent,
+    PortfolioComponent
   ],
   providers: [
     AuthService,
