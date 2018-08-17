@@ -5,3 +5,8 @@
 .organization-content {
   background-color: #EEFBFF;
 }
+
+.link {
+  color: #007bff;
+  cursor: pointer;
+}

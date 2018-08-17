@@ -30,6 +30,7 @@ import { OrganizationFormComponent } from './components/organization/form/organi
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import {ProjectModule} from '../project/project.module';
 import { UpdatePortfolioComponent } from './components/portfolio/update/update-portfolio.component';
+import { TermsOfServiceComponent } from './auth/components/register/terms-of-service/terms-of-service.component';
 
 @NgModule({
   imports: [

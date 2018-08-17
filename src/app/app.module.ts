@@ -29,7 +29,7 @@ import { SharedModule } from './shared/shared.module';
     DashboardComponent,
     DashboardHomeComponent,
     DashboardSidebarComponent,
-    ProfileComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

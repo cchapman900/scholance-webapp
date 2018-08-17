@@ -7,6 +7,7 @@ import { CallbackComponent } from './components/callback/callback.component';
 import { LoginComponent } from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
 import {AuthGuardService} from './services/auth-guard.service';
+import {TermsOfServiceComponent} from './components/register/terms-of-service/terms-of-service.component';
 
 @NgModule({
   imports: [
@@ -16,11 +17,13 @@ import {AuthGuardService} from './services/auth-guard.service';
   declarations: [
     LoginComponent,
     CallbackComponent,
-    RegisterComponent
+    RegisterComponent,
+    TermsOfServiceComponent
   ],
   providers: [
     AuthService,
     AuthGuardService
-  ]
+  ],
+  entryComponents: [TermsOfServiceComponent]
 })
 export class AuthModule { }

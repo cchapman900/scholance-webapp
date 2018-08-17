@@ -1,0 +1,22 @@
+<div class="modal-header">
+  <h2 class="modal-title">Terms of Service</h2>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <h3>For Students</h3>
+  <ul>
+    <li>
+      I will not submit content other than that which I have permission to and that the host organization will
+      have permission to use for their commercial use.
+    </li>
+  </ul>
+  <h3>For Businesses</h3>
+  <ul>
+    <li>I will not solicit services from students outside of the strict project scopes</li>
+  </ul>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>
