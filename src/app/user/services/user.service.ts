@@ -55,7 +55,6 @@ export class UserService extends SharedService {
       );
   }
 
-
   /**
    * UPDATE User
    * @param {User} user
@@ -66,9 +65,26 @@ export class UserService extends SharedService {
     return this.http.put<User>(updateUserUrl, user, this.httpOptions)
       .pipe(
         tap(updatedUser => {
-          this.log(`fetched user=${updatedUser}`);
+          this.log('Successfully updated profile', 'success');
         }),
         catchError(this.handleError<User>('updateUser'))
+      );
+  }
+
+  /**
+   * UPDATE Completed Projects
+   * @param {User} user
+   * @param {[any]} completedProjects
+   * @returns {Observable<User>}
+   */
+  updateCompletedProjects (user: User, completedProjects: [any]): Observable<User> {
+    const updateCompletedProjectsUrl = `${this.usersServiceAPIUrl}/users/${user._id}/completed-projects`;
+    return this.http.put<User>(updateCompletedProjectsUrl, {completedProjects: completedProjects}, this.httpOptions)
+      .pipe(
+        tap(updatedUser => {
+          this.log('Successfully updated portfolio', 'success');
+        }),
+        catchError(this.handleError<User>('updateCompletedProjects'))
       );
   }
 

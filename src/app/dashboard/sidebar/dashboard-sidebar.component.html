@@ -43,7 +43,8 @@
         </ul>
       </li>
     </ul>
-    <ul class="nav flex-column mt-4" *ngIf="userService.authenticatedUser?.userType === 'business'">
+    <ul *ngIf="userService.authenticatedUser?.userType === 'business' && userService.authenticatedUser?.organization"
+        class="nav flex-column mt-4">
       <li class="nav-item px-4">
         <button class="btn btn-info mx-auto btn-sm form-control" routerLink="/projects/create">
           Post a project

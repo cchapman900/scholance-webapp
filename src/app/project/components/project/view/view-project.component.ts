@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from '../../../../user/auth/services/auth.service';
 
 @Component({
   selector: 'app-view-project',
@@ -16,22 +17,25 @@ export class ViewProjectComponent implements OnInit {
   faCaretUp = faCaretUp;
   project: Project;
   showComments: boolean;
+  projectId: string
 
   constructor(
+    public authService: AuthService,
     private projectService: ProjectService,
     public userService: UserService,
     private route: ActivatedRoute,
     protected router: Router      // Currently assuming that webapp matches perfectly with API. Probably should fix soon.
-  ) { }
-
-  ngOnInit() {
-    const project_id = this.route.snapshot.paramMap.get('project_id');
-    this.getProject(project_id);
-    this.showComments = false;
+  ) {
+    this.projectId = this.route.snapshot.paramMap.get('project_id');
   }
 
-  getProject(id: string): void {
-    this.projectService.getProject(id)
+  ngOnInit() {
+    this.getProject();
+    this.showComments = true;
+  }
+
+  getProject(): void {
+    this.projectService.getProject(this.projectId)
       .subscribe((project) => {
         this.project = project;
       })

@@ -19,9 +19,19 @@
   </div>
 </div>
 
-<div class="row">
-  <div class="col-12" *ngIf="user?.organization">
-    <h4>Organization: <a routerLink="/organizations/{{user?.organization._id}}">{{user?.organization.name}}</a></h4>
-    <p *ngIf="user?.position">Position: {{user?.position}}</p>
+<div *ngIf="user?.organization" class="row">
+
+  <div class="col-3 text-right">
+    <p><strong>Organization</strong></p>
+  </div>
+  <div class="col-9">
+    <a routerLink="/organizations/{{user?.organization._id}}">{{user?.organization.name}}</a>
+  </div>
+
+  <div class="col-3 text-right">
+    <p><strong *ngIf="user?.position">Position</strong></p>
+  </div>
+  <div class="col-9">
+    <p *ngIf="user?.position">{{user?.position}}</p>
   </div>
 </div>

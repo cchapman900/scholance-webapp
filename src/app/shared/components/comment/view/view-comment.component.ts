@@ -17,28 +17,19 @@ export class ViewCommentComponent implements OnInit {
     entry_id?: string
   };
   @Input() commentType: string;
-  user: User;
 
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     private commentService: CommentService
   ) { }
 
   ngOnInit() {
-    this.getUser();
-  }
-
-  getUser(): void {
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.user = user;
-      })
   }
 
   deleteComment(): void {
     this.commentService.deleteComment(this.commentType, this.objectIds, this.comment._id)
       .subscribe(() => {
-        console.log('deleted comment');
+        location.reload();
       })
   }
 

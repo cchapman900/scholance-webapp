@@ -16,6 +16,7 @@ import {ProfileComponent} from './dashboard/profile/profile.component';
 import {ViewUserComponent} from './user/components/user/view/view-user.component';
 import {ViewOrganizationComponent} from './user/components/organization/view/view-organization.component';
 import {PortfolioComponent} from './user/components/portfolio/portfolio.component';
+import {UpdatePortfolioComponent} from './user/components/portfolio/update/update-portfolio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -55,7 +56,8 @@ const routes: Routes = [
   { path: 'users', children: [
       { path: ':user_id', component: ViewUserComponent },
       { path: ':user_id/update', component: UpdateUserComponent, canActivate: [AuthGuard] },
-      { path: ':user_id/portfolio', component: PortfolioComponent }
+      { path: ':user_id/portfolio', component: PortfolioComponent },
+      { path: ':user_id/portfolio/update', component: UpdatePortfolioComponent }
     ]
   },
   { path: 'organizations', children: [

@@ -1,5 +1,6 @@
 import {Organization} from './organization.model';
 import {Project} from '../../project/models/project.model';
+import {Asset} from '../../project/models/asset.model';
 
 export class User {
   _id?: string;
@@ -18,4 +19,16 @@ export class User {
   twitter: string;
   website: string;
   instagram: string;
+  completedProjects: [{
+    project: {
+      title: string,
+      organization: string,
+      summary: string
+    },
+    submission: {
+      assets: [Asset],
+      commentary: string
+    },
+    visible: boolean
+  }]
 }

@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLinkedin, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faLinkedin);
+library.add(faLinkedin );
 library.add(faTwitter);
 library.add(faInstagram);
 
@@ -29,6 +29,7 @@ import { ViewUserStudentComponent } from './components/user/view/student/view-us
 import { OrganizationFormComponent } from './components/organization/form/organization-form.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import {ProjectModule} from '../project/project.module';
+import { UpdatePortfolioComponent } from './components/portfolio/update/update-portfolio.component';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import {ProjectModule} from '../project/project.module';
     ViewUserLiaisonComponent,
     ViewUserStudentComponent,
     OrganizationFormComponent,
-    PortfolioComponent
+    PortfolioComponent,
+    UpdatePortfolioComponent
   ],
   providers: [
     AuthService,

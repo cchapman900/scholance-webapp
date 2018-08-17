@@ -31,7 +31,7 @@
 
 <div *ngIf="entry" class="row">
   <div class="col-10 mx-auto text-center">
-    <p *ngIf="project.selectedEntry === entry.student._id" class="badge badge-success">This entry was selected!</p>
+    <p *ngIf="project?.selectedEntry === entry?.student._id" class="badge badge-success">This entry was selected!</p>
     <app-liaison-entry-work-area *ngIf="userService.authenticatedUser?._id === project?.liaison._id"
                                  [project]="project"
                                  [entry]="entry"></app-liaison-entry-work-area>

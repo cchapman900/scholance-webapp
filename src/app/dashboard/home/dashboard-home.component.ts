@@ -12,4 +12,6 @@ export class DashboardHomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Add in some informational stuff here
+
 }

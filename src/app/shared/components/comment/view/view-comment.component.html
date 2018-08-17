@@ -3,7 +3,7 @@
     <h5 class="card-title">{{comment?.author.name}}</h5>
     <p class="card-text">{{comment?.text}}</p>
   </div>
-  <div *ngIf="comment?.author._id === user?._id" class="card-footer">
+  <div *ngIf="comment?.author._id === userService.authenticatedUser?._id" class="card-footer">
     <div class="row">
       <div class="col-6 offset-6 text-right">
         <button class="btn btn-danger" (click)="deleteComment()">Delete Comment</button>

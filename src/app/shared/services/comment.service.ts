@@ -44,7 +44,9 @@ export class CommentService extends SharedService {
     }
     return this.http.post<Comment>(createCommentUrl, {text: text}, this.httpOptions)
       .pipe(
-        tap(createdComment => this.log(`fetched comment=${text}`)),
+        tap(createdComment => {
+          this.log('Successfully commented')
+        }),
         catchError(this.handleError<Comment>('createComment'))
       );
   }
@@ -61,7 +63,8 @@ export class CommentService extends SharedService {
     if (commentType === 'project') {
       deleteCommentUrl = `${this.projectsServiceDomain}/projects/${objectIds.project_id}/comments/${comment_id}`;
     } else if (commentType === 'entry') {
-      deleteCommentUrl = `${this.projectsServiceDomain}/projects/${objectIds.project_id}/entries/${objectIds.entry_id}/comments/${comment_id}`;
+      deleteCommentUrl =
+        `${this.projectsServiceDomain}/projects/${objectIds.project_id}/entries/${objectIds.entry_id}/comments/${comment_id}`;
     } else {
       this.handleError('invalid comment type');
       return;

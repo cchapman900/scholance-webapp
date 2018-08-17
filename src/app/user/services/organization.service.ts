@@ -46,9 +46,7 @@ export class OrganizationService extends SharedService {
     const getOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${id}`;
     return this.http.get<Organization>(getOrganizationUrl)
       .pipe(
-        tap(organization => {
-          this.log(`fetched organization id=${id}`)
-        }),
+        tap(organization => { }),
         catchError(this.handleError<Organization>('getOrganization'))
       );
   }
@@ -64,7 +62,7 @@ export class OrganizationService extends SharedService {
     console.log(organization);
     return this.http.post<Organization>(createOrganizationUrl, organization, this.httpOptions)
       .pipe(
-        tap(createdOrganization => this.log(`fetched user=${createdOrganization}`)),
+        tap(createdOrganization => this.log('You successfully created an organization', 'success')),
         catchError(this.handleError<Organization>('createOrganization'))
       );
   }
@@ -80,7 +78,7 @@ export class OrganizationService extends SharedService {
     return this.http.put<Organization>(updateOrganizationUrl, organization, this.httpOptions)
       .pipe(
         tap(updatedOrganization => {
-          this.log(`updated organization=${updatedOrganization}`);
+          this.log('You successfully updated your organization', 'success');
         }),
         catchError(this.handleError<Organization>('updateOrganization'))
       );
@@ -98,7 +96,7 @@ export class OrganizationService extends SharedService {
     return this.http.post<Organization>(addUserToOrganizationUrl, null, this.httpOptions)
       .pipe(
         tap(updatedOrganization => {
-          this.log(`fetched user=${updatedOrganization}`);
+          this.log('You were successfully added to this organization', 'success');
         }),
         catchError(this.handleError<Organization>('addUserToOrganization'))
       );
@@ -115,9 +113,7 @@ export class OrganizationService extends SharedService {
     const addUserToOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization_id}/users/${user_id}`;
     return this.http.delete<Organization>(addUserToOrganizationUrl, this.httpOptions)
       .pipe(
-        tap(updatedOrganization => {
-          this.log(`fetched user=${updatedOrganization}`);
-        }),
+        tap(updatedOrganization => { }),
         catchError(this.handleError<Organization>('updateOrganization'))
       );
   }

@@ -25,7 +25,7 @@ export class CreateCommentComponent implements OnInit {
   createComment(): void {
     this.commentService.createComment(this.commentType, this.objectIds, this.text)
       .subscribe((response) => {
-        console.log(response);
+        location.reload()
       });
   }
 

@@ -73,14 +73,10 @@
 
 <hr/>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-md-10 offset-md-1">
     <h4>Project discussion board</h4>
     <div [hidden]="!showComments">
-      <p style="cursor: pointer" class="text-center comment-toggle" (click)="showComments = ! showComments">
-        Hide comments
-        <fa-icon [icon]="faCaretUp"></fa-icon>
-      </p>
       <p class="text-center text-muted small" *ngIf="project?.comments.length === 0">There are no comments to display</p>
       <app-view-comment *ngFor="let comment of project?.comments"
                         [commentType]="'project'" [objectIds]="{project_id: project?._id}" [comment]="comment"></app-view-comment>
@@ -89,12 +85,14 @@
         <fa-icon [icon]="faCaretUp"></fa-icon>
       </p>
     </div>
-    <div [hidden]="showComments" class="text-center text-muted comment-toggle">
+    <div [hidden]="showComments && project?.comments" class="text-center text-muted comment-toggle">
       <p style="cursor: pointer" (click)="showComments = ! showComments">
         View {{project?.comments?.length}} comment<span *ngIf="project?.comments.length != 1">s</span>
         <fa-icon [icon]="faCaretDown"></fa-icon>
       </p>
     </div>
-    <app-create-comment [commentType]="'project'" [objectIds]="{project_id: project?._id}"></app-create-comment>
+    <app-create-comment *ngIf="authService.isAuthenticated()"
+                        [commentType]="'project'"
+                        [objectIds]="{project_id: project?._id}"></app-create-comment>
   </div>
 </div>

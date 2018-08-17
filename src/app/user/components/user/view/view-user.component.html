@@ -10,17 +10,21 @@
     <app-view-user-student *ngIf="user?.userType === 'student'" [user]="user"></app-view-user-student>
     <app-view-user-liaison *ngIf="user?.userType === 'business'" [user]="user"></app-view-user-liaison>
 
-    <div class="row">
+    <div *ngIf="user?.about"
+         class="row">
       <div class="col-3 text-right">
         <strong>About Me</strong>
       </div>
-      <div class="col-9">
+      <div class="col-9 mb-3">
         {{user?.about}}
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-12 text-center">
+    <div *ngIf="user?.linkedin || user?.twitter || user?.website || user?.instagram" class="row">
+      <div class="col-3 text-right">
+        <p><strong>Links</strong></p>
+      </div>
+      <div class="col-9">
         <a *ngIf="user?.linkedin" href="{{ user?.linkedin }}" target="_blank" class="mx-1 social-link">
           <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
         </a>

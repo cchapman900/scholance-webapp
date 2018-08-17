@@ -12,10 +12,10 @@ import {Project} from '../../../project/models/project.model';
 })
 export class PortfolioComponent implements OnInit {
   user: User;
-  projects: [Project];
+  completedProjects: any;
 
   constructor(
-    private userService: UserService,
+    public userService: UserService,
     private route: ActivatedRoute
   ) { }
 
@@ -28,15 +28,8 @@ export class PortfolioComponent implements OnInit {
     this.userService.getUser(user_id)
       .subscribe((user) => {
         this.user = user;
-        this.projects = user.projects
+        this.completedProjects = user.completedProjects;
       })
-  }
-
-  getStudentEntry(project: Project) {
-
-    const entryIndex = project.entries.findIndex(entry => entry.student === this.user._id);
-    const entry = project.entries[entryIndex];
-    return entry;
   }
 
 }
