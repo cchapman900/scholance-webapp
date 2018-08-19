@@ -5,6 +5,9 @@ import {ProjectService} from '../../../services/project.service';
 import {UserService} from '../../../../user/services/user.service';
 import {Router} from '@angular/router';
 import {Project} from '../../../models/project.model';
+import {User} from '../../../../user/models/user.model';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CreateProjectAgreementComponent} from '../create/create-project-agreement/create-project-agreement.component';
 
 @Component({
   selector: 'app-project-form',
@@ -18,6 +21,9 @@ export class ProjectFormComponent implements OnInit {
   @Input() project: Project;
   @Input() action: string;
   projectForm: FormGroup;
+  closeResult: string;
+
+  user: User;
 
   categories: string[] = [
     'Graphic Design',
@@ -38,36 +44,41 @@ export class ProjectFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private projectService: ProjectService,
+    private modalService: NgbModal,
     private userService: UserService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
+    this.userService.authenticatedUser$ // TODO: this seems dumb too.
+      .subscribe((user) => {
+        this.projectForm = this.formBuilder.group({
+          _id: [this.project._id || ''],
+          title: [this.project.title || '', Validators.required],
+          organization: [user.organization._id || ''],
+          summary: [this.project.summary || '', Validators.required],
+          fullDescription: [this.project.fullDescription || ''],
+          category: [this.project.category || '', Validators.required],
+          specs: this.formBuilder.array([this.createSpec()]),
+          deliverables: this.formBuilder.array([this.createDeliverable()]),
+          deadline: [this.project.deadline || '']
+        });
 
-    this.projectForm = this.formBuilder.group({
-      _id: [this.project._id],
-      title: [this.project.title, Validators.required],
-      organization: [this.userService.authenticatedUser.organization._id],
-      summary: [this.project.summary, Validators.required],
-      fullDescription: [this.project.fullDescription],
-      category: [this.project.category, Validators.required],
-      specs: this.formBuilder.array([this.createSpec()]),
-      deliverables: this.formBuilder.array([this.createDeliverable()]),
-      deadline: [this.project.deadline]
-    });
+        if (this.project.specs) {
+          this.removeSpec(0); // TODO: This is kinda dumb. But having trouble initializing this array
+          for (const spec of this.project.specs) {
+            this.addSpec(spec)
+          }
+        }
 
-    if (this.project.specs) {
-      this.removeSpec(0); // TODO: This is kinda dumb. But having trouble initializing this array
-      for (const spec of this.project.specs) {
-        this.addSpec(spec)
-      }
-    }
-
-    if (this.project.deliverables) {
-      this.removeDeliverable(0); // TODO: This is kinda dumb. But having trouble initializing this array
-      for (const deliverable of this.project.deliverables) {
-        this.addDeliverable(deliverable.name, deliverable.mediaType)
-      }
-    }
+        if (this.project.deliverables) {
+          this.removeDeliverable(0); // TODO: This is kinda dumb. But having trouble initializing this array
+          for (const deliverable of this.project.deliverables) {
+            this.addDeliverable(deliverable.name, deliverable.mediaType)
+          }
+        }
+      })
   }
 
   /***************
@@ -136,7 +147,7 @@ export class ProjectFormComponent implements OnInit {
   saveProject() {
     // console.log(this.projectForm.value)
     if (this.action === 'create') {
-      this.createProject()
+      this.openCreateProjectAgreement()
     } else if (this.action === 'update') {
       this.updateProject()
     }
@@ -156,6 +167,25 @@ export class ProjectFormComponent implements OnInit {
         console.log(project);
         this.router.navigate(['workbench', 'projects', project._id])
       })
+  }
+
+  openCreateProjectAgreement() {
+    this.modalService.open(CreateProjectAgreementComponent, {size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+      this.createProject();
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
 

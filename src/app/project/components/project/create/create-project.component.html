@@ -1,2 +1,4 @@
-<h1>Project</h1>
-<app-project-form *ngIf="project" [project]="project" [action]="'create'"></app-project-form>
+<div *ngIf="project">
+  <h1>Project</h1>
+  <app-project-form [project]="project" [action]="'create'"></app-project-form>
+</div>
