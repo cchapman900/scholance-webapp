@@ -5,14 +5,7 @@
     </h2>
   </div>
   <div class="col-3 text-right" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
-    <button *ngIf="!studentIsRegisteredForProject()"
-            class="btn btn-success btn-sm" (click)="studentSignup()">
-      Sign up for this project
-    </button>
-    <button *ngIf="studentIsRegisteredForProject()"
-            class="btn btn-danger btn-sm" (click)="studentSignoff()">
-      Sign off of this project
-    </button>
+    <app-student-project-toolbar [project_id]="project._id"></app-student-project-toolbar>
   </div>
 </div>
 <h5>Project Summary</h5>

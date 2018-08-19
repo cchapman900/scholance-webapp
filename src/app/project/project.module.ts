@@ -24,6 +24,7 @@ import { AssetFormComponent } from './components/asset/form/asset-form.component
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LiaisonEntryWorkAreaComponent } from './components/entry/view/liaison-work-area/liaison-entry-work-area.component';
 import { StudentEntryWorkAreaComponent } from './components/entry/view/student-work-area/student-entry-work-area.component';
+import { ProjectSignupAgreementComponent } from './components/project/view/student-project-toolbar/project-signup-agreement/project-signup-agreement.component';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { StudentEntryWorkAreaComponent } from './components/entry/view/student-w
     AssetFormComponent,
     WorkbenchSidebarComponent,
     LiaisonEntryWorkAreaComponent,
-    StudentEntryWorkAreaComponent
+    StudentEntryWorkAreaComponent,
+    ProjectSignupAgreementComponent
   ],
   providers: [
     AuthService,
@@ -59,6 +61,7 @@ import { StudentEntryWorkAreaComponent } from './components/entry/view/student-w
   ],
   exports: [
     ViewEntryComponent
-  ]
+  ],
+  entryComponents: [ProjectSignupAgreementComponent]
 })
 export class ProjectModule { }

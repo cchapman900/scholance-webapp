@@ -6,8 +6,8 @@ import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../../../user/auth/services/auth.service';
-import {TermsOfServiceComponent} from '../../../../user/auth/components/register/terms-of-service/terms-of-service.component';
-import {ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ProjectSignupAgreementComponent} from './student-project-toolbar/project-signup-agreement/project-signup-agreement.component';
 
 @Component({
   selector: 'app-view-project',
@@ -43,43 +43,20 @@ export class ViewProjectComponent implements OnInit {
       })
   }
 
-  studentIsRegisteredForProject(): boolean {
-    const studentIsRegistered = this.project.entries.some(entry => entry.student._id === this.userService.authenticatedUser._id);
-    return studentIsRegistered;
-  }
-
-  studentSignup() {
-    this.projectService.createEntry(this.project._id)
-      .subscribe((response) => {
-        console.log(response);
-        this.router.navigate(['workbench', 'projects', this.project._id])
-      })
-  }
-
-  studentSignoff() {
-    this.projectService.deleteEntry(this.project._id, this.userService.authenticatedUser._id)
-      .subscribe((response) => {
-        console.log(response);
-        location.reload()
-      })
-  }
-
-  openSignupAgreement() {
-    this.modalService.open(TermsOfServiceComponent, {size: 'lg'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });;
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  }
+  // studentSignup() {
+  //   this.projectService.createEntry(this.project._id)
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //       this.router.navigate(['workbench', 'projects', this.project._id])
+  //     })
+  // }
+  //
+  // studentSignoff() {
+  //   this.projectService.deleteEntry(this.project._id, this.userService.authenticatedUser._id)
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //       location.reload()
+  //     })
+  // }
 
 }

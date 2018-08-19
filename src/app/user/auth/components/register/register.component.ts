@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });;
+    });
   }
 
   private getDismissReason(reason: any): string {
