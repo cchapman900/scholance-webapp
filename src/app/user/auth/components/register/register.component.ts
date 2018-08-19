@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
     this.acceptTermsOfService = false;
   }
 
-  open() {
+  openTermsOfService() {
     this.modalService.open(TermsOfServiceComponent, {size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

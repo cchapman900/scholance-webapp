@@ -6,6 +6,8 @@ import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../../../user/auth/services/auth.service';
+import {TermsOfServiceComponent} from '../../../../user/auth/components/register/terms-of-service/terms-of-service.component';
+import {ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-view-project',
@@ -17,7 +19,7 @@ export class ViewProjectComponent implements OnInit {
   faCaretUp = faCaretUp;
   project: Project;
   showComments: boolean;
-  projectId: string
+  projectId: string;
 
   constructor(
     public authService: AuthService,
@@ -58,8 +60,26 @@ export class ViewProjectComponent implements OnInit {
     this.projectService.deleteEntry(this.project._id, this.userService.authenticatedUser._id)
       .subscribe((response) => {
         console.log(response);
-        this.router.navigate(['projects', this.project._id])
+        location.reload()
       })
+  }
+
+  openSignupAgreement() {
+    this.modalService.open(TermsOfServiceComponent, {size: 'lg'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });;
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 
 }
