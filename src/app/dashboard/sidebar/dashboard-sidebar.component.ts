@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faUser, faHome, faBuilding, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../user/services/user.service';
+import {Project} from '../../project/models/project.model';
 
 @Component({
   selector: 'app-dashboard-sidebar',
@@ -16,11 +17,20 @@ export class DashboardSidebarComponent implements OnInit {
   faBuilding = faBuilding;
   faAddressCard = faAddressCard;
 
+  activeProjects: Project[];
+  completedProjects: Project[];
+
   constructor(
     public userService: UserService
   ) { }
 
   ngOnInit() {
+    this.userService.authenticatedUser$
+      .subscribe((user) => {
+        console.log(user);
+        this.activeProjects = user.projects.filter(project => project.status === 'active');
+        this.completedProjects = user.projects.filter(project => project.status === 'complete');
+      })
   }
 
 }

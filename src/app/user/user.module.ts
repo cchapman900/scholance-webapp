@@ -7,7 +7,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faLinkedin, faTwitter, faInstagram } from '@fortawesome/free-brands-svg-icons';
 
-library.add(faLinkedin);
+library.add(faLinkedin );
 library.add(faTwitter);
 library.add(faInstagram);
 

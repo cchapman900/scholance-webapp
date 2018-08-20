@@ -32,12 +32,26 @@
     </ul>
 
     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-      <span>My Projects</span>
+      <span>Active Projects</span>
     </h6>
     <ul class="nav flex-column">
       <li class="nav-item">
         <ul class="nav flex-column ml-4">
-          <li class="nav-item" *ngFor="let project of userService.authenticatedUser?.projects">
+          <li class="nav-item" *ngFor="let project of activeProjects">
+            <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h6 *ngIf="completedProjects?.length > 0"
+        class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      <span>Completed Projects</span>
+    </h6>
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <ul class="nav flex-column ml-4">
+          <li class="nav-item" *ngFor="let project of completedProjects">
             <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
           </li>
         </ul>

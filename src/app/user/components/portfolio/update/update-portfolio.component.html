@@ -1,6 +1,6 @@
 <h1>Update Portfolio</h1>
 
-<div *ngFor="let completedProject of completedProjects; let i = index"
+<div *ngFor="let completedProject of portfolioEntries; let i = index"
      class="row align-items-center">
   <div class="col-10 p-4 mb-4 border rounded">
     <div class="col-12">
@@ -48,6 +48,6 @@
 </div>
 <div class="row">
   <div class="col-12 mx-auto pb-5 text-center">
-    <button class="btn btn-info" (click)="updateCompletedProjects()">Update Portfolio</button>
+    <button class="btn btn-info" (click)="updatePortfolioEntries()">Update Portfolio</button>
   </div>
 </div>

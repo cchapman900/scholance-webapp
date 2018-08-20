@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class UpdatePortfolioComponent implements OnInit {
 
-  completedProjects: [{
+  portfolioEntries: [{
     project: {
       title: string,
       organization: string,
@@ -31,24 +31,24 @@ export class UpdatePortfolioComponent implements OnInit {
   ngOnInit() {
     this.userService.authenticatedUser$  // TODO: Figure out why you need to refresh page for portfolio to work
       .subscribe((user) => {
-        this.completedProjects = user.completedProjects;
+        this.portfolioEntries = user.portfolioEntries;
       })
   }
 
   moveToTop(index: number) {
-    this.completedProjects.splice(0, 0, this.completedProjects.splice(index, 1)[0]);
+    this.portfolioEntries.splice(0, 0, this.portfolioEntries.splice(index, 1)[0]);
   }
 
   moveToBottom(index: number) {
-    this.completedProjects.splice(this.completedProjects.length - 1, 0, this.completedProjects.splice(index, 1)[0]);
+    this.portfolioEntries.splice(this.portfolioEntries.length - 1, 0, this.portfolioEntries.splice(index, 1)[0]);
   }
 
   toggleVisibility(index: number) {
-    this.completedProjects[index].visible = !this.completedProjects[index].visible;
+    this.portfolioEntries[index].visible = !this.portfolioEntries[index].visible;
   }
 
-  updateCompletedProjects() {
-    this.userService.updateCompletedProjects(this.userService.authenticatedUser, this.completedProjects)
+  updatePortfolioEntries() {
+    this.userService.updatePortfolioEntries(this.userService.authenticatedUser, this.portfolioEntries)
       .subscribe((response) => {
         this.router.navigate(['users', this.userService.authenticatedUser._id, 'portfolio']);
       })

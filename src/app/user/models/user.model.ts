@@ -19,7 +19,7 @@ export class User {
   twitter: string;
   website: string;
   instagram: string;
-  completedProjects: [{
+  portfolioEntries: [{
     project: {
       title: string,
       organization: string,

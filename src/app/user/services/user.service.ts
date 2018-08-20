@@ -74,17 +74,17 @@ export class UserService extends SharedService {
   /**
    * UPDATE Completed Projects
    * @param {User} user
-   * @param {[any]} completedProjects
+   * @param {[any]} portfolioEntries
    * @returns {Observable<User>}
    */
-  updateCompletedProjects (user: User, completedProjects: [any]): Observable<User> {
-    const updateCompletedProjectsUrl = `${this.usersServiceAPIUrl}/users/${user._id}/completed-projects`;
-    return this.http.put<User>(updateCompletedProjectsUrl, {completedProjects: completedProjects}, this.httpOptions)
+  updatePortfolioEntries (user: User, portfolioEntries: [any]): Observable<User> {
+    const updatePortfolioEntriesUrl = `${this.usersServiceAPIUrl}/users/${user._id}/completed-projects`;
+    return this.http.put<User>(updatePortfolioEntriesUrl, {portfolioEntries: portfolioEntries}, this.httpOptions)
       .pipe(
         tap(updatedUser => {
           this.log('Successfully updated portfolio', 'success');
         }),
-        catchError(this.handleError<User>('updateCompletedProjects'))
+        catchError(this.handleError<User>('updatePortfolioEntries'))
       );
   }
 

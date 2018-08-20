@@ -12,7 +12,7 @@ import {Project} from '../../../project/models/project.model';
 })
 export class PortfolioComponent implements OnInit {
   user: User;
-  completedProjects: any;
+  portfolioEntries: any;
 
   constructor(
     public userService: UserService,
@@ -28,7 +28,7 @@ export class PortfolioComponent implements OnInit {
     this.userService.getUser(user_id)
       .subscribe((user) => {
         this.user = user;
-        this.completedProjects = user.completedProjects;
+        this.portfolioEntries = user.portfolioEntries;
       })
   }
 
