@@ -18,7 +18,7 @@
         <app-view-asset [project_id]="project_id" [asset]="asset" [assetType]="assetType"></app-view-asset>
       </div>
       <div class="col-2">
-        <button *ngIf="userService.authenticatedUser._id === entry.student._id"
+        <button *ngIf="userService.authenticatedUser._id === entry.student._id && entry?.submissionStatus !== 'submitted'"
                 (click)="deleteAsset(assetType, project_id, asset._id, i)"
                 class="btn btn-sm btn-danger form-control">Delete</button>
       </div>
@@ -27,15 +27,20 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-12 text-center">
+    <p *ngIf="project?.selectedEntry === entry?.student._id" class="badge badge-success">This entry was selected!</p>
+  </div>
+</div>
+
 <hr/>
 
 <div *ngIf="entry" class="row">
-  <div class="col-10 mx-auto text-center">
-    <p *ngIf="project?.selectedEntry === entry?.student._id" class="badge badge-success">This entry was selected!</p>
+  <div class="col-10 mx-auto">
     <app-liaison-entry-work-area *ngIf="userService.authenticatedUser?._id === project?.liaison._id"
                                  [project]="project"
                                  [entry]="entry"></app-liaison-entry-work-area>
-    <app-student-entry-work-area *ngIf="userService.authenticatedUser?._id === entry?.student._id"
+    <app-student-entry-work-area *ngIf="userService.authenticatedUser?._id === entry?.student._id && entry?.submissionStatus !== 'submitted'"
                                  [project]="project"
                                  [entry]="entry"></app-student-entry-work-area>
   </div>

@@ -3,6 +3,7 @@ import {UserService} from '../../../user/services/user.service';
 import {ProjectService} from '../../services/project.service';
 import {Project} from '../../models/project.model';
 import {ActivatedRoute, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-workbench',
@@ -18,7 +19,8 @@ export class WorkbenchComponent implements OnInit {
   constructor(
     public userService: UserService,
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
@@ -30,7 +32,12 @@ export class WorkbenchComponent implements OnInit {
     this.projectService.getProject(id)
       .subscribe((project) => {
         this.project = project;
+        this.setTitle(project.title)
       })
+  }
+
+  setTitle(title: string) {
+    this.titleService.setTitle(`Scholance | Project Workbench: ${title}`)
   }
 
 }

@@ -3,6 +3,7 @@ import {AuthService} from './user/auth/services/auth.service';
 import {UserService} from './user/services/user.service';
 import {User} from './user/models/user.model';
 import {NavigationEnd, Router} from '@angular/router';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent {
   constructor(
     public auth: AuthService,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private titleService: Title
   ) {
 
     // Authentication Stuff
@@ -39,6 +41,10 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  public setTitle(newTitle: string) {
+    this.titleService.setTitle(newTitle);
   }
 
 }

@@ -59,7 +59,7 @@
     </ul>
     <ul *ngIf="userService.authenticatedUser?.userType === 'business' &&
     userService.authenticatedUser?.organization &&
-    activeProjects.length < 3"
+    activeProjects?.length < 3"
 
         class="nav flex-column mt-4">
       <li class="nav-item px-4">

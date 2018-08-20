@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ProjectService} from '../../../services/project.service';
 import {Project} from '../../../models/project.model';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-list-projects',
@@ -11,11 +12,13 @@ export class ListProjectsComponent implements OnInit {
   projects: Project[];
 
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private titleService: Title
   ) { }
 
   ngOnInit() {
     this.listProjects();
+    this.setTitle()
   }
 
   listProjects() {
@@ -23,6 +26,10 @@ export class ListProjectsComponent implements OnInit {
       .subscribe((projects) => {
         this.projects = projects;
       })
+  }
+
+  setTitle() {
+    this.titleService.setTitle('Scholance | Browse Projects')
   }
 
 }

@@ -27,10 +27,11 @@ export class DashboardSidebarComponent implements OnInit {
   ngOnInit() {
     this.userService.authenticatedUser$
       .subscribe((user) => {
-        console.log(user);
         this.activeProjects = user.projects.filter(project => project.status === 'active');
         this.completedProjects = user.projects.filter(project => project.status === 'complete');
       })
+
+
   }
 
 }

@@ -8,6 +8,7 @@ import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
 import {AuthService} from '../../../../user/auth/services/auth.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {ProjectSignupAgreementComponent} from './student-project-toolbar/project-signup-agreement/project-signup-agreement.component';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-project',
@@ -26,7 +27,8 @@ export class ViewProjectComponent implements OnInit {
     private projectService: ProjectService,
     public userService: UserService,
     private route: ActivatedRoute,
-    protected router: Router      // Currently assuming that webapp matches perfectly with API. Probably should fix soon.
+    protected router: Router,      // Currently assuming that webapp matches perfectly with API. Probably should fix soon.
+    private titleService: Title
   ) {
     this.projectId = this.route.snapshot.paramMap.get('project_id');
   }
@@ -40,23 +42,12 @@ export class ViewProjectComponent implements OnInit {
     this.projectService.getProject(this.projectId)
       .subscribe((project) => {
         this.project = project;
+        this.setTitle(project.title)
       })
   }
 
-  // studentSignup() {
-  //   this.projectService.createEntry(this.project._id)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //       this.router.navigate(['workbench', 'projects', this.project._id])
-  //     })
-  // }
-  //
-  // studentSignoff() {
-  //   this.projectService.deleteEntry(this.project._id, this.userService.authenticatedUser._id)
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //       location.reload()
-  //     })
-  // }
+  setTitle(title: string) {
+    this.titleService.setTitle(`Scholance | ${title}`)
+  }
 
 }
