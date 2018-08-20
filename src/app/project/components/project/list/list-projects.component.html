@@ -1,9 +1,25 @@
 <div class="row">
-  <div class="col-md-3 bg-light border rounded">
-    <h4 class="mt-2">Search</h4>
-    <h4 class="mt-2">Filter</h4>
+  <div class="col-md-3 pb-5 bg-light border rounded">
+    <form [formGroup]="filterForm">
+      <h4 class="mt-2">Filter</h4>
+      <div class="row">
+        <div class="col-12">
+          <label for="status">Project Status</label>
+          <select formControlName="status" id="status" class="form-control">
+            <option value="active">Active</option>
+            <option value="complete">Complete</option>
+          </select>
+          <button class="btn btn-info form-control mt-3" (click)="updateFilter()">Submit</button>
+        </div>
+      </div>
+    </form>
   </div>
   <div class="col-md-9">
+    <h1>Browse Projects</h1>
+    <p *ngIf="projects?.length === 0"
+       class="alert alert-warning">
+      There don't appear to be any projects matching your criteria.
+    </p>
     <div *ngFor="let project of projects" class="card mb-3">
       <div class="card-body">
         <h5 class="card-title"><a routerLink="{{project._id}}"> {{project.title}}</a></h5>
@@ -17,7 +33,7 @@
         <div class="row">
           <div class="col-2 offset-1"><span class="badge badge-info py-2" *ngIf="project.category">{{project.category}}</span></div>
           <div class="col-3 small"><span *ngIf="project.deadline"><strong>Deadline:</strong> {{project.deadline}}</span> </div>
-          <div class="col-3 small">{{project.entries.length}} active registrants</div>
+          <div class="col-3 small">{{project.entries.length}} registrants</div>
         </div>
       </div>
     </div>

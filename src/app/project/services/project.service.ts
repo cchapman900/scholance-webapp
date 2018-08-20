@@ -4,7 +4,7 @@ import {User} from '../../user/models/user.model';
 import {SharedService} from '../../shared/services/shared.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
 import {Entry} from '../models/entry.model';
 import {Asset} from '../models/asset.model';
@@ -33,9 +33,10 @@ export class ProjectService extends SharedService {
    * LIST Projects
    * @returns {Observable<Project[]>}
    */
-  listProjects (): Observable<Project[]> {
+  listProjects (filter: any = null): Observable<Project[]> {
     const getProjectUrl = `${this.projectsServiceDomain}/projects`;
-    return this.http.get<Project[]>(getProjectUrl)
+    const options = filter ? { params: new HttpParams().set('status', filter.status)} : {};
+    return this.http.get<Project[]>(getProjectUrl, options)
       .pipe(
         tap(project => { }),
         catchError(this.handleError<Project[]>('listProjects'))
