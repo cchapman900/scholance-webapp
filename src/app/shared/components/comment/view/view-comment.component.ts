@@ -4,6 +4,8 @@ import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 import {CommentService} from '../../../services/comment.service';
 
+const ObjectID = require('bson-objectid');
+
 @Component({
   selector: 'app-view-comment',
   templateUrl: './view-comment.component.html',
@@ -31,6 +33,10 @@ export class ViewCommentComponent implements OnInit {
       .subscribe(() => {
         location.reload();
       })
+  }
+
+  getTime(objectId: string) {
+    return ObjectID(objectId).getTimestamp();
   }
 
 }

@@ -5,7 +5,10 @@
   </div>
   <div *ngIf="comment?.author._id === userService.authenticatedUser?._id" class="card-footer">
     <div class="row">
-      <div class="col-6 offset-6 text-right">
+      <div class="col-3">
+        {{getTime(comment?._id) | date:"M/dd/yy | h:mm a"}}
+      </div>
+      <div class="col-6 ml-auto text-right">
         <button class="btn btn-danger" (click)="deleteComment()">Delete Comment</button>
       </div>
     </div>

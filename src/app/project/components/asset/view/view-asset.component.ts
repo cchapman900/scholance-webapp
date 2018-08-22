@@ -18,4 +18,8 @@ export class ViewAssetComponent implements OnInit {
 
   ngOnInit() { }
 
+  formatUri(uri: string) {
+    return uri.replace('https://', '').replace('http://', '');
+  }
+
 }

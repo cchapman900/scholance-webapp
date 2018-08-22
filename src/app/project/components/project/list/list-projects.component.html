@@ -14,15 +14,20 @@
       </div>
     </form>
   </div>
+
   <div class="col-md-9">
     <h1>Browse Projects</h1>
+
     <p *ngIf="projects?.length === 0"
        class="alert alert-warning">
       There don't appear to be any projects matching your criteria.
     </p>
+
     <div *ngFor="let project of projects" class="card mb-3">
       <div class="card-body">
-        <h5 class="card-title"><a routerLink="{{project._id}}"> {{project.title}}</a></h5>
+        <h5 class="card-title">
+          <a routerLink="{{project._id}}"> {{project.title}}</a>
+        </h5>
         <div class="row mb-3">
           <div class="col-2 offset-1 rounded">
             <img src="assets/images/logo.svg" class="img-fluid">
@@ -34,9 +39,11 @@
           <div class="col-2 offset-1"><span class="badge badge-info py-2" *ngIf="project.category">{{project.category}}</span></div>
           <div class="col-3 small"><span *ngIf="project.deadline"><strong>Deadline:</strong> {{project.deadline}}</span> </div>
           <div class="col-3 small">{{project.entries.length}} registrants</div>
+          <div class="col-3 small text-right">Posted {{getTime(project._id) | date}}</div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
 

@@ -4,6 +4,7 @@ import {Project} from '../../../models/project.model';
 import {Title} from '@angular/platform-browser';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+const ObjectID = require('bson-objectid');
 
 @Component({
   selector: 'app-list-projects',
@@ -45,6 +46,10 @@ export class ListProjectsComponent implements OnInit {
       .subscribe((projects) => {
         this.projects = projects;
       })
+  }
+
+  getTime(objectId: string) {
+    return ObjectID(objectId).getTimestamp();
   }
 
   setTitle() {

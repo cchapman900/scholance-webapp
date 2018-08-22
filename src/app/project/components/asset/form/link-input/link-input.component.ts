@@ -32,7 +32,9 @@ export class LinkInputComponent implements OnInit {
   }
 
   uploadLinkAsset() {
-    // console.log(this.linkInputForm.value);
+    this.linkInputForm.value.uri = this.linkInputForm.value.uri ?
+      this.linkInputForm.value.uri.replace('https://', '').replace('http://', '') :
+      ''; // TODO: Do this in a regex
     this.projectService.createAsset(this.assetType, this.project_id, this.linkInputForm.value, this.userService.authenticatedUser._id)
       .subscribe((response) => {
         console.log(response);
