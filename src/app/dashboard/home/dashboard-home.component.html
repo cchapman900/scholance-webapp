@@ -1,3 +1,53 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
   <h1 class="h2">Dashboard</h1>
 </div>
+<div class="row">
+  <div class="col-12 pb-4">
+    <h4>
+      Hello {{userService.authenticatedUser?.name}}!
+    </h4>
+    <p *ngIf="userService.authenticatedUser?.userType === 'business' && userService.authenticatedUser?.organization">
+      Your profile is complete!
+    </p>
+    <p *ngIf="userService.authenticatedUser?.userType === 'business' && !userService.authenticatedUser?.organization">
+      Your profile is almost complete. Finish it off by adding your company.
+    </p>
+  </div>
+
+</div>
+
+<hr/>
+
+<h2>Projects</h2>
+<div class="row">
+  <div class="col-md-6 card">
+    <div class="card-body">
+      <h4>Active Projects</h4>
+      <p *ngIf="activeProjects?.length === 0">
+        You have no active projects
+      </p>
+      <ul>
+        <li *ngFor="let project of activeProjects" class="row">
+          <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-6 card">
+    <div class="card-body">
+      <h4>Completed Projects</h4>
+      <ul>
+        <li *ngFor="let project of completedProjects" class="row">
+          <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-3 pt-3 mx-auto">
+    <button *ngIf="userService.authenticatedUser?.userType === 'business' && userService.authenticatedUser?.organization && activeProjects?.length < 3"
+            class="btn btn-info mx-auto btn-sm form-control"
+            routerLink="/projects/create">
+      Post a project
+    </button>
+  </div>
+</div>

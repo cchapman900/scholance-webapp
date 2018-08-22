@@ -17,19 +17,10 @@ export class DashboardSidebarComponent implements OnInit {
   faBuilding = faBuilding;
   faAddressCard = faAddressCard;
 
-  activeProjects: Project[];
-  completedProjects: Project[];
-
   constructor(
     public userService: UserService
   ) { }
 
-  ngOnInit() {
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.activeProjects = user.projects.filter(project => project.status === 'active');
-        this.completedProjects = user.projects.filter(project => project.status === 'complete');
-      })
-  }
+  ngOnInit() { }
 
 }
