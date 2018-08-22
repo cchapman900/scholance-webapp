@@ -30,8 +30,6 @@ export class DashboardSidebarComponent implements OnInit {
         this.activeProjects = user.projects.filter(project => project.status === 'active');
         this.completedProjects = user.projects.filter(project => project.status === 'complete');
       })
-
-
   }
 
 }

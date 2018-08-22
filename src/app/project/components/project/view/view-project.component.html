@@ -5,7 +5,7 @@
     </h2>
   </div>
   <div class="col-3 text-right" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
-    <app-student-project-toolbar [project_id]="project._id"></app-student-project-toolbar>
+    <app-student-project-toolbar *ngIf="project.status !== 'complete'" [project_id]="project._id"></app-student-project-toolbar>
   </div>
 </div>
 <h5>Project Summary</h5>
