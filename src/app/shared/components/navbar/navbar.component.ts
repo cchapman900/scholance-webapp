@@ -20,11 +20,13 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userService.authenticatedUser$
-      .subscribe((user) => {
-        this.activeProjects = user.projects.filter(project => project.status === 'active');
-        this.completedProjects = user.projects.filter(project => project.status === 'complete');
-      })
+    if (this.userService.authenticatedUser$) {
+      this.userService.authenticatedUser$
+        .subscribe((user) => {
+          this.activeProjects = user.projects.filter(project => project.status === 'active');
+          this.completedProjects = user.projects.filter(project => project.status === 'complete');
+        })
+    }
   }
 
 }

@@ -66,3 +66,7 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
  * Needed for: All but Chrome, Firefox, Edge, IE11 and Safari 10
  */
 // import 'intl';  // Run `npm install --save intl`.
+
+
+// Added via https://github.com/auth0/auth0.js/issues/753#issuecomment-386703094
+(window as any).global = window;

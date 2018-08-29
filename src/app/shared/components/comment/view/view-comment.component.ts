@@ -4,7 +4,7 @@ import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 import {CommentService} from '../../../services/comment.service';
 
-const ObjectID = require('bson-objectid');
+import ObjectID from 'bson-objectid';
 
 @Component({
   selector: 'app-view-comment',
@@ -36,7 +36,8 @@ export class ViewCommentComponent implements OnInit {
   }
 
   getTime(objectId: string) {
-    return ObjectID(objectId).getTimestamp();
+    const id = new ObjectID(objectId);
+    return id.getTimestamp();
   }
 
 }
