@@ -27,7 +27,7 @@ export class AssetFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  private assetTypeDisplay(assetTypeString: string) {
+  public assetTypeDisplay(assetTypeString: string) {
     return assetTypeString
     // insert a space before all caps
       .replace(/([A-Z])/g, ' $1')

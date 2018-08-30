@@ -11,7 +11,7 @@ import {User} from '../user/models/user.model';
 export class HomeComponent implements OnInit {
   user: string;
   showStudentContent: boolean;
-  showBusinessContent: boolean;
+  showOrganizationContent: boolean;
 
   constructor(
     public auth: AuthService,
