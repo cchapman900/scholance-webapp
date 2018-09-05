@@ -31,6 +31,7 @@ import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import {ProjectModule} from '../project/project.module';
 import { UpdatePortfolioComponent } from './components/portfolio/update/update-portfolio.component';
 import { TermsOfServiceComponent } from './auth/components/register/terms-of-service/terms-of-service.component';
+import { ForgotPasswordConfirmationComponent } from './auth/components/forgot-password/confirmation/forgot-password-confirmation.component';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { TermsOfServiceComponent } from './auth/components/register/terms-of-ser
     ViewUserStudentComponent,
     OrganizationFormComponent,
     PortfolioComponent,
-    UpdatePortfolioComponent
+    UpdatePortfolioComponent,
+    ForgotPasswordConfirmationComponent
   ],
   providers: [
     AuthService,

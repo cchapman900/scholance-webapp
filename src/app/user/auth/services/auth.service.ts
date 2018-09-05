@@ -3,10 +3,17 @@ import { Router } from '@angular/router';
 import { AUTH_CONFIG } from '../auth0-variables';
 import * as auth0 from 'auth0-js';
 import * as jwt_decode from 'jwt-decode'
+import { HttpClient } from '@angular/common/http';
 import {UserService} from '../../services/user.service';
 
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
+import {SharedService} from '../../../shared/services/shared.service';
+import {MessageService} from '../../../messages/message.service';
+
 @Injectable()
-export class AuthService {
+export class AuthService extends SharedService {
 
   requestedScopes = 'openid profile manage:project manage:entry manage:organization';
 
@@ -24,8 +31,12 @@ export class AuthService {
 
   constructor(
     private router: Router,
+    private http: HttpClient,
+    private messageService: MessageService,
     private userService: UserService
-  ) { }
+  ) {
+    super(messageService);
+  }
 
   public login(username: string, password: string): void {
     this.auth0.login({
@@ -110,6 +121,21 @@ export class AuthService {
     } else {
       return null;
     }
+  }
+
+  public resetPassword(email: string) {
+    const url = `${this.auth0.baseOptions.rootUrl}/dbconnections/change_password`;
+    const request = {
+      client_id: this.auth0.baseOptions.clientID,
+      email: email,
+      connection: 'Username-Password-Authentication'
+    };
+
+    this.http.post(url, request, {responseType: 'text'})
+      .subscribe((response) => {
+        this.log(response, 'success');
+        this.router.navigate(['login'])
+      });
   }
 
   private parseUserIdFromIdToken(id_token: string): string {

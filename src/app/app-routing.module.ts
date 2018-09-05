@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import {CallbackComponent} from './user/auth/components/callback/callback.component';
+import {ForgotPasswordComponent} from './user/auth/components/forgot-password/forgot-password.component';
 import {RegisterComponent} from './user/auth/components/register/register.component';
 import {LoginComponent} from './user/auth/components/login/login.component';
 import {HomeComponent} from './home/home.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
       { path: '', component: DashboardHomeComponent},
       { path: 'profile', component: ProfileComponent, children: [
