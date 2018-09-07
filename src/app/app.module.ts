@@ -20,6 +20,7 @@ import { DashboardSidebarComponent } from './dashboard/sidebar/dashboard-sidebar
 import { ProfileComponent } from './dashboard/profile/profile.component';
 import { MessageService } from './messages/message.service';
 import { SharedModule } from './shared/shared.module';
+import { AccountSetupOrganizationComponent } from './dashboard/home/account-setup/organization/account-setup-organization.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SharedModule } from './shared/shared.module';
     DashboardComponent,
     DashboardHomeComponent,
     DashboardSidebarComponent,
-    ProfileComponent
+    ProfileComponent,
+    AccountSetupOrganizationComponent
   ],
   imports: [
     BrowserModule,

@@ -31,7 +31,7 @@ export class OrganizationService extends SharedService {
       return of([]);
     }
     return this.http.get<Organization[]>(`${this.usersServiceAPIUrl}/organizations?domain=${domain}`).pipe(
-      tap(_ => this.log(`found heroes matching "${domain}"`)),
+      tap(_ => {}),
       catchError(this.handleError<Organization[]>('listOrganizations', []))
     );
   }

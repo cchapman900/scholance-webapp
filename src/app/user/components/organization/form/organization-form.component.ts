@@ -28,7 +28,7 @@ export class OrganizationFormComponent implements OnInit {
       industry: [this.organization.industry],
       about: [this.organization.about],
       linkedin: [this.organization.linkedin], // TODO: Add validation to verify this is a linkedin
-      domain: [this.organization.domain],
+      domain: [this.organization.domain], // TODO: Add normalization to domains
       twitter: [this.organization.twitter]
     });
   }

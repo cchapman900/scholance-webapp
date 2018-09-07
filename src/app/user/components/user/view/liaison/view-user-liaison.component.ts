@@ -10,31 +10,11 @@ import {OrganizationService} from '../../../../services/organization.service';
 })
 export class ViewUserLiaisonComponent implements OnInit {
   @Input() user: User;
-  suggestedOrganizations: Organization[];
 
   constructor(
-    private organizationService: OrganizationService
   ) { }
 
   ngOnInit() {
-    if (!this.user.organization) {
-      this.getSuggestedOrganization()
-    }
-  }
-
-  signUpLiaisonToOrganization(organization_id: string): void {
-    this.organizationService.addUserToOrganization(organization_id, this.user._id)
-      .subscribe((response) => {
-        console.log('Added user to organization');
-      })
-  }
-
-  getSuggestedOrganization(): void {
-    const emailDomain = this.user.email.split('@')[1];
-    this.organizationService.listOrganizations(emailDomain)
-      .subscribe((organizations) => {
-        this.suggestedOrganizations = organizations
-      })
   }
 
 }

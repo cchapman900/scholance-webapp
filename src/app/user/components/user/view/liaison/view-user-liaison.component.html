@@ -1,24 +1,3 @@
-<div class="row text-center" *ngIf="!user?.organization">
-  <h3>Organization</h3>
-  <div class="col-10 mx-auto">
-    <h4 class="alert alert-warning">You don't yet have an organization associated with your account.</h4>
-    <div *ngIf="suggestedOrganizations?.length > 0">
-      <p>
-        Based on your company email, however, we found
-        {{suggestedOrganizations?.length > 1 ? 'these organizations' : 'this organization'}}
-        already in our system:
-      </p>
-      <div class="card col-md-8 mx-auto mb-5" *ngFor="let suggestedOrganization of suggestedOrganizations">
-        <div class="card-body">
-          <h4>{{suggestedOrganization.name}}</h4>
-          <button class="btn btn-success btn-sm" (click)="signUpLiaisonToOrganization(suggestedOrganization._id)">This is it. Sign me up for this organization</button>
-        </div>
-      </div>
-    </div>
-    <a class="btn btn-info btn-sm" routerLink="/organizations/create">(Or create a new organization here)</a>
-  </div>
-</div>
-
 <div *ngIf="user?.organization" class="row">
 
   <div class="col-3 text-right">

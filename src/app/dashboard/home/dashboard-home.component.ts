@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../user/services/user.service';
 import {Project} from '../../project/models/project.model';
+import {User} from '../../user/models/user.model';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -10,6 +11,8 @@ import {Project} from '../../project/models/project.model';
 export class DashboardHomeComponent implements OnInit {
   activeProjects: Project[];
   completedProjects: Project[];
+  profileIsComplete: boolean;
+  user: User;
 
   constructor(
     public userService: UserService
@@ -18,9 +21,20 @@ export class DashboardHomeComponent implements OnInit {
   ngOnInit() {
     this.userService.authenticatedUser$
       .subscribe((user) => {
+        this.user = user;
         this.activeProjects = user.projects.filter(project => project.status === 'active');
         this.completedProjects = user.projects.filter(project => project.status === 'complete');
+        this.profileIsComplete = this.getIfProfileIsComplete();
       })
+  }
+
+  getIfProfileIsComplete() {
+    if (this.user.userType === 'student') {
+      return true;
+    } else if (this.user.userType === 'business' && this.user.organization) {
+      return true;
+    }
+    return false;
   }
 
   // Add in some informational stuff here

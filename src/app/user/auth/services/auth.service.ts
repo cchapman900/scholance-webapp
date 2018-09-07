@@ -32,7 +32,7 @@ export class AuthService extends SharedService {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private messageService: MessageService,
+    public messageService: MessageService,
     private userService: UserService
   ) {
     super(messageService);
@@ -58,9 +58,11 @@ export class AuthService extends SharedService {
     this.auth0.redirect.signupAndLogin({
       connection: 'Username-Password-Authentication',
       email: email,
-      name: name,
       password: password,
-      user_metadata: {user_type: userType}
+      user_metadata: {
+        name: name,
+        user_type: userType
+      }
     }, err => {
       if (err) {
         console.log(err);
