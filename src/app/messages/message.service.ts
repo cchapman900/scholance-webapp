@@ -9,7 +9,6 @@ export class MessageService {
   add(message: string, alertClass = 'info') {
     setTimeout(() => this.clear(), 10000);
     this.messages.push(message);
-    console.log(alertClass);
     this.alertClass = alertClass;
   }
 

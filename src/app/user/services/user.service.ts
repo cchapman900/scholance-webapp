@@ -62,7 +62,10 @@ export class UserService extends SharedService {
    */
   updateUser (user: User): Observable<User> {
     const updateUserUrl = `${this.usersServiceAPIUrl}/users/${user._id}`;
-    return this.http.put<User>(updateUserUrl, user, this.httpOptions)
+    return this.http.put<User>(updateUserUrl, user, {headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      })})
       .pipe(
         tap(updatedUser => {
           this.log('Successfully updated profile', 'success');

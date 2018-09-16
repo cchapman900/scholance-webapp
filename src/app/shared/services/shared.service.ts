@@ -44,4 +44,14 @@ export class SharedService {
     this.messageService.add(message, alertClass);
   }
 
+  refreshHttpOptions() {
+    this.httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+      })
+    };
+    console.log(this.httpOptions);
+  }
+
 }

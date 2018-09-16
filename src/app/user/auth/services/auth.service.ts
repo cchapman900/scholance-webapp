@@ -87,7 +87,6 @@ export class AuthService extends SharedService {
   private setSession(authResult): void {
     const user_id = this.parseUserIdFromIdToken(authResult.idToken);
     const scopes = authResult.scope || this.requestedScopes || '';
-    console.log(scopes);
     this.userService.setAuthenticatedUser(user_id);
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify(
@@ -98,6 +97,7 @@ export class AuthService extends SharedService {
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
     localStorage.setItem('scopes', scopes);
+    this.refreshHttpOptions();
     this.router.navigate(['/dashboard']);
   }
 
