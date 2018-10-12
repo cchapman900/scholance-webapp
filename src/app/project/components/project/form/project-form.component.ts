@@ -65,14 +65,17 @@ export class ProjectFormComponent implements OnInit {
           deadline: [this.project.deadline || '']
         });
 
-        if (this.project.specs) {
+        console.log(this.project)
+
+        if (this.project.specs && this.project.specs.length > 0) {
           this.removeSpec(0); // TODO: This is kinda dumb. But having trouble initializing this array
           for (const spec of this.project.specs) {
             this.addSpec(spec)
           }
         }
 
-        if (this.project.deliverables) {
+        if (this.project.deliverables && this.project.deliverables.length > 0) {
+          console.log(this.project)
           this.removeDeliverable(0); // TODO: This is kinda dumb. But having trouble initializing this array
           for (const deliverable of this.project.deliverables) {
             this.addDeliverable(deliverable.name, deliverable.mediaType)

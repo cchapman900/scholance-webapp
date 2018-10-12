@@ -30,5 +30,5 @@ export class User {
       commentary: string
     },
     visible: boolean
-  }]
+  }];
 }

@@ -94,6 +94,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   updateProject (project: Project): Observable<Project> {
+    console.log(project)
     const updateProjectUrl = `${this.projectsServiceDomain}/projects/${project._id}`;
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(

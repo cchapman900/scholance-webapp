@@ -26,7 +26,7 @@ import { ViewOrganizationComponent } from './components/organization/view/view-o
 import {RouterModule} from '@angular/router';
 import { ViewUserLiaisonComponent } from './components/user/view/liaison/view-user-liaison.component';
 import { ViewUserStudentComponent } from './components/user/view/student/view-user-student.component';
-import { OrganizationFormComponent } from './components/organization/form/organization-form.component';
+import { OrganizationFormComponent } from './components/organization/_form/organization-form.component';
 import { PortfolioComponent } from './components/portfolio/portfolio.component';
 import {ProjectModule} from '../project/project.module';
 import { UpdatePortfolioComponent } from './components/portfolio/update/update-portfolio.component';

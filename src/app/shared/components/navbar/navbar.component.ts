@@ -10,6 +10,7 @@ import {Project} from '../../../project/models/project.model';
 })
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
+  showPostProjectButton = false;
   activeProjects: Project[];
   completedProjects: Project[];
 
@@ -25,8 +26,13 @@ export class NavbarComponent implements OnInit {
         .subscribe((user) => {
           this.activeProjects = user.projects.filter(project => project.status === 'active');
           this.completedProjects = user.projects.filter(project => project.status === 'complete');
+          this.showPostProjectButton = this.shouldShowPostProjectButton(user)
         })
     }
+  }
+
+  shouldShowPostProjectButton(user) {
+    return (user.userType === 'business' && this.userService.getNumActiveProjects(user) < 2);
   }
 
 }

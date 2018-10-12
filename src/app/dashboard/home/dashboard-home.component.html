@@ -45,7 +45,7 @@
       <h4>Completed Projects</h4>
       <ul>
         <li *ngFor="let project of completedProjects" class="row">
-          <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
+          <a routerLink="/users/{{user?._id}}/portfolio/update">{{project.title}}</a>
         </li>
       </ul>
     </div>

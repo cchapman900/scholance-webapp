@@ -91,4 +91,13 @@ export class UserService extends SharedService {
       );
   }
 
+  /**************************
+   * Helper Methods
+   **************************/
+
+  getNumActiveProjects (user: User): number {
+    const activeProjects = user.projects.filter(project => project.status === 'active');
+    return activeProjects.length;
+  }
+
 }
