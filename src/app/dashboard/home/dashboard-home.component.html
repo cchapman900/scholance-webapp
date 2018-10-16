@@ -2,14 +2,13 @@
   <h1 class="h2">Dashboard</h1>
 </div>
 <div class="row">
-  <div class="col-12 pb-4">
+  <div class="col-11 mx-auto pb-4">
     <h4>
       Hello {{user?.name}}!
     </h4>
     <div *ngIf="profileIsComplete">
-      <p>
-        Your profile is complete!
-      </p>
+      <app-dashboard-home-content-student *ngIf="user?.userType === 'student'"></app-dashboard-home-content-student>
+      <app-dashboard-home-content-liaison *ngIf="user?.userType === 'business'"></app-dashboard-home-content-liaison>
     </div>
     <div *ngIf="user && !profileIsComplete">
       Your profile is almost complete. Follow these steps to start working on projects:
@@ -43,6 +42,9 @@
   <div class="col-md-5 mx-auto card">
     <div class="card-body">
       <h4>Completed Projects</h4>
+      <p class="small text-muted" *ngIf="user?.userType === 'student'">
+        These can be managed in your <a routerLink="/users/{{user._id}}/portfolio">Portfolio</a>
+      </p>
       <ul>
         <li *ngFor="let project of completedProjects" class="row">
           <a routerLink="/users/{{user?._id}}/portfolio/update">{{project.title}}</a>

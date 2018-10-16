@@ -23,6 +23,7 @@ export class User {
     project: {
       title: string,
       organization: string,
+      liaison: string,
       summary: string
     },
     submission: {

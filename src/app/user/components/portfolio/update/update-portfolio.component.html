@@ -6,8 +6,25 @@
     <div class="col-12">
       <div class="row">
         <div class="col-md-4">
-          <h5>{{completedProject.project.title}}</h5>
-          <p>{{completedProject.project.organization.name}}</p>
+          <h5>
+            <strong>Project: </strong>
+            <a routerLink="/projects/{{completedProject.project._id}}">{{completedProject.project.title}}</a>
+          </h5>
+          <p>
+            <strong>Host Organization: </strong>
+            <a routerLink="/organizations/{{completedProject.project.organization._id}}">
+              {{completedProject.project.organization.name}}
+            </a>
+            <br/>
+            <strong>Project Liaison: </strong>
+            <a routerLink="/users/{{completedProject.project.liaison._id}}">
+              {{completedProject.project.liaison.name}}
+            </a>
+          </p>
+        </div>
+        <div class="col-md-4 ml-auto text-right">
+          <p *ngIf="completedProject.visible" class="badge badge-success">Public</p>
+          <p *ngIf="!completedProject.visible" class="badge badge-info">Private</p>
         </div>
       </div>
       <hr/>
@@ -41,13 +58,13 @@
     </div>
   </div>
   <div class="col-2">
-    <button class="btn btn-info form-control mb-2" (click)="moveToTop(i)">Move to top</button>
-    <button class="btn btn-info form-control mb-2" (click)="moveToBottom(i)">Move to bottom</button>
+    <button class="btn btn-info form-control mb-2" [hidden]="i === 0" (click)="moveToTop(i)">Move to top</button>
+    <button class="btn btn-info form-control mb-2" [hidden]="i === portfolioEntries.length - 1" (click)="moveToBottom(i)">Move to bottom</button>
     <button class="btn btn-info form-control mb-2" (click)="toggleVisibility(i)">Make {{completedProject.visible ? 'private' : 'public'}}</button>
   </div>
 </div>
 <div class="row">
   <div class="col-12 mx-auto pb-5 text-center">
-    <button class="btn btn-info" (click)="updatePortfolioEntries()">Update Portfolio</button>
+    <button class="btn btn-outline-primary" (click)="updatePortfolioEntries()">Save</button>
   </div>
 </div>

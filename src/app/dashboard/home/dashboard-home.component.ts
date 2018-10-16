@@ -22,8 +22,10 @@ export class DashboardHomeComponent implements OnInit {
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.user = user;
-        this.activeProjects = user.projects.filter(project => project.status === 'active');
-        this.completedProjects = user.projects.filter(project => project.status === 'complete');
+        if (user.projects) {
+          this.activeProjects = user.projects.filter(project => project.status === 'active');
+          this.completedProjects = user.projects.filter(project => project.status === 'complete');
+        }
         this.profileIsComplete = this.getIfProfileIsComplete();
       })
   }

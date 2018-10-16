@@ -2,7 +2,7 @@
 
 <hr/>
 
-<div *ngIf="user?._id === userService.authenticatedUser?._id"
+<div *ngIf="user?._id === userService.authenticatedUser?._id && user?.projects"
      class="row text-center">
   <div class="col-3 mx-auto">
     <button class="btn btn-info" routerLink="/users/{{user?._id}}/portfolio/update">Update Portfolio</button>
@@ -17,6 +17,9 @@
         <div class="col-md-4">
           <h5>{{completedProject.project.title}}</h5>
           <p>{{completedProject.project.organization.name}}</p>
+        </div>
+        <div *ngIf="user?._id === userService.authenticatedUser?._id" class="col-md-4 ml-auto text-right">
+          <p class="badge badge-success">Public</p>
         </div>
       </div>
       <hr/>

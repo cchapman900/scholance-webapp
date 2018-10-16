@@ -14,6 +14,7 @@ export class UpdatePortfolioComponent implements OnInit {
     project: {
       title: string,
       organization: string,
+      liaison: string,
       summary: string
     },
     submission: {

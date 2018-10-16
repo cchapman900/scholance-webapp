@@ -13,6 +13,7 @@ import {Project} from '../../../project/models/project.model';
 export class PortfolioComponent implements OnInit {
   user: User;
   portfolioEntries: any;
+  isOwnPortfolio = false;
 
   constructor(
     public userService: UserService,
