@@ -32,24 +32,27 @@
       <p *ngIf="activeProjects?.length === 0">
         You have no active projects
       </p>
-      <ul>
-        <li *ngFor="let project of activeProjects" class="row">
-          <a routerLink="/workbench/projects/{{project._id}}">{{project.title}}</a>
-        </li>
-      </ul>
+      <div *ngFor="let project of activeProjects" routerLink="/workbench/projects/{{project._id}}">
+        <app-list-projects-small-student
+          *ngIf="user.userType === 'student'"
+          [project]="project" [user]="user">
+        </app-list-projects-small-student>
+      </div>
     </div>
   </div>
   <div class="col-md-5 mx-auto card">
     <div class="card-body">
       <h4>Completed Projects</h4>
-      <p class="small text-muted" *ngIf="user?.userType === 'student'">
+      <p *ngIf="completedProjects?.length === 0">
+        You haven't yet completed any projects
+      </p>
+      <div *ngFor="let project of completedProjects" routerLink="/users/{{user?._id}}/portfolio/update">
+        <app-list-projects-small-student *ngIf="user.userType === 'student'" [project]="project" [user]="user">
+        </app-list-projects-small-student>
+      </div>
+      <p class="small text-muted pt-2 text-center" *ngIf="user?.userType === 'student'">
         These can be managed in your <a routerLink="/users/{{user._id}}/portfolio">Portfolio</a>
       </p>
-      <ul>
-        <li *ngFor="let project of completedProjects" class="row">
-          <a routerLink="/users/{{user?._id}}/portfolio/update">{{project.title}}</a>
-        </li>
-      </ul>
     </div>
   </div>
   <div class="col-md-3 pt-3 mx-auto">

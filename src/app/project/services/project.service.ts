@@ -215,6 +215,14 @@ export class ProjectService extends SharedService {
   }
 
 
+  // Entry Helper Methods
+  getStudentEntryFromProject(project: Project, studentId: string): Entry {
+    return project.entries.find((entry) => {
+      return entry.student._id === studentId;
+    })
+  }
+
+
   ////////////////////////////////////
   // ASSET METHODS
   ////////////////////////////////////

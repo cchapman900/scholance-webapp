@@ -26,6 +26,7 @@ import { LiaisonEntryWorkAreaComponent } from './components/entry/view/liaison-w
 import { StudentEntryWorkAreaComponent } from './components/entry/view/student-work-area/student-entry-work-area.component';
 import { ProjectSignupAgreementComponent } from './components/project/view/student-project-toolbar/project-signup-agreement/project-signup-agreement.component';
 import { CreateProjectAgreementComponent } from './components/project/create/create-project-agreement/create-project-agreement.component';
+import { ListProjectsSmallStudentComponent } from './components/project/list/small/student/list-projects-small-student.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { CreateProjectAgreementComponent } from './components/project/create/cre
     LiaisonEntryWorkAreaComponent,
     StudentEntryWorkAreaComponent,
     ProjectSignupAgreementComponent,
-    CreateProjectAgreementComponent
+    CreateProjectAgreementComponent,
+    ListProjectsSmallStudentComponent
   ],
   providers: [
     AuthService,
@@ -62,7 +64,8 @@ import { CreateProjectAgreementComponent } from './components/project/create/cre
     ProjectService
   ],
   exports: [
-    ViewEntryComponent
+    ViewEntryComponent,
+    ListProjectsSmallStudentComponent
   ],
   entryComponents: [
     ProjectSignupAgreementComponent,

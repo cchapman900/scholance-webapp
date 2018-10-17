@@ -1,0 +1,26 @@
+<div class="row border rounded project m-3">
+  <div class="col-12 pt-2">
+      <div *ngIf="project.status === 'active'">
+        <h5>
+          {{project.title}} - <span class="small"><strong> Hosted by </strong>{{project.organization.name}}</span>
+        </h5>
+        <p class="small">
+          <strong>Project Status: </strong>{{project.status}}
+        </p>
+        <p *ngIf="project.deadline">
+          <strong>Deadline: </strong>{{project.deadline}}
+        </p>
+        <hr/>
+        <h6>My Submission</h6>
+        <p class="small">
+          <strong>Status: </strong> {{entry?.submissionStatus}}
+        </p>
+      </div>
+
+      <div *ngIf="project.status === 'complete'">
+        <h5>
+          {{project.title}}
+        </h5>
+      </div>
+  </div>
+</div>

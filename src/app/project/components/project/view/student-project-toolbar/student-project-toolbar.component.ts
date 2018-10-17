@@ -23,15 +23,17 @@ export class StudentProjectToolbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.studentIsRegisteredForProject = this.userService.authenticatedUser.projects.some((project) => {
-      return project._id === this.project_id;
-    });
+    this.userService.authenticatedUser$.subscribe(user => {
+      this.studentIsRegisteredForProject = user.projects.some((project) => {
+        return project._id === this.project_id;
+      });
+    })
   }
 
   projectSignup(): void {
     this.projectService.createEntry(this.project_id)
       .subscribe((project) => {
-        console.log(project)
+        this.studentIsRegisteredForProject = true;
         this.router.navigate(['workbench', 'projects', this.project_id])
       })
   }
@@ -40,6 +42,7 @@ export class StudentProjectToolbarComponent implements OnInit {
     if (confirm('Are you sure you want to sign off of this project? Any work you have submitted will be deleted.')) {
       this.projectService.deleteEntry(this.project_id, this.userService.authenticatedUser._id)
         .subscribe(() => {
+          this.studentIsRegisteredForProject = false;
           this.router.navigate(['projects', this.project_id])
         })
     }
