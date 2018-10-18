@@ -222,6 +222,24 @@ export class ProjectService extends SharedService {
     })
   }
 
+  getNumActiveRegistrants(project: Project) {
+    return project.entries.filter((entry) => {
+      return entry.submissionStatus === 'active'
+    }).length
+  }
+
+  getNumDrafts(project: Project) {
+    return project.entries.filter((entry) => {
+      return entry.submissionStatus === 'draft'
+    }).length
+  }
+
+  getNumSubmissions(project: Project) {
+    return project.entries.filter((entry) => {
+      return entry.submissionStatus === 'submitted'
+    }).length
+  }
+
 
   ////////////////////////////////////
   // ASSET METHODS
