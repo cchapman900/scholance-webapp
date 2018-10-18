@@ -18,9 +18,11 @@ import {ViewUserComponent} from './user/components/user/view/view-user.component
 import {ViewOrganizationComponent} from './user/components/organization/view/view-organization.component';
 import {PortfolioComponent} from './user/components/portfolio/portfolio.component';
 import {UpdatePortfolioComponent} from './user/components/portfolio/update/update-portfolio.component';
+import {AboutComponent} from './about/about.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },

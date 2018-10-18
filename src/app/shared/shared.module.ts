@@ -5,6 +5,7 @@ import { CreateCommentComponent } from './components/comment/create/create-comme
 import { CommentService } from './services/comment.service';
 import { FormsModule } from '@angular/forms';
 import { MessagesComponent } from '../messages/messages.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   imports: [
@@ -14,12 +15,14 @@ import { MessagesComponent } from '../messages/messages.component';
   declarations: [
     ViewCommentComponent,
     CreateCommentComponent,
-    MessagesComponent
+    MessagesComponent,
+    LoadingComponent
   ],
   exports: [
     ViewCommentComponent,
     CreateCommentComponent,
-    MessagesComponent
+    MessagesComponent,
+    LoadingComponent
   ],
   providers: [CommentService]
 })

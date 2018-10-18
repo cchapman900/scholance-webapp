@@ -23,6 +23,7 @@ import { SharedModule } from './shared/shared.module';
 import { AccountSetupOrganizationComponent } from './dashboard/home/account-setup/organization/account-setup-organization.component';
 import { DashboardHomeContentStudentComponent } from './dashboard/home/content/student/dashboard-home-content-student.component';
 import { DashboardHomeContentLiaisonComponent } from './dashboard/home/content/liaison/dashboard-home-content-liaison.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { DashboardHomeContentLiaisonComponent } from './dashboard/home/content/l
     ProfileComponent,
     AccountSetupOrganizationComponent,
     DashboardHomeContentStudentComponent,
-    DashboardHomeContentLiaisonComponent
+    DashboardHomeContentLiaisonComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

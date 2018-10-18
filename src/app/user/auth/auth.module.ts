@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from './services/auth.service';
 import { RouterModule } from '@angular/router';
+import {SharedModule} from '../../shared/shared.module';
 
 import { CallbackComponent } from './components/callback/callback.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,7 +16,8 @@ import {ForgotPasswordComponent} from './components/forgot-password/forgot-passw
   imports: [
     CommonModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   declarations: [
     LoginComponent,
