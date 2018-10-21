@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../../../user/auth/services/auth.service';
 import {UserService} from '../../../user/services/user.service';
 import {Project} from '../../../project/models/project.model';
+import {User} from '../../../user/models/user.model';
 
 @Component({
   selector: 'app-navbar',
@@ -10,29 +11,12 @@ import {Project} from '../../../project/models/project.model';
 })
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
-  showPostProjectButton = false;
-  activeProjects: Project[];
-  completedProjects: Project[];
 
 
   constructor(
-    public auth: AuthService,
-    public userService: UserService
+    public auth: AuthService
   ) { }
 
-  ngOnInit() {
-    if (this.userService.authenticatedUser$) {
-      this.userService.authenticatedUser$
-        .subscribe((user) => {
-          this.activeProjects = user.projects.filter(project => project.status === 'active');
-          this.completedProjects = user.projects.filter(project => project.status === 'complete');
-          this.showPostProjectButton = this.shouldShowPostProjectButton(user)
-        })
-    }
-  }
-
-  shouldShowPostProjectButton(user) {
-    return (user.userType === 'business' && this.userService.getNumActiveProjects(user) < 2);
-  }
+  ngOnInit() {}
 
 }

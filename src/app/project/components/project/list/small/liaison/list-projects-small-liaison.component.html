@@ -1,4 +1,4 @@
-<div class="row border rounded project m-3">
+<div class="row border border-light bg-light rounded project m-3">
   <div class="col-12 pt-2">
     <div *ngIf="project.status === 'active'">
       <h5>
@@ -25,7 +25,7 @@
       </ul>
     </div>
 
-    <div *ngIf="project.status === 'complete'">
+    <div *ngIf="project.status === 'complete'" routerLink="/workbench/projects/{{project._id}}/submissions">
       <h5>
         {{project.title}}
       </h5>

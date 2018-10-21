@@ -8,15 +8,7 @@
     </h4>
     <div *ngIf="profileIsComplete">
       <app-dashboard-home-content-student *ngIf="user?.userType === 'student'"></app-dashboard-home-content-student>
-      <app-dashboard-home-content-liaison *ngIf="user?.userType === 'business'"></app-dashboard-home-content-liaison>
-    </div>
-    <div *ngIf="user && !profileIsComplete">
-      Your profile is almost complete. Follow these steps to start working on projects:
-      <ol>
-        <li class="alert alert-warning border rounded">
-          <app-account-setup-organization></app-account-setup-organization>
-        </li>
-      </ol>
+      <app-dashboard-home-content-liaison *ngIf="user?.userType === 'business'" [user]="user" [activeProjects]="activeProjects" [profileIsComplete]="profileIsComplete"></app-dashboard-home-content-liaison>
     </div>
   </div>
 
@@ -50,7 +42,7 @@
       <p *ngIf="completedProjects?.length === 0">
         You haven't yet completed any projects
       </p>
-      <div *ngFor="let project of completedProjects" routerLink="/users/{{user?._id}}/portfolio/update">
+      <div *ngFor="let project of completedProjects">
         <app-list-projects-small-student
           *ngIf="user.userType === 'student'"
           [project]="project" [user]="user">
@@ -64,12 +56,5 @@
         These can be managed in your <a routerLink="/users/{{user._id}}/portfolio">Portfolio</a>
       </p>
     </div>
-  </div>
-  <div class="col-md-3 pt-3 mx-auto">
-    <button *ngIf="userService.authenticatedUser?.userType === 'business' && userService.authenticatedUser?.organization && activeProjects?.length < 3"
-            class="btn btn-info mx-auto btn-sm form-control"
-            routerLink="/projects/create">
-      Post a project
-    </button>
   </div>
 </div>

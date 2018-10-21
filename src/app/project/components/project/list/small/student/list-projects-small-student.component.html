@@ -17,7 +17,7 @@
         </p>
       </div>
 
-      <div *ngIf="project.status === 'complete'">
+      <div *ngIf="project.status === 'complete'" routerLink="/users/{{user?._id}}/portfolio/update">
         <h5>
           {{project.title}}
         </h5>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {User} from '../../../../user/models/user.model';
+import {Project} from '../../../../project/models/project.model';
 
 @Component({
   selector: 'app-dashboard-home-content-liaison',
@@ -6,6 +8,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-home-content-liaison.component.css']
 })
 export class DashboardHomeContentLiaisonComponent implements OnInit {
+  @Input() user: User;
+  @Input() activeProjects: Project[];
+  @Input() profileIsComplete: boolean;
 
   constructor() { }
 
