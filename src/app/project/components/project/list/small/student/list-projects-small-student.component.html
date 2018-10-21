@@ -12,9 +12,18 @@
         </p>
         <hr/>
         <h6>My Submission</h6>
-        <p class="small">
-          <strong>Status: </strong> {{entry?.submissionStatus}}
-        </p>
+        <div class="row">
+          <div class="col-md-6">
+            <p class="small">
+              <strong>Status: </strong> {{entry?.submissionStatus}}
+            </p>
+          </div>
+          <div class="col-md-6">
+            <p class="small">
+              <strong>Attached Assets: </strong> {{entry?.assets.length}}
+            </p>
+          </div>
+        </div>
       </div>
 
       <div *ngIf="project.status === 'complete'" routerLink="/users/{{user?._id}}/portfolio/update">
