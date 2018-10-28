@@ -10,5 +10,6 @@ export class Entry {
   commentary?: string;
   assets?: [Asset];
   submissionStatus?: string;
-  comments?: [Comment]
+  comments?: [Comment];
+  selected?: boolean;
 }

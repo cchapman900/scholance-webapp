@@ -4,9 +4,13 @@ import {Observable} from 'rxjs/Observable';
 import {HttpHeaders} from '@angular/common/http';
 import {MessageService} from '../../messages/message.service';
 
+import { environment } from '../../../environments/environment';
+
 
 @Injectable()
 export class SharedService {
+  protected projectsServiceDomain = environment.apiUris.projects;
+  protected usersServiceAPIUrl = environment.apiUris.users;
 
   httpOptions = {
     headers: new HttpHeaders({

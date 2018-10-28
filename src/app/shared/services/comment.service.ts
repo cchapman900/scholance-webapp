@@ -10,8 +10,6 @@ import {MessageService} from '../../messages/message.service';
 @Injectable()
 export class CommentService extends SharedService {
 
-  private projectsServiceDomain = 'https://lichslfej2.execute-api.us-east-1.amazonaws.com/dev';
-
   constructor(
     private http: HttpClient,
     private userService: UserService,

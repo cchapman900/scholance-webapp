@@ -1,8 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <app-workbench-sidebar [project]="project"></app-workbench-sidebar>
+    <app-workbench-sidebar [showSidebar]="showSidebar" [project]="project"></app-workbench-sidebar>
 
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <button (click)="showSidebar = !showSidebar">Show</button>
       <h1>Project Workbench</h1>
       <hr/>
       <app-messages></app-messages>

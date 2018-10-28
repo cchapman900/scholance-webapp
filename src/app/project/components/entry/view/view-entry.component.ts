@@ -17,6 +17,7 @@ export class ViewEntryComponent implements OnInit {
   showComments: boolean;
   project_id: string;
   assetType = 'entryAsset';
+  isSelected = false;
 
   constructor(
     private projectService: ProjectService,
@@ -42,6 +43,8 @@ export class ViewEntryComponent implements OnInit {
     }
 
     this.showComments = false;
+
+    this.isSelected = this.projectService.getSelectedEntry(this.project)._id === this.entry._id;
   }
 
   getProject(project_id: string): void {

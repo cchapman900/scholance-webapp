@@ -13,8 +13,6 @@ import { MessageService } from '../../messages/message.service';
 
 @Injectable()
 export class ProjectService extends SharedService {
-
-  private projectsServiceDomain = 'https://lichslfej2.execute-api.us-east-1.amazonaws.com/dev';
   public user: User;
 
   constructor(
@@ -128,9 +126,9 @@ export class ProjectService extends SharedService {
    * @param {string} selectedEntry
    * @returns {Observable<Project>}
    */
-  updateProjectStatus (project_id: string, status: string, selectedEntry?: string): Observable<Project> {
+  updateProjectStatus (project_id: string, status: string, selectedEntryId?: string): Observable<Project> {
     const updateProjectStatusUrl = `${this.projectsServiceDomain}/projects/${project_id}/status`;
-    return this.http.put<Project>(updateProjectStatusUrl, {status: status, selectedEntry: selectedEntry}, this.httpOptions)
+    return this.http.put<Project>(updateProjectStatusUrl, {status: status, selectedEntryId: selectedEntryId}, this.httpOptions)
       .pipe(
         tap(createdProject => {
           this.log('Successfully updated project status')
@@ -340,6 +338,14 @@ export class ProjectService extends SharedService {
         }),
         catchError(this.handleError<Asset>('createProject'))
       );
+  }
+
+
+  /*****************
+   * UTILITY METHODS
+   *****************/
+  public getSelectedEntry (project: Project): Entry {
+    return project.entries.filter((entry) => { return entry.selected})[0];
   }
 
 }

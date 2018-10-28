@@ -13,6 +13,7 @@ import {Project} from '../../../models/project.model';
 })
 export class WorkbenchSidebarComponent implements OnInit {
   @Input() project: Project;
+  @Input() showSidebar: boolean;
 
   constructor(
     public userService: UserService

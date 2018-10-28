@@ -1,15 +1,15 @@
 import { environment } from '../../../environments/environment';
 
 interface AuthConfig {
+  apiUrl: string;
+  callbackURL: string;
   clientID: string;
   domain: string;
-  callbackURL: string;
-  apiUrl: string;
 }
 
 export const AUTH_CONFIG: AuthConfig = {
+  apiUrl: environment.auth.apiUrl,
   clientID: environment.auth.clientID,
-  domain: 'scholance.auth0.com',
-  callbackURL: environment.auth.callbackURL,
-  apiUrl: 'https://auth.scholance.com'
+  domain: environment.auth.domain,
+  callbackURL: environment.auth.callbackURL
 };

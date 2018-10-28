@@ -22,7 +22,7 @@ export class DashboardHomeComponent implements OnInit {
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.user = user;
-        if (user.projects) {
+        if (user && user.projects) {
           this.activeProjects = user.projects.filter(project => project.status === 'active');
           this.completedProjects = user.projects.filter(project => project.status === 'complete');
         }
@@ -31,9 +31,9 @@ export class DashboardHomeComponent implements OnInit {
   }
 
   getIfProfileIsComplete() {
-    if (this.user.userType === 'student') {
+    if (this.user && this.user.userType === 'student') {
       return true;
-    } else if (this.user.userType === 'business' && this.user.organization) {
+    } else if (this.user && this.user.userType === 'business' && this.user.organization) {
       return true;
     }
     return false;

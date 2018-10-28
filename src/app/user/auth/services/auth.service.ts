@@ -22,7 +22,6 @@ export class AuthService extends SharedService {
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientID,
     redirectUri: AUTH_CONFIG.callbackURL,
-    audience: AUTH_CONFIG.apiUrl,
     responseType: 'token id_token',
     scope: this.requestedScopes
   });

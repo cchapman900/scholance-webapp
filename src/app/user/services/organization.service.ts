@@ -11,8 +11,6 @@ import {MessageService} from '../../messages/message.service';
 @Injectable()
 export class OrganizationService extends SharedService {
 
-  private usersServiceAPIUrl = 'https://5jnzq5gaii.execute-api.us-east-1.amazonaws.com/dev';
-
   constructor(
     private http: HttpClient,
     protected messageService: MessageService) {

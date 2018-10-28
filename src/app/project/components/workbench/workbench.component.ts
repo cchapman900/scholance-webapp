@@ -15,6 +15,7 @@ import {Title} from '@angular/platform-browser';
 })
 export class WorkbenchComponent implements OnInit {
   project: Project;
+  showSidebar = false;
 
   constructor(
     public userService: UserService,

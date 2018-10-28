@@ -50,3 +50,8 @@
   font-size: .75rem;
   text-transform: uppercase;
 }
+
+
+.show-sidebar {
+  display: block;
+}

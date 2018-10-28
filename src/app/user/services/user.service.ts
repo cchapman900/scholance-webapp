@@ -11,8 +11,6 @@ import {MessageService} from '../../messages/message.service';
 
 @Injectable()
 export class UserService extends SharedService {
-
-  private usersServiceAPIUrl = 'https://5jnzq5gaii.execute-api.us-east-1.amazonaws.com/dev';
   public authenticatedUser$: Observable<User>;
   public authenticatedUser: User; // Trying this out instead of having to do the subscriber
 
