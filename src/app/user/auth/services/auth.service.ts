@@ -19,6 +19,7 @@ export class AuthService extends SharedService {
 
   // Configure Auth0
   auth0 = new auth0.WebAuth({
+    audience: AUTH_CONFIG.apiUrl,
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientID,
     redirectUri: AUTH_CONFIG.callbackURL,
@@ -37,20 +38,8 @@ export class AuthService extends SharedService {
     super(messageService);
   }
 
-  public login(username: string, password: string): void {
-    this.auth0.login({
-      realm: 'Username-Password-Authentication',
-      username,
-      password
-    }, (err, authResult) => {
-      if (err) {
-        console.log(err);
-        alert(`Error: ${err.error_description}. Check the console for further details.`);
-        return;
-      } else if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-      }
-    });
+  public login(): void {
+    this.auth0.authorize();
   }
 
   public signup(name: string, email: string, password: string, userType: string): void {
