@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Title} from '@angular/platform-browser';
+import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,17 +11,25 @@ import {Title} from '@angular/platform-browser';
   ]
 })
 export class DashboardComponent implements OnInit {
+  faChevronLeft = faChevronLeft;
+
+  sidebarCollapsed: boolean;
 
   constructor(
     private titleService: Title
   ) { }
 
   ngOnInit() {
-    this.setTitle()
+    this.setTitle();
+    this.sidebarCollapsed = true;
   }
 
   setTitle() {
     this.titleService.setTitle('Scholance | Dashboard')
+  }
+
+  toggleSidebarCollapsed() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { faUser, faHome, faBuilding, faAddressCard } from '@fortawesome/free-solid-svg-icons';
 import {UserService} from '../../user/services/user.service';
 import {Project} from '../../project/models/project.model';
