@@ -14,7 +14,6 @@ export class DashboardHomeContentLiaisonComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }

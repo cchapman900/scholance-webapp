@@ -6,10 +6,13 @@
     <h4>
       Hello {{user?.name}}!
     </h4>
-    <div *ngIf="profileIsComplete">
       <app-dashboard-home-content-student *ngIf="user?.userType === 'student'"></app-dashboard-home-content-student>
-      <app-dashboard-home-content-liaison *ngIf="user?.userType === 'business'" [user]="user" [activeProjects]="activeProjects" [profileIsComplete]="profileIsComplete"></app-dashboard-home-content-liaison>
-    </div>
+      <app-dashboard-home-content-liaison
+        *ngIf="user?.userType === 'business'"
+        [user]="user"
+        [activeProjects]="activeProjects"
+        [profileIsComplete]="profileIsComplete">
+      </app-dashboard-home-content-liaison>
   </div>
 
 </div>

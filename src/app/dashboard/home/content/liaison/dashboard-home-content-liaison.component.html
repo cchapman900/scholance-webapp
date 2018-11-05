@@ -1,10 +1,10 @@
 <div *ngIf="user && !profileIsComplete">
-  Your profile is almost complete. Follow these steps to start working on projects:
-  <ol>
+  Your profile is almost complete. Please complete the following to start working on projects:
+  <ul>
     <li class="alert alert-warning border rounded">
       <app-account-setup-organization></app-account-setup-organization>
     </li>
-  </ol>
+  </ul>
 </div>
 <div *ngIf="user && profileIsComplete">
   <div class="col-md-3 pt-3 mx-auto">
