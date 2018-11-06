@@ -1,0 +1,14 @@
+.project {
+  background-color: #dee2e6;
+}
+
+.project :hover {
+  cursor: pointer;
+  background-color: #eee;
+  border-left: 3px solid #007bff;
+}
+
+.no-border :hover {
+  background-color: transparent;
+  border-left: none;
+}

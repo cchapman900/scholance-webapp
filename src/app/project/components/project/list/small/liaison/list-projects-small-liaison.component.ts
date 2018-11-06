@@ -7,7 +7,10 @@ import {ProjectService} from '../../../../../services/project.service';
 @Component({
   selector: 'app-list-projects-small-liaison',
   templateUrl: './list-projects-small-liaison.component.html',
-  styleUrls: ['./list-projects-small-liaison.component.css']
+  styleUrls: [
+    './list-projects-small-liaison.component.css',
+    '../../list-projects.component.css'
+  ]
 })
 export class ListProjectsSmallLiaisonComponent implements OnInit {
   @Input() project: Project;
