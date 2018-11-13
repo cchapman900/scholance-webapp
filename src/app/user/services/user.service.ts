@@ -45,7 +45,7 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   getUser (id: string): Observable<User> {
-    const getUserUrl = `${this.usersServiceAPIUrl}/users/${id}`;
+    const getUserUrl = `${this.scholanceApiDomain}/users/${id}`;
     return this.http.get<User>(getUserUrl)
       .pipe(
         tap(user => { }),
@@ -59,7 +59,7 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   updateUser (user: User): Observable<User> {
-    const updateUserUrl = `${this.usersServiceAPIUrl}/users/${user._id}`;
+    const updateUserUrl = `${this.scholanceApiDomain}/users/${user._id}`;
     return this.http.put<User>(updateUserUrl, user, {headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
@@ -79,7 +79,7 @@ export class UserService extends SharedService {
    * @returns {Observable<User>}
    */
   updatePortfolioEntries (user: User, portfolioEntries: [any]): Observable<User> {
-    const updatePortfolioEntriesUrl = `${this.usersServiceAPIUrl}/users/${user._id}/completed-projects`;
+    const updatePortfolioEntriesUrl = `${this.scholanceApiDomain}/users/${user._id}/completed-projects`;
     return this.http.put<User>(updatePortfolioEntriesUrl, {portfolioEntries: portfolioEntries}, this.httpOptions)
       .pipe(
         tap(updatedUser => {

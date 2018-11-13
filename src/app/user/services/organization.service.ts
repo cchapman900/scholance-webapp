@@ -28,7 +28,7 @@ export class OrganizationService extends SharedService {
       // if not search term, return empty organization array.
       return of([]);
     }
-    return this.http.get<Organization[]>(`${this.usersServiceAPIUrl}/organizations?domain=${domain}`).pipe(
+    return this.http.get<Organization[]>(`${this.scholanceApiDomain}/organizations?domain=${domain}`).pipe(
       tap(_ => {}),
       catchError(this.handleError<Organization[]>('listOrganizations', []))
     );
@@ -41,7 +41,7 @@ export class OrganizationService extends SharedService {
    * @returns {Observable<Organization>}
    */
   getOrganization (id: string): Observable<Organization> {
-    const getOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${id}`;
+    const getOrganizationUrl = `${this.scholanceApiDomain}/organizations/${id}`;
     return this.http.get<Organization>(getOrganizationUrl)
       .pipe(
         tap(organization => { }),
@@ -56,7 +56,7 @@ export class OrganizationService extends SharedService {
    * @returns {Observable<Organization>}
    */
   createOrganization (organization: Organization): Observable<Organization> {
-    const createOrganizationUrl = `${this.usersServiceAPIUrl}/organizations`;
+    const createOrganizationUrl = `${this.scholanceApiDomain}/organizations`;
     console.log(organization);
     return this.http.post<Organization>(createOrganizationUrl, organization, this.httpOptions)
       .pipe(
@@ -72,7 +72,7 @@ export class OrganizationService extends SharedService {
    * @returns {Observable<Organization>}
    */
   updateOrganization (organization: Organization): Observable<Organization> {
-    const updateOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization._id}`;
+    const updateOrganizationUrl = `${this.scholanceApiDomain}/organizations/${organization._id}`;
     return this.http.put<Organization>(updateOrganizationUrl, organization, this.httpOptions)
       .pipe(
         tap(updatedOrganization => {
@@ -90,7 +90,7 @@ export class OrganizationService extends SharedService {
    * @returns {Observable<Organization>}
    */
   addUserToOrganization (organization_id: string, user_id: string): Observable<Organization> {
-    const addUserToOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization_id}/users/${user_id}`;
+    const addUserToOrganizationUrl = `${this.scholanceApiDomain}/organizations/${organization_id}/users/${user_id}`;
     return this.http.post<Organization>(addUserToOrganizationUrl, null, this.httpOptions)
       .pipe(
         tap(updatedOrganization => {
@@ -108,7 +108,7 @@ export class OrganizationService extends SharedService {
    * @returns {Observable<Organization>}
    */
   removeUserFromOrganization (organization_id: string, user_id: string): Observable<Organization> {
-    const addUserToOrganizationUrl = `${this.usersServiceAPIUrl}/organizations/${organization_id}/users/${user_id}`;
+    const addUserToOrganizationUrl = `${this.scholanceApiDomain}/organizations/${organization_id}/users/${user_id}`;
     return this.http.delete<Organization>(addUserToOrganizationUrl, this.httpOptions)
       .pipe(
         tap(updatedOrganization => { }),

@@ -9,8 +9,7 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class SharedService {
-  protected projectsServiceDomain = environment.apiUris.projects;
-  protected usersServiceAPIUrl = environment.apiUris.users;
+  protected scholanceApiDomain = environment.apiUri;
 
   httpOptions = {
     headers: new HttpHeaders({

@@ -11,8 +11,5 @@ export const environment = {
     clientID: 'xIC1lXmLXBn1SPufKA7eSdiRSZXyytEm',
     domain: 'dev-scholance.auth0.com'
   },
-  apiUris: {
-    projects: 'https://lichslfej2.execute-api.us-east-1.amazonaws.com/dev',
-    users: 'https://5jnzq5gaii.execute-api.us-east-1.amazonaws.com/dev'
-  }
+  apiUri: 'https://inj6x6567k.execute-api.us-east-1.amazonaws.com/dev'
 };
