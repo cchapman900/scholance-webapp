@@ -1,9 +1,18 @@
 <div class="container-fluid">
   <div class="row">
-    <app-workbench-sidebar [showSidebar]="showSidebar" [project]="project"></app-workbench-sidebar>
+    <app-workbench-sidebar class="d-md-block"
+                           [project]="project"
+                           [ngClass]="{'d-none': sidebarCollapsed}">
+    </app-workbench-sidebar>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <button (click)="showSidebar = !showSidebar">Show</button>
+    <main role="main"
+          class="col-md-9 col-lg-10 px-4 offset-md-2"
+          [ngClass] = "{'offset-4': !sidebarCollapsed}"
+    >
+      <button class="d-md-none btn btn-sm btn-outline-dark" (click)="toggleSidebarCollapsed()">
+        <fa-icon [icon]="faChevronLeft" *ngIf="!sidebarCollapsed"></fa-icon>
+        <fa-icon [icon]="faChevronRight" *ngIf="sidebarCollapsed"></fa-icon>
+      </button>
       <h1>Project Workbench</h1>
       <hr/>
       <app-messages></app-messages>

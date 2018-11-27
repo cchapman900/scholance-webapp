@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Title} from '@angular/platform-browser';
-import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +12,7 @@ import {faChevronLeft} from '@fortawesome/free-solid-svg-icons';
 })
 export class DashboardComponent implements OnInit {
   faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
 
   sidebarCollapsed: boolean;
 

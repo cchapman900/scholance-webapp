@@ -4,6 +4,7 @@ import {ProjectService} from '../../services/project.service';
 import {Project} from '../../models/project.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
+import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-workbench',
@@ -14,8 +15,12 @@ import {Title} from '@angular/platform-browser';
   ]
 })
 export class WorkbenchComponent implements OnInit {
+  faChevronLeft = faChevronLeft;
+  faChevronRight = faChevronRight;
+
   project: Project;
-  showSidebar = false;
+
+  sidebarCollapsed: boolean;
 
   constructor(
     public userService: UserService,
@@ -27,6 +32,7 @@ export class WorkbenchComponent implements OnInit {
   ngOnInit() {
     const project_id = this.route.firstChild.snapshot.paramMap.get('project_id');
     this.getProject(project_id);
+    this.sidebarCollapsed = true;
   }
 
   getProject(id: string): void {
@@ -39,6 +45,10 @@ export class WorkbenchComponent implements OnInit {
 
   setTitle(title: string) {
     this.titleService.setTitle(`Scholance | Project Workbench: ${title}`)
+  }
+
+  toggleSidebarCollapsed() {
+    this.sidebarCollapsed = !this.sidebarCollapsed;
   }
 
 }
