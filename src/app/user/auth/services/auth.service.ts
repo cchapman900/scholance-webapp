@@ -38,8 +38,19 @@ export class AuthService extends SharedService {
     super(messageService);
   }
 
-  public login(): void {
-    this.auth0.authorize();
+  public login(email: string, password: string): void {
+    this.auth0.login({
+      realm: 'Username-Password-Authentication',
+      email,
+      password
+    }, (err, authResult) => {
+      if (err) {
+        this.log(`Login failed: ${err.error_description}`, 'danger');
+        return;
+      } else if (authResult && authResult.accessToken && authResult.idToken) {
+        this.setSession(authResult);
+      }
+    });
   }
 
   public signup(name: string, email: string, password: string, userType: string): void {
@@ -53,8 +64,7 @@ export class AuthService extends SharedService {
       }
     }, err => {
       if (err) {
-        console.log(err);
-        alert(`Error: ${err.description}. Check the console for further details.`);
+        this.log(`Signup failed: ${err.description}`, 'danger');
         return;
       }
     });
@@ -67,7 +77,7 @@ export class AuthService extends SharedService {
       } else if (err) {
         this.router.navigate(['/dashboard']);
         console.log(err);
-        alert(`Error: ${err.error}. Check the console for further details.`);
+        this.log(`Authentication failed: ${err.error_description}`, 'danger');
       }
     });
   }
@@ -94,6 +104,7 @@ export class AuthService extends SharedService {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('scopes');
     // Go back to the home route
     this.router.navigate(['/home']);
   }
