@@ -1,0 +1,12 @@
+<div class="card mb-2">
+  <img *ngIf="supplementalResource?.mediaType === 'image'" class="card-img-top" [src]="supplementalResource.uri">
+  <div class="card-body">
+    <h5 class="card-title" *ngIf="supplementalResource?.name">
+      <span class="badge badge-info mr-2">{{supplementalResource.mediaType}}</span> <a [href]="supplementalResource?.uri" target="_blank">{{supplementalResource.name}}</a>
+    </h5>
+    <p class="card-text" *ngIf="supplementalResource?.text">{{supplementalResource.text}}</p>
+    <p *ngIf="isProjectOwner">
+      <button class="btn btn-sm btn-danger" (click)="delete()">Delete</button>
+    </p>
+  </div>
+</div>

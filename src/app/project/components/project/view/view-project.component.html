@@ -15,32 +15,12 @@
 
 <hr/>
 
-<h5>About {{project?.organization.name}}</h5>
+<h5>Host Organization: <a routerLink="/organizations/{{project?.organization._id}}" target="_blank">{{project?.organization.name}}</a></h5>
 <p>{{project?.organization.about}}</p>
 
 <hr/>
 
 <div class="row">
-
-  <div class="col-md-3">
-    <h5>Project Specs</h5>
-  </div>
-  <div class="col-md-9">
-    <ul>
-      <li *ngFor="let spec of project?.specs">{{spec}}</li>
-    </ul>
-  </div>
-
-  <div class="col-md-3">
-    <h5>Deliverables</h5>
-  </div>
-  <div class="col-md-9">
-    <ul>
-      <li *ngFor="let deliverable of project?.deliverables">
-        <p>{{deliverable.name}} <span class="badge badge-info">{{deliverable.mediaType}}</span> </p>
-      </li>
-    </ul>
-  </div>
 
   <div class="col-md-3">
     <h5>Deadline</h5>
@@ -49,24 +29,48 @@
     <p>{{project?.deadline || "None"}}</p>
   </div>
 
-  <hr/>
-
   <div class="col-md-3">
-    <h5>Supplemental Resources</h5>
+    <h5>Project Specifications</h5>
   </div>
   <div class="col-md-9">
     <ul>
-      <li *ngFor="let supplementalResource of project?.supplementalResources">
-        <p>{{supplementalResource.name}}</p>
+      <li *ngFor="let spec of project?.specs">{{spec}}</li>
+    </ul>
+  </div>
+
+  <div class="col-md-3">
+    <h5>Expected Deliverables</h5>
+  </div>
+  <div class="col-md-9">
+    <ul>
+      <li *ngFor="let deliverable of project?.deliverables">
+        <p><span class="badge badge-info">{{deliverable.mediaType}}</span> {{deliverable.name}}</p>
       </li>
     </ul>
   </div>
 
 </div>
 
-<hr/>
+<div class="row" *ngIf="authService.isAuthenticated() && project?.supplementalResources.length > 0">
+  <div class="col-md-3">
+    <h5>Supplemental Resources</h5>
+  </div>
+  <div class="col-md-9">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let supplementalResource of project?.supplementalResources">
+        <app-supplemental-resource [supplementalResource]="supplementalResource"
+                                   [projectId]="project._id"
+                                   [isProjectOwner]="project.liaison._id && project.liaison._id === userService.authenticatedUser?._id">
+        </app-supplemental-resource>
+      </div>
+    </div>
+  </div>
 
-<div class="row mb-5">
+</div>
+
+
+<div class="row mb-5" *ngIf="authService.isAuthenticated()">
+  <hr/>
   <div class="col-md-10 offset-md-1">
     <h4>Project discussion board</h4>
     <div [hidden]="!showComments">

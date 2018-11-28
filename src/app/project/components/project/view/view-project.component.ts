@@ -50,4 +50,8 @@ export class ViewProjectComponent implements OnInit {
     this.titleService.setTitle(`Scholance | ${title}`)
   }
 
+  isProjectOwner() {
+
+  }
+
 }

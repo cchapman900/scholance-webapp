@@ -7,11 +7,11 @@
       <h4>{{organization?.name}}</h4>
     </div>
     <div class="row">
-      <div class="col-12">
-        <p><strong>Industry:</strong> {{organization?.industry}}</p>
+      <div class="col-12" *ngIf="organization?.industry">
+        <p><strong>Industry:</strong> {{organization.industry}}</p>
       </div>
-      <div class="col-12">
-        <p><strong>About the Organization</strong><br/>{{organization?.about}}</p>
+      <div class="col-12" *ngIf="organization?.about">
+        <p><strong>About the Organization</strong><br/>{{organization.about}}</p>
       </div>
     </div>
 

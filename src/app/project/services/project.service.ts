@@ -52,22 +52,13 @@ export class ProjectService extends SharedService {
    * @param {boolean} cacheProject
    * @returns {Observable<Project>}
    */
-  getProject (id: string, cacheProject = true): Observable<Project> {
-    const cachedProject = localStorage.getItem('project');
-    const parsedProject = JSON.parse(cachedProject);
-    const getProjectUrl = `${this.scholanceApiDomain}/projects/${id}`;
-    if (cachedProject && parsedProject._id === id && cacheProject) {
-      console.log('Project loaded from cache');
-      return Observable.of(parsedProject);
-    } else {
-      return this.http.get<Project>(getProjectUrl)
-        .pipe(
-          tap(project => {
-            localStorage.setItem('project', JSON.stringify(project));
-          }),
-          catchError(this.handleError<Project>('getProject'))
-        );
-    }
+  getProject (id: string): Observable<Project> {
+    const uri = `${this.scholanceApiDomain}/projects/${id}`;
+    return this.http.get<Project>(uri)
+      .pipe(
+        tap(),
+        catchError(this.handleError<Project>('getProject'))
+      );
   }
 
   /**
@@ -92,7 +83,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   updateProject (project: Project): Observable<Project> {
-    console.log(project)
+    console.log(project);
     const updateProjectUrl = `${this.scholanceApiDomain}/projects/${project._id}`;
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
@@ -336,7 +327,24 @@ export class ProjectService extends SharedService {
         tap((createdFile) =>  {
           this.log('Successfully created file asset')
         }),
-        catchError(this.handleError<Asset>('createProject'))
+        catchError(this.handleError<Asset>('createFile'))
+      );
+  }
+
+  /**
+   * DELETE Supplemental Resource
+   * @param {string} project_id
+   * @param {string} asset_id
+   * @returns {Observable<Project>}
+   */
+  deleteSupplementalResource (project_id: string, asset_id: string): Observable<Asset> {
+    const uri = `${this.scholanceApiDomain}/projects/${project_id}/supplemental-resources/${asset_id}`;
+    return this.http.delete<Asset>(uri, this.httpOptions)
+      .pipe(
+        tap(() =>  {
+          this.log('Successfully delete supplemental resource')
+        }),
+        catchError(this.handleError<Asset>('deleteSupplementalResource'))
       );
   }
 

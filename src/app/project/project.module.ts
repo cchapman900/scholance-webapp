@@ -28,6 +28,7 @@ import { ProjectSignupAgreementComponent } from './components/project/view/stude
 import { CreateProjectAgreementComponent } from './components/project/create/create-project-agreement/create-project-agreement.component';
 import { ListProjectsSmallStudentComponent } from './components/project/list/small/student/list-projects-small-student.component';
 import { ListProjectsSmallLiaisonComponent } from './components/project/list/small/liaison/list-projects-small-liaison.component';
+import { SupplementalResourceComponent } from './components/project/view/supplemental-resource/supplemental-resource.component';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { ListProjectsSmallLiaisonComponent } from './components/project/list/sma
     ProjectSignupAgreementComponent,
     CreateProjectAgreementComponent,
     ListProjectsSmallStudentComponent,
-    ListProjectsSmallLiaisonComponent
+    ListProjectsSmallLiaisonComponent,
+    SupplementalResourceComponent
   ],
   providers: [
     AuthService,
