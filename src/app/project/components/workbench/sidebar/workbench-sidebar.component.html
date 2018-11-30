@@ -8,9 +8,26 @@
     </div>
 
     <ul class="nav flex-column">
+
       <li class="nav-item">
         <a class="nav-link" routerLink="/workbench/projects/{{project?._id}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
           Project Overview
+        </a>
+      </li>
+
+      <div *ngIf="userService.authenticatedUser?.userType === 'student'">
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLink="/workbench/projects/{{project?._id}}/submission"
+             routerLinkActive="active">
+            My Submission
+          </a>
+        </li>
+      </div>
+
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/workbench/projects/{{project?._id}}/discussion-board" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+          Discussion Board
         </a>
       </li>
 
@@ -27,15 +44,6 @@
         </li>
       </div>
 
-      <div *ngIf="userService.authenticatedUser?.userType === 'student'">
-        <li class="nav-item">
-          <a class="nav-link"
-             routerLink="/workbench/projects/{{project?._id}}/submission"
-             routerLinkActive="active">
-            My Submission
-          </a>
-        </li>
-      </div>
     </ul>
   </div>
 </nav>

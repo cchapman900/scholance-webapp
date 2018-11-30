@@ -1,32 +1,33 @@
 import { Component, OnInit } from '@angular/core';
-import {Project} from '../../../models/project.model';
-import {ProjectService} from '../../../services/project.service';
-import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../../../../user/services/user.service';
-import {AuthService} from '../../../../user/auth/services/auth.service';
+import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import {AuthService} from '../../../user/auth/services/auth.service';
+import {Project} from '../../models/project.model';
+import {ProjectService} from '../../services/project.service';
 import {Title} from '@angular/platform-browser';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
-  selector: 'app-view-project',
-  templateUrl: './view-project.component.html',
-  styleUrls: ['./view-project.component.css']
+  selector: 'app-project-discussion-board',
+  templateUrl: './project-discussion-board.component.html',
+  styleUrls: ['./project-discussion-board.component.css']
 })
-export class ViewProjectComponent implements OnInit {
+export class ProjectDiscussionBoardComponent implements OnInit {
   project: Project;
   projectId: string;
+  faCaretDown = faCaretDown;
+  faCaretUp = faCaretUp;
+  showComments: boolean;
 
   constructor(
     public authService: AuthService,
     private projectService: ProjectService,
-    public userService: UserService,
     private route: ActivatedRoute,
-    protected router: Router,      // Currently assuming that webapp matches perfectly with API. Probably should fix soon.
     private titleService: Title
-  ) {
-  }
+    ) { }
 
   ngOnInit() {
     this.projectId = this.route.snapshot.paramMap.get('project_id');
+    this.showComments = true;
     this.getProject();
   }
 

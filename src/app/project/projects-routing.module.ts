@@ -10,6 +10,7 @@ import {UpdateProjectComponent} from './components/project/update/update-project
 import {ViewEntryComponent} from './components/entry/view/view-entry.component';
 import {WorkbenchComponent} from './components/workbench/workbench.component';
 import {ListEntriesComponent} from './components/entry/list/list-entries.component';
+import {ProjectDiscussionBoardComponent} from './components/discussion-board/project-discussion-board.component';
 
 const projectsRoutes: Routes = [
   {
@@ -38,13 +39,14 @@ const projectsRoutes: Routes = [
   { path: 'workbench', component: WorkbenchComponent, canActivate: [AuthGuard], children: [
       { path: 'projects/:project_id', children: [
           { path: '', component: ViewProjectComponent },
+          { path: 'discussion-board', component: ProjectDiscussionBoardComponent},
           { path: 'submission', component: ViewEntryComponent},
           { path: 'submissions', children: [
             { path: '', component: ListEntriesComponent },
             { path: ':entry_id', component: ViewEntryComponent }
-          ]
-          }
-        ] }
+            ]
+          }]
+      }
     ]
   },
 ];
