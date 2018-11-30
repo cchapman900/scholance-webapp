@@ -1,8 +1,9 @@
+<h1 class="mb-4">Project Portfolio</h1>
 <app-view-user></app-view-user>
 
 <hr/>
 
-<div *ngIf="user?._id === userService.authenticatedUser?._id && portfolioEntries.length > 1"
+<div *ngIf="user?._id === userService.authenticatedUser?._id && portfolioEntries?.length > 1"
      class="row text-center">
   <div class="col-3 mx-auto">
     <button class="btn btn-info" routerLink="/users/{{user?._id}}/portfolio/update">Update Portfolio</button>
@@ -10,7 +11,7 @@
 </div>
 
 <h3>Completed Projects</h3>
-<p *ngIf="portfolioEntries.length === 0">There are no completed projects for this student yet.</p>
+<p *ngIf="!portfolioEntries || portfolioEntries?.length === 0">There are no completed projects for this student yet.</p>
 <div *ngFor="let completedProject of portfolioEntries">
   <div *ngIf="completedProject.visible" class="row border rounded p-4 mb-4">
     <div class="col-12">

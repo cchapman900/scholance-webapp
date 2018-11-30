@@ -1,0 +1,10 @@
+<h2>Portfolio</h2>
+<p>
+  This is how your public portfolio will look. You can share this with friends, colleagues and potential employers at
+  <a [href]="'/users/'+userService.authenticatedUser?._id+'/portfolio'" target="_blank"> this link</a>.
+</p>
+<div class="card my-4">
+  <div class="card-body">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -17,7 +17,7 @@
       </li>
 
       <li *ngIf="userService.authenticatedUser?.userType === 'student'" class="nav-item">
-        <a class="nav-link" routerLink="/users/{{userService.authenticatedUser?._id}}/portfolio" routerLinkActive="active">
+        <a class="nav-link" routerLink="/dashboard/portfolio" routerLinkActive="active">
           <fa-icon [icon]="faAddressCard"></fa-icon>
           Portfolio
         </a>

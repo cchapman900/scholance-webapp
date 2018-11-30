@@ -43,7 +43,7 @@ export class CommentService extends SharedService {
     return this.http.post<Comment>(createCommentUrl, {text: text}, this.httpOptions)
       .pipe(
         tap(createdComment => {
-          this.log('Successfully commented')
+          this.log('Successfully commented', 'success')
         }),
         catchError(this.handleError<Comment>('createComment'))
       );
@@ -70,7 +70,7 @@ export class CommentService extends SharedService {
 
     return this.http.delete<Comment>(deleteCommentUrl, this.httpOptions)
       .pipe(
-        tap(createdComment => this.log(`fetched comment id=${comment_id}`)),
+        tap(deletedComment => this.log('Successfully deleted comment', 'success')),
         catchError(this.handleError<Comment>('delete'))
       );
   }

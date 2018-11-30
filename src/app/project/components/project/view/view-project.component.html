@@ -29,12 +29,16 @@
     <p>{{project?.deadline || "None"}}</p>
   </div>
 
+</div>
+
+<div class="row" *ngIf="project?.specs.length > 0">
+
   <div class="col-md-3">
     <h5>Project Specifications</h5>
   </div>
   <div class="col-md-9">
     <ul>
-      <li *ngFor="let spec of project?.specs">{{spec}}</li>
+      <li *ngFor="let spec of project.specs">{{spec}}</li>
     </ul>
   </div>
 
@@ -68,6 +72,7 @@
 
 </div>
 
+<hr/>
 
 <div class="row mb-5" *ngIf="authService.isAuthenticated()">
   <hr/>

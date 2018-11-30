@@ -13,7 +13,6 @@ import {Project} from '../../../project/models/project.model';
 export class PortfolioComponent implements OnInit {
   user: User;
   portfolioEntries: any;
-  isOwnPortfolio = false;
 
   constructor(
     public userService: UserService,
@@ -22,7 +21,14 @@ export class PortfolioComponent implements OnInit {
 
   ngOnInit() {
     const user_id = this.route.snapshot.paramMap.get('user_id');
-    this.getUser(user_id)
+    if (!user_id) {
+      this.userService.authenticatedUser$
+        .subscribe((user) => {
+          this.user = user;
+        })
+    } else {
+      this.getUser(user_id)
+    }
   }
 
   getUser(user_id) {

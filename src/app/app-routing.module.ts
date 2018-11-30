@@ -19,6 +19,7 @@ import {ViewOrganizationComponent} from './user/components/organization/view/vie
 import {PortfolioComponent} from './user/components/portfolio/portfolio.component';
 import {UpdatePortfolioComponent} from './user/components/portfolio/update/update-portfolio.component';
 import {AboutComponent} from './about/about.component';
+import {DashboardPortfolioComponent} from './dashboard/portfolio/dashboard-portfolio.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -51,6 +52,13 @@ const routes: Routes = [
           {
             path: 'update',
             component: UpdateOrganizationComponent,
+          }
+        ]
+      },
+      { path: 'portfolio', component: DashboardPortfolioComponent, children: [
+          {
+            path: '',
+            component: PortfolioComponent
           }
         ]
       },
