@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {ProjectService} from '../../../services/project.service';
 import {Entry} from '../../../models/entry.model';
-import {User} from '../../../../user/models/user.model';
 import {UserService} from '../../../../user/services/user.service';
 import {Project} from '../../../models/project.model';
 
@@ -44,7 +43,6 @@ export class ViewEntryComponent implements OnInit {
 
     this.showComments = false;
 
-    this.isSelected = this.projectService.getSelectedEntry(this.project)._id === this.entry._id;
   }
 
   getProject(project_id: string): void {
@@ -58,6 +56,7 @@ export class ViewEntryComponent implements OnInit {
     this.projectService.getEntry(project_id, entry_id)
       .subscribe((entry) => {
         this.entry = entry;
+        this.isSelected = this.projectService.isSelectedEntry(this.project, this.entry);
       })
   }
 

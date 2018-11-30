@@ -114,16 +114,15 @@ export class ProjectService extends SharedService {
    * UPDATE Project Status
    * @param {string} project_id
    * @param {string} status
-   * @param {string} selectedEntry
+   * @param {string} selectedStudentId
    * @returns {Observable<Project>}
    */
-  updateProjectStatus (project_id: string, status: string, selectedEntryId?: string): Observable<Project> {
-    const updateProjectStatusUrl = `${this.scholanceApiDomain}/projects/${project_id}/status`;
-    return this.http.put<Project>(updateProjectStatusUrl, {status: status, selectedEntryId: selectedEntryId}, this.httpOptions)
+  updateProjectStatus (project_id: string, status: string, selectedStudentId?: string): Observable<Project> {
+    const uri = `${this.scholanceApiDomain}/projects/${project_id}/status`;
+    return this.http.put<Project>(uri, {status: status, selectedStudentId: selectedStudentId}, this.httpOptions)
       .pipe(
         tap(createdProject => {
-          this.log('Successfully updated project status')
-          localStorage.removeItem('project')
+          this.log('Successfully updated project status', 'success');
         }),
         catchError(this.handleError<Project>('updateProject'))
       );
@@ -352,8 +351,8 @@ export class ProjectService extends SharedService {
   /*****************
    * UTILITY METHODS
    *****************/
-  public getSelectedEntry (project: Project): Entry {
-    return project.entries.filter((entry) => { return entry.selected})[0];
+  public isSelectedEntry (project: Project, entry: Entry): boolean {
+    return project.selectedStudentId === entry.student._id;
   }
 
 }

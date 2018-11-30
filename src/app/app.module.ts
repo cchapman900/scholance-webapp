@@ -24,6 +24,7 @@ import { AccountSetupOrganizationComponent } from './dashboard/home/account-setu
 import { DashboardHomeContentStudentComponent } from './dashboard/home/content/student/dashboard-home-content-student.component';
 import { DashboardHomeContentLiaisonComponent } from './dashboard/home/content/liaison/dashboard-home-content-liaison.component';
 import { AboutComponent } from './about/about.component';
+import { DeleteAccountConfirmationComponent } from './dashboard/profile/delete-account-confirmation/delete-account-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AboutComponent } from './about/about.component';
     AccountSetupOrganizationComponent,
     DashboardHomeContentStudentComponent,
     DashboardHomeContentLiaisonComponent,
-    AboutComponent
+    AboutComponent,
+    DeleteAccountConfirmationComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +52,7 @@ import { AboutComponent } from './about/about.component';
     SharedModule
   ],
   providers: [TitleCasePipe, MessageService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DeleteAccountConfirmationComponent]
 })
 export class AppModule { }

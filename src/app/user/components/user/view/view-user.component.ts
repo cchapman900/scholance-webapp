@@ -10,7 +10,6 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ViewUserComponent implements OnInit {
   user: User;
-  showUpdateButton: boolean;
 
   constructor(
     public userService: UserService,
@@ -20,7 +19,6 @@ export class ViewUserComponent implements OnInit {
   ngOnInit() {
     const user_id = this.route.snapshot.paramMap.get('user_id');
     if (!user_id) {
-      this.showUpdateButton = true;
       this.userService.authenticatedUser$
         .subscribe((user) => {
           this.user = user;
