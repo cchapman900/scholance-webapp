@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-delete-project-confirmation',

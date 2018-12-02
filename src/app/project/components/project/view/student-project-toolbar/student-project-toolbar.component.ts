@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProjectService} from '../../../../services/project.service';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {ProjectSignupAgreementComponent} from './project-signup-agreement/project-signup-agreement.component';
+import {ProjectSignupAgreementComponent} from '../../_modals/project-signup-agreement/project-signup-agreement.component';
 import {UserService} from '../../../../../user/services/user.service';
 import {Router} from '@angular/router';
 

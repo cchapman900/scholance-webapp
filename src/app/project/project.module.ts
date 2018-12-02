@@ -24,14 +24,15 @@ import { AssetFormComponent } from './components/asset/form/asset-form.component
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LiaisonEntryWorkAreaComponent } from './components/entry/view/liaison-work-area/liaison-entry-work-area.component';
 import { StudentEntryWorkAreaComponent } from './components/entry/view/student-work-area/student-entry-work-area.component';
-import { ProjectSignupAgreementComponent } from './components/project/view/student-project-toolbar/project-signup-agreement/project-signup-agreement.component';
-import { CreateProjectAgreementComponent } from './components/project/create/create-project-agreement/create-project-agreement.component';
+import { ProjectSignupAgreementComponent } from './components/project/_modals/project-signup-agreement/project-signup-agreement.component';
+import { CreateProjectAgreementComponent } from './components/project/_modals/create-project-agreement/create-project-agreement.component';
 import { ListProjectsSmallStudentComponent } from './components/project/list/small/student/list-projects-small-student.component';
 import { ListProjectsSmallLiaisonComponent } from './components/project/list/small/liaison/list-projects-small-liaison.component';
 import { SupplementalResourceComponent } from './components/project/view/supplemental-resource/supplemental-resource.component';
 import { ProjectDiscussionBoardComponent } from './components/discussion-board/project-discussion-board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {DeleteProjectConfirmationComponent} from './components/project/delete-project-confirmation/delete-project-confirmation.component';
+import {DeleteProjectConfirmationComponent} from './components/project/_modals/delete-project-confirmation/delete-project-confirmation.component';
+import { SelectProjectSubmissionConfirmationComponent } from './components/project/_modals/select-project-submission-confirmation/select-project-submission-confirmation.component';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import {DeleteProjectConfirmationComponent} from './components/project/delete-pr
     ListProjectsSmallLiaisonComponent,
     SupplementalResourceComponent,
     ProjectDiscussionBoardComponent,
-    DeleteProjectConfirmationComponent
+    DeleteProjectConfirmationComponent,
+    SelectProjectSubmissionConfirmationComponent
   ],
   providers: [
     AuthService,
@@ -81,7 +83,8 @@ import {DeleteProjectConfirmationComponent} from './components/project/delete-pr
   entryComponents: [
     ProjectSignupAgreementComponent,
     CreateProjectAgreementComponent,
-    DeleteProjectConfirmationComponent
+    DeleteProjectConfirmationComponent,
+    SelectProjectSubmissionConfirmationComponent
   ]
 })
 export class ProjectModule { }

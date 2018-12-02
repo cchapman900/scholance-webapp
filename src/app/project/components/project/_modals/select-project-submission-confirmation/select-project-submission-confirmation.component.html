@@ -1,0 +1,13 @@
+<div class="m-3">
+  <h3>Are you sure you want to select this project submission?</h3>
+  <p>
+    This will mark the project as complete, and this submission as the final selection. You will only have access
+    to a single final submission's assets for your organization's use.
+  </p>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button class="btn btn-info m-3" (click)="activeModal.dismiss('cancel')">Go back</button>
+      <button class="btn btn-success" (click)="activeModal.close('agree')">Yes, select this submission and complete the project</button>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import {UserService} from '../../../../user/services/user.service';
 import {ProjectService} from '../../../services/project.service';
 import {Project} from '../../../models/project.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {DeleteProjectConfirmationComponent} from '../../project/delete-project-confirmation/delete-project-confirmation.component';
+import {DeleteProjectConfirmationComponent} from '../../project/_modals/delete-project-confirmation/delete-project-confirmation.component';
 import {Router} from '@angular/router';
 
 @Component({

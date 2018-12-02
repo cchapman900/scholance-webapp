@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
 import {Project} from '../../../models/project.model';
 import {User} from '../../../../user/models/user.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CreateProjectAgreementComponent} from '../create/create-project-agreement/create-project-agreement.component';
+import {CreateProjectAgreementComponent} from '../_modals/create-project-agreement/create-project-agreement.component';
 
 @Component({
   selector: 'app-project-form',
