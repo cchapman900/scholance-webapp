@@ -16,7 +16,7 @@ export class Project {
     about: string
   };
   entries?: [Entry];
-  selectedStudentId: string
+  selectedStudentId: string;
   supplementalResources?: [Asset];
   status: string;
   specs: [string];
