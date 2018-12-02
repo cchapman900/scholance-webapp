@@ -19,7 +19,7 @@ import { SharedModule} from '../shared/shared.module';
 import { StudentProjectToolbarComponent } from './components/project/view/student-project-toolbar/student-project-toolbar.component';
 import { WorkbenchComponent } from './components/workbench/workbench.component';
 import { WorkbenchSidebarComponent} from './components/workbench/sidebar/workbench-sidebar.component';
-import { ProjectFormComponent } from './components/project/form/project-form.component';
+import { ProjectFormComponent } from './components/project/_form/project-form.component';
 import { AssetFormComponent } from './components/asset/form/asset-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LiaisonEntryWorkAreaComponent } from './components/entry/view/liaison-work-area/liaison-entry-work-area.component';
@@ -30,12 +30,14 @@ import { ListProjectsSmallStudentComponent } from './components/project/list/sma
 import { ListProjectsSmallLiaisonComponent } from './components/project/list/small/liaison/list-projects-small-liaison.component';
 import { SupplementalResourceComponent } from './components/project/view/supplemental-resource/supplemental-resource.component';
 import { ProjectDiscussionBoardComponent } from './components/discussion-board/project-discussion-board.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     SharedModule,
     CommonModule,
     FontAwesomeModule,
+    NgbModule,
     ReactiveFormsModule,
     AuthModule,
     ProjectsRoutingModule

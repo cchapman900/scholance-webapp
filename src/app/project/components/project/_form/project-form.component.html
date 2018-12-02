@@ -2,7 +2,14 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="title">Project Title</label>
+      <label for="title">
+        Project Title
+        <fa-icon class="text-info ml-1"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="This should concisely sum up what the project is and what it's about."
+                 placement="bottom">
+        </fa-icon>
+      </label>
     </div>
     <div class="col-md-9">
       <input type="text" class="form-control" id="title"
@@ -13,7 +20,15 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="summary">Project Summary</label>
+      <label for="summary">
+        Project Summary
+        <fa-icon class="text-info ml-1"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="This will be visible in the Project Listings page. This should be your initial hook into
+                 what this project is about."
+                 placement="bottom">
+        </fa-icon>
+      </label>
     </div>
     <div class="col-md-9">
       <textarea class="form-control" id="summary" rows="3"
@@ -24,7 +39,16 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="summary">Full Description</label>
+      <label for="summary">
+        Full Description
+        <fa-icon class="text-info ml-1"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="This won't be shown on the Project Listings page, but will be visible on the individual
+                 project page. This will give you a chance to better explain everything you are looking for in the
+                 finished product."
+                 placement="bottom">
+        </fa-icon>
+      </label>
     </div>
     <div class="col-md-9">
       <textarea class="form-control" id="fullDescription" rows="6"
@@ -35,7 +59,9 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="category">Project Category</label>
+      <label for="category">
+        Project Category
+      </label>
     </div>
     <div class="col-md-3">
       <select class="form-control" id="category"
@@ -49,7 +75,16 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="specs">Project Specifications</label>
+      <label for="specs">
+        Project Specifications
+        <fa-icon class="text-info ml-1"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="The more guidance the better on defining specifically what you are looking for. If there
+                 are certain color schemes, programming languages or word lengths needed for this project, provide them
+                 here so that students will be better able to deliver what you are looking for."
+                 placement="bottom">
+        </fa-icon>
+      </label>
       <p class="small text-muted">
 
       </p>
@@ -73,7 +108,15 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="deliverables">Deliverables</label>
+      <label for="deliverables">
+        Expected Deliverables
+        <fa-icon class="text-info ml-1"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="For a project submission to be complete, the following assets will be required."
+                 tooltipClass="wide-tooltip"
+                 placement="bottom">
+        </fa-icon>
+      </label>
     </div>
     <div class="col-md-9" formArrayName="deliverables">
       <div class="row mb-2 p-3 border rounded" id="deliverables" *ngFor="let deliverable of deliverables.controls; let i=index" [formGroupName]="i">
@@ -102,7 +145,9 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="deadline">Deadline</label>
+      <label for="deadline">
+        Deadline
+      </label>
     </div>
     <div class="col-md-3">
       <input type="date" class="form-control" id="deadline"

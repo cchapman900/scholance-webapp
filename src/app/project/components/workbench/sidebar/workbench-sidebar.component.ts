@@ -22,4 +22,8 @@ export class WorkbenchSidebarComponent implements OnInit {
   ngOnInit() {
   }
 
+  deleteProject() {
+
+  }
+
 }

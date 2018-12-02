@@ -49,7 +49,7 @@ import { DashboardPortfolioComponent } from './dashboard/portfolio/dashboard-por
     HttpClientModule,
     UserModule,
     ProjectModule,
-    NgbModule.forRoot(),
+    NgbModule,
     AppRoutingModule,
     SharedModule
   ],

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormArray, Validators, Form, FormGroup} from '@angular/forms';
-import {faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
+import {faPlus, faMinus, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {ProjectService} from '../../../services/project.service';
 import {UserService} from '../../../../user/services/user.service';
 import {Router} from '@angular/router';
@@ -17,6 +17,7 @@ import {CreateProjectAgreementComponent} from '../create/create-project-agreemen
 export class ProjectFormComponent implements OnInit {
   faPlus = faPlus;
   faMinus = faMinus;
+  faInfoCircle = faInfoCircle;
 
   @Input() project: Project;
   @Input() action: string;
