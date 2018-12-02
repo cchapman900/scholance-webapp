@@ -31,6 +31,7 @@ import { ListProjectsSmallLiaisonComponent } from './components/project/list/sma
 import { SupplementalResourceComponent } from './components/project/view/supplemental-resource/supplemental-resource.component';
 import { ProjectDiscussionBoardComponent } from './components/discussion-board/project-discussion-board.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {DeleteProjectConfirmationComponent} from './components/project/delete-project-confirmation/delete-project-confirmation.component';
 
 @NgModule({
   imports: [
@@ -64,7 +65,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ListProjectsSmallStudentComponent,
     ListProjectsSmallLiaisonComponent,
     SupplementalResourceComponent,
-    ProjectDiscussionBoardComponent
+    ProjectDiscussionBoardComponent,
+    DeleteProjectConfirmationComponent
   ],
   providers: [
     AuthService,
@@ -78,7 +80,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   ],
   entryComponents: [
     ProjectSignupAgreementComponent,
-    CreateProjectAgreementComponent
+    CreateProjectAgreementComponent,
+    DeleteProjectConfirmationComponent
   ]
 })
 export class ProjectModule { }

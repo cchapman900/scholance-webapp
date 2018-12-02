@@ -26,11 +26,10 @@
     <h5>Deadline</h5>
   </div>
   <div class="col-md-9">
-    <p>{{project?.deadline || "None"}}</p>
+    <p>{{(project?.deadline | date) || "None"}}</p>
   </div>
 
 </div>
-
 <div class="row" *ngIf="project?.specs && project?.specs.length > 0">
 
   <div class="col-md-3">

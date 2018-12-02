@@ -71,7 +71,7 @@ export class ProjectService extends SharedService {
     return this.http.post<Project>(createProjectUrl, project, this.httpOptions)
       .pipe(
         tap(() => {
-          this.log(`Project successfully created`)
+          this.log('Project successfully created', 'success')
         }),
         catchError(this.handleError<Project>('createProject'))
       );
@@ -88,7 +88,7 @@ export class ProjectService extends SharedService {
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
         tap(() => {
-          this.log(`Project successfully updated`)
+          this.log('Project successfully updated', 'success')
         }),
         catchError(this.handleError<Project>('updateProject'))
       );
