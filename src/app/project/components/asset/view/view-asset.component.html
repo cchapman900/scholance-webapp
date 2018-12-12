@@ -10,8 +10,12 @@
       </a>
     </div>
   </div>
-  <div class="col-md-8" *ngIf="asset.text">
-    <p><strong>About this item</strong></p>
-    {{asset.text}}
+  <div class="col-md-8">
+    <p>
+      <strong>About this item</strong>
+      <br/>
+      <span class="small">Media Type: {{asset.mediaType}}</span>
+    </p>
+    <p>{{asset.text}}</p>
   </div>
 </div>
