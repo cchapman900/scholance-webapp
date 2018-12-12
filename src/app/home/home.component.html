@@ -27,7 +27,7 @@
           </p>
         </li>
       </ul>
-      <div class="row" [hidden]="!showStudentContent">
+      <div class="row">
         <div class="col-md-6 mx-auto">
           <button
             *ngIf="!auth.isAuthenticated()"
@@ -70,7 +70,6 @@
                   *ngIf="!auth.isAuthenticated()"
                   routerLink="/register"
                   [queryParams]="{userType: 'business'}"
-                  [hidden]="!showOrganizationContent"
           >
             Register as a Business Liaison
           </button>
@@ -79,3 +78,11 @@
     </div>
   </div>
 </main>
+
+<div class="row mt-5 pt-5">
+  <div class="col-md-6 mx-auto">
+    <p class="small text-center">
+      &#169; 2017 Scholance
+    </p>
+  </div>
+</div>
