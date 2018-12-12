@@ -18,6 +18,8 @@
 <h5>Host Organization: <a routerLink="/organizations/{{project?.organization._id}}" target="_blank">{{project?.organization.name}}</a></h5>
 <p>{{project?.organization.about}}</p>
 
+<h6>Organization Liaison: <a routerLink="/users/{{project?.liaison._id}}" target="_blank">{{project?.liaison.name}}</a></h6>
+
 <hr/>
 
 <div class="row">
@@ -33,11 +35,18 @@
 <div class="row" *ngIf="project?.specs && project?.specs.length > 0">
 
   <div class="col-md-3">
-    <h5>Project Specifications</h5>
+    <h5>
+      Project Specifications
+      <fa-icon class="text-info ml-1 small"
+               [icon]="faInfoCircle"
+               ngbTooltip="These criteria must be met for a project to be complete."
+               placement="bottom">
+      </fa-icon>
+    </h5>
   </div>
   <div class="col-md-9">
     <ul>
-      <li *ngFor="let spec of project.specs">{{spec}}</li>
+      <li *ngFor="let spec of project.specs"><strong>{{spec}}</strong></li>
     </ul>
   </div>
 
@@ -46,12 +55,20 @@
 <div class="row" *ngIf="project?.deliverables && project?.deliverables.length > 0">
 
   <div class="col-md-3">
-    <h5>Expected Deliverables</h5>
+    <h5>
+      Expected Deliverables
+      <fa-icon class="text-info ml-1 small"
+               [icon]="faInfoCircle"
+               ngbTooltip="These are the actual files, text, or links to assets that will provide as the finished product."
+               tooltipClass="wide-tooltip"
+               placement="bottom">
+      </fa-icon>
+    </h5>
   </div>
   <div class="col-md-9">
     <ul>
       <li *ngFor="let deliverable of project?.deliverables">
-        <p><span class="badge badge-info">{{deliverable.mediaType}}</span> {{deliverable.name}}</p>
+        <p><strong>{{deliverable.name}}</strong> - Media type: <span class="badge badge-info">{{deliverable.mediaType}}</span> </p>
       </li>
     </ul>
   </div>
@@ -61,7 +78,16 @@
 <div class="row" *ngIf="authService.isAuthenticated() && project?.supplementalResources.length > 0">
 
   <div class="col-md-3">
-    <h5>Supplemental Resources</h5>
+    <h5>
+      Supplemental Resources
+      <fa-icon class="text-info ml-1 small"
+               [icon]="faInfoCircle"
+               ngbTooltip="Use these as starter assets to help you with your project. These might be the company logo,
+               images, or design files to help you get started on your submission."
+               tooltipClass="wide-tooltip"
+               placement="bottom">
+      </fa-icon>
+    </h5>
   </div>
   <div class="col-md-9">
     <div class="row">

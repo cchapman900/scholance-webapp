@@ -41,3 +41,24 @@
     </div>
   </div>
 </div>
+
+<div class="row m-2" *ngIf="userService.authenticatedUser?._id === user?._id">
+  <div class="col-12 text-center">
+    <hr/>
+    <a class="btn btn-info"
+       routerLink="/dashboard/profile/update"
+    >
+      Update my profile
+    </a>
+  </div>
+  <div *ngIf="false" class="col-12 text-center">
+    <hr/>
+    <button class="btn btn-danger"
+            (click)="deleteAccount()"
+    >
+      Delete my account
+    </button>
+  </div>
+</div>
+
+

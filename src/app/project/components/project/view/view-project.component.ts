@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../../../../user/services/user.service';
 import {AuthService} from '../../../../user/auth/services/auth.service';
 import {Title} from '@angular/platform-browser';
+import {faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-view-project',
@@ -14,6 +15,7 @@ import {Title} from '@angular/platform-browser';
 export class ViewProjectComponent implements OnInit {
   project: Project;
   projectId: string;
+  faInfoCircle = faInfoCircle;
 
   constructor(
     public authService: AuthService,

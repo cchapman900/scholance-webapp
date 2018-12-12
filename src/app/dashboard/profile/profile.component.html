@@ -3,23 +3,4 @@
   <div class="card-body">
     <router-outlet></router-outlet>
   </div>
-
-  <div class="row m-2">
-    <div class="col-12 text-center">
-      <hr/>
-      <a class="btn btn-info"
-         routerLink="update"
-      >
-        Update my profile
-      </a>
-    </div>
-    <div *ngIf="false" class="col-12 text-center">
-      <hr/>
-      <button class="btn btn-danger"
-         (click)="deleteAccount()"
-      >
-        Delete my account
-      </button>
-    </div>
-  </div>
 </div>
