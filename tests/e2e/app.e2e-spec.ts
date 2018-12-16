@@ -1,6 +1,6 @@
 import { CustomLoginFormPage } from './app.po';
 
-describe('custom-login-form App', () => {
+describe('Scholance App', () => {
   let page: CustomLoginFormPage;
 
   beforeEach(() => {

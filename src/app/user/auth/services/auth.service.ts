@@ -64,7 +64,7 @@ export class AuthService extends SharedService {
       }
     }, err => {
       if (err) {
-        this.log(`Signup failed: ${err.description}`, 'danger');
+        this.log(`Signup failed: ${JSON.stringify(err.description)}`, 'danger');
         return;
       }
     });
