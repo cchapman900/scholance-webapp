@@ -24,11 +24,11 @@ export class OrganizationFormComponent implements OnInit {
   ngOnInit() {
     this.organizationForm = this.formBuilder.group({
       _id: [this.organization._id],
-      name: [this.organization.name, Validators.required],
+      name: [this.organization.name, [Validators.required, Validators.minLength(4)]],
       industry: [this.organization.industry],
       about: [this.organization.about],
       linkedin: [this.organization.linkedin], // TODO: Add validation to verify this is a linkedin
-      domain: [this.organization.domain], // TODO: Add normalization to domains
+      domain: [this.organization.domain, [Validators.required]],
       twitter: [this.organization.twitter]
     });
   }
@@ -48,17 +48,29 @@ export class OrganizationFormComponent implements OnInit {
   }
 
   create(): void {
-    this.organizationService.createOrganization(this.organizationForm.value)
-      .subscribe(() => {
-        this.goBack();
-      });
+    if (this.organizationForm.dirty && this.organizationForm.valid) {
+      this.organizationService.createOrganization(this.organizationForm.value)
+        .subscribe(() => {
+          this.goBack();
+        });
+    } else {
+      console.log(this.organizationForm);
+    }
   }
 
   update(): void {
-    this.organizationService.updateOrganization(this.organizationForm.value)
-      .subscribe(() => {
-        this.goBack();
-      })
+    if (this.organizationForm.dirty && this.organizationForm.valid) {
+      this.organizationService.updateOrganization(this.organizationForm.value)
+        .subscribe(() => {
+          this.goBack();
+        })
+    } else {
+      console.log(this.organizationForm);
+    }
   }
+
+  get name() {return this.organizationForm.get('name')}
+
+  get domain() {return this.organizationForm.get('domain')}
 
 }

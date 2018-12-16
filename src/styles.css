@@ -6,3 +6,7 @@
 * {
   font-family: 'Didact Gothic', sans-serif;
 }
+
+.required {
+  color: red;
+}
