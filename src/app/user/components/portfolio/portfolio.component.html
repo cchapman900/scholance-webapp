@@ -1,28 +1,14 @@
-<div *ngIf="user?._id === userService.authenticatedUser?._id"
-     class="alert alert-info text-center mb-5 row">
-  <div class="col-md-5 mx-auto">
-    <p>Below is how your portfolio will look to the outside world.</p>
-    <p>
-      If you would like to update the ordering, or set certain projects as publicly or non-publicly viewable, click the
-      button below
-    </p>
-    <div class="row">
-      <div class="col-3 ml-auto">
-        <button class="btn btn-info btn-sm" routerLink="/users/{{user?._id}}/update">Update Profile</button>
-      </div>
-      <div class="col-3 mr-auto">
-        <button class="btn btn-info btn-sm" routerLink="/users/{{user?._id}}/portfolio/update">Update Portfolio</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <h1 class="mb-4">Project Portfolio for</h1>
 <app-view-user></app-view-user>
 
 <hr/>
 
 <h3>Completed Projects</h3>
+<div class="row mb-3" *ngIf="user?._id === userService.authenticatedUser?._id">
+  <div class="col-12 text-center mr-auto">
+    <button class="btn btn-info btn-sm" routerLink="/users/{{user?._id}}/portfolio/update">Update Portfolio</button>
+  </div>
+</div>
 <p *ngIf="!portfolioEntries || portfolioEntries?.length === 0">There are no completed projects for this student yet.</p>
 <div *ngFor="let completedProject of portfolioEntries">
   <div *ngIf="completedProject.visible" class="row border rounded p-4 mb-4">
