@@ -2,22 +2,27 @@
   {{ entry?.student._id == userService.authenticatedUser._id ? 'My Project Submission' : 'Project Submission for: '+entry?.student.name }}
 </h3>
 
-<div class="row" *ngIf="entry?.commentary">
+<div class="row">
   <div class="col-10 mx-auto">
-    <h5>Commentary about this submission</h5>
-    <p>{{entry.commentary}}</p>
+    <h4>Project Status: <span class="badge">{{entry?.submissionStatus}}</span> </h4>
+    <div class="row" *ngIf="entry?.commentary">
+      <h5>Commentary about this submission</h5>
+      <p>{{entry.commentary}}</p>
+    </div>
   </div>
 </div>
+
+
 
 <div class="row">
   <div class="col-10 mx-auto">
     <h5>Attached Deliverables for this Project Entry</h5>
     <p *ngIf="entry?.assets.length === 0">There are currently no assets for this Project Submission</p>
     <div *ngFor="let asset of entry?.assets; let i = index" class="row border rounded my-2 p-3">
-      <div class="col-10">
+      <div class="col-md-10">
         <app-view-asset [project_id]="project_id" [asset]="asset" [assetType]="assetType"></app-view-asset>
       </div>
-      <div class="col-2">
+      <div class="col-md-2">
         <button *ngIf="userService.authenticatedUser._id === entry.student._id && entry?.submissionStatus !== 'submitted'"
                 (click)="deleteAsset(assetType, project_id, asset._id, i)"
                 class="btn btn-sm btn-danger form-control">Delete</button>
@@ -49,7 +54,7 @@
 
 <hr class="my-5"/>
 
-<div class="row">
+<div class="row mb-5">
   <div class="col-md-10 mx-auto">
     <h4>Comments on this project entry</h4>
     <div [hidden]="!showComments">

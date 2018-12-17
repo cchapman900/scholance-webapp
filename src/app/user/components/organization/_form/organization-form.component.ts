@@ -38,35 +38,32 @@ export class OrganizationFormComponent implements OnInit {
   }
 
   save(): void {
-    if (this.action === 'create') {
-      this.create();
-    } else if (this.action === 'update') {
-      this.update();
-    } else {
-      console.log('Unknown action')
+    if (this.organizationForm.dirty && this.organizationForm.valid) {
+      this.organizationForm.value.domain = this.organizationForm.value.uri ?
+        this.organizationForm.value.domain.replace('https://', '').replace('http://', '') :
+        '';
+      if (this.action === 'create') {
+        this.create();
+      } else if (this.action === 'update') {
+        this.update();
+      } else {
+        console.log('Unknown action')
+      }
     }
   }
 
   create(): void {
-    if (this.organizationForm.dirty && this.organizationForm.valid) {
-      this.organizationService.createOrganization(this.organizationForm.value)
-        .subscribe(() => {
-          this.goBack();
-        });
-    } else {
-      console.log(this.organizationForm);
-    }
+    this.organizationService.createOrganization(this.organizationForm.value)
+      .subscribe(() => {
+        this.goBack();
+      });
   }
 
   update(): void {
-    if (this.organizationForm.dirty && this.organizationForm.valid) {
-      this.organizationService.updateOrganization(this.organizationForm.value)
-        .subscribe(() => {
-          this.goBack();
-        })
-    } else {
-      console.log(this.organizationForm);
-    }
+    this.organizationService.updateOrganization(this.organizationForm.value)
+      .subscribe(() => {
+        this.goBack();
+      });
   }
 
   get name() {return this.organizationForm.get('name')}

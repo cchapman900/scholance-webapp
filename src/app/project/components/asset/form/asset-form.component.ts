@@ -11,9 +11,9 @@ export class AssetFormComponent implements OnInit {
   @Input() assetType: string;
   selectedMediaType: string;
   mediaTypes = [
-    '',
     'image',
-    'link'
+    'link',
+    'text'
   ];
 
   assetForm = this.formBuilder.group({
@@ -27,12 +27,12 @@ export class AssetFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  public assetTypeDisplay(assetTypeString: string) {
-    return assetTypeString
-    // insert a space before all caps
-      .replace(/([A-Z])/g, ' $1')
-      // uppercase the first character
-      .replace(/^./, function(str){ return str.toUpperCase(); })
-  }
+  // public assetTypeDisplay(assetTypeString: string) {
+  //   return assetTypeString
+  //   // insert a space before all caps
+  //     .replace(/([A-Z])/g, ' $1')
+  //     // uppercase the first character
+  //     .replace(/^./, function(str){ return str.toUpperCase(); })
+  // }
 
 }

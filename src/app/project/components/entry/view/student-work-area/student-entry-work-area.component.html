@@ -1,35 +1,69 @@
 <h4>Update My Submission</h4>
 
-<div class="row border p-3">
+<div class="row border pt-3">
   <div class="col-md-10 mx-auto">
-    <app-asset-form [project_id]="project._id" [assetType]="'entryAsset'"></app-asset-form>
-  </div>
-</div>
 
-<hr/>
+    <div class="row mb-5">
+      <div class="col-12">
+        <h5>Add Deliverable</h5>
+        <p class="pb-2">
+          Add images, links, or text here as part of your project's submission.
+        </p>
+        <p class="text-center">
+          <button class="btn btn-outline-info btn-sm"
+                  *ngIf="!showAssetForm"
+                  (click)="showAssetForm = true">Add a deliverable</button>
+          <button class="btn btn-outline-danger btn-sm"
+                  *ngIf="showAssetForm"
+                  (click)="showAssetForm = false">Cancel</button>
+        </p>
+        <app-asset-form *ngIf="showAssetForm" [project_id]="project._id" [assetType]="'entryAsset'"></app-asset-form>
+      </div>
+    </div>
 
-<div class="row border p-3 mb-5">
-  <div class="col-12">
-    <form [formGroup]="entryForm" (ngSubmit)="onSubmit()">
-      <div class="form-group row mb-4">
-        <div class="col-10 mx-auto">
-          <label for="commentary">Submission Commentary</label>
+    <form *ngIf="!showAssetForm"
+          [formGroup]="entryForm"
+          (ngSubmit)="onSubmit()">
+
+      <div class="form-group row mb-5">
+        <div class="col-12">
+          <h5>
+            <label for="commentary"><strong>Submission Commentary </strong> <span class="small">(optional)</span></label>
+          </h5>
+        </div>
+        <div class="col-md-10 mx-auto">
+          <p>
+            This will be visible to the project liaison, and is a place to introduce your project submission.
+          </p>
           <textarea class="form-control" id="commentary" formControlName="commentary"></textarea>
         </div>
       </div>
 
       <div class="form-group row mb-4">
-        <div class="col-6 mx-auto">
-          <label for="submissionStatus">Submission Status</label>
-          <select class="form-control" id="submissionStatus" formControlName="submissionStatus">
-            <option *ngFor="let submissionStatus of submissionStatuses" [ngValue]="submissionStatus">{{submissionStatus | titlecase}}</option>
-          </select>
+        <div class="col-12">
+          <h5>
+            <label for="submissionStatus"><strong>Submission Status</strong></label>
+          </h5>
+          <div class="col-md-6 mx-auto">
+            <select class="form-control" id="submissionStatus" formControlName="submissionStatus">
+              <option *ngFor="let submissionStatus of submissionStatuses"
+                      [ngValue]="submissionStatus"
+                      [selected]="entry.submissionStatus === submissionStatus"
+              >{{submissionStatus | titlecase}}
+              </option>
+            </select>
+            <ul>
+              <li><code>Active</code> means that only you can see it.</li>
+              <li><code>Draft</code> means that the project liaison can see it, but you can still change things.</li>
+              <li><code>Submitted</code> means that your are ready to submit your final entry.</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="row text-center">
+      <div class="row text-center mb-5">
         <div class="col-md-3 mx-auto">
-          <button type="submit" class="btn btn-success form-control">Save</button>
+          <button [disabled]="!entryForm.dirty || !entryForm.valid" type="submit" class="btn btn-success form-control">Save</button>
         </div>
       </div>
     </form>

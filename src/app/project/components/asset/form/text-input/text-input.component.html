@@ -1,0 +1,20 @@
+<form [formGroup]="textInputForm">
+  <div class="row text-center">
+    <div class="col-5 offset-1 text-left">
+      <label for="name">Deliverable Name</label>
+      <input type="text" class="form-control" id="name" formControlName="name"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 mx-auto">
+      <label for="text">Text</label>
+      <textarea class="form-control" id="text" formControlName="text" rows="10"></textarea>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <div class="col-12 text-center">
+      <button class="btn btn-primary" (click)="uploadTextAsset()">Upload</button>
+    </div>
+  </div>
+</form>

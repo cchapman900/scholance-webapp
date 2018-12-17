@@ -1,16 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {UserService} from '../../../../user/services/user.service';
-import {ProjectService} from '../../../services/project.service';
-import {Project} from '../../../models/project.model';
+import {UserService} from '../../user/services/user.service';
+import {ProjectService} from '../../project/services/project.service';
+import {Project} from '../../project/models/project.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {DeleteProjectConfirmationComponent} from '../../project/_modals/delete-project-confirmation/delete-project-confirmation.component';
+import {DeleteProjectConfirmationComponent} from '../../project/components/project/_modals/delete-project-confirmation/delete-project-confirmation.component';
 import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-workbench-sidebar',
   templateUrl: './workbench-sidebar.component.html',
   styleUrls: [
-    '../../../../../assets/css/sidebar.css',
+    '../../../assets/css/sidebar.css',
     './workbench-sidebar.component.css'
   ]
 })

@@ -5,7 +5,7 @@ import {Input} from '@angular/core';
 import {Project} from '../../../../models/project.model';
 import {User} from '../../../../../user/models/user.model';
 import {UserService} from '../../../../../user/services/user.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-file-input',
@@ -85,8 +85,8 @@ export class FileInputComponent implements OnInit {
 
 
   fileInputForm = this.formBuilder.group({
-    file: [''],
-    name: [''],
+    file: ['', [Validators.required]],
+    name: ['', [Validators.required]],
     text: ['']
   });
 
@@ -120,26 +120,28 @@ export class FileInputComponent implements OnInit {
   }
 
   uploadFile(assetType: string): void {
-    // TODO: Move this logic to the service
-    if (this.image) {
-      const file = {
-        name: this.fileInputForm.value.name,
-        text: this.fileInputForm.value.text,
-        file: this.image
-      };
-      // console.log(assetType);
-      if (assetType === 'supplementalResource') {
-        this.projectService.createSupplementalResourceFile(this.project_id, file)
-          .subscribe(() => {
-            location.reload();
-          });
-      } else if (assetType === 'entryAsset') {
-        this.projectService.createEntryAssetFile(this.project_id, this.userService.authenticatedUser._id, file)
-          .subscribe(() => {
-            location.reload();
-          });
-      }
+    if (this.fileInputForm.valid) {
+      // TODO: Move this logic to the service
+      if (this.image) {
+        const file = {
+          name: this.fileInputForm.value.name,
+          text: this.fileInputForm.value.text,
+          file: this.image
+        };
+        // console.log(assetType);
+        if (assetType === 'supplementalResource') {
+          this.projectService.createSupplementalResourceFile(this.project_id, file)
+            .subscribe(() => {
+              location.reload();
+            });
+        } else if (assetType === 'entryAsset') {
+          this.projectService.createEntryAssetFile(this.project_id, this.userService.authenticatedUser._id, file)
+            .subscribe(() => {
+              location.reload();
+            });
+        }
 
+      }
     }
   }
 

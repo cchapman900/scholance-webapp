@@ -8,7 +8,7 @@ import {ListProjectsComponent} from './components/project/list/list-projects.com
 import {ViewProjectComponent} from './components/project/view/view-project.component';
 import {UpdateProjectComponent} from './components/project/update/update-project.component';
 import {ViewEntryComponent} from './components/entry/view/view-entry.component';
-import {WorkbenchComponent} from './components/workbench/workbench.component';
+import {WorkbenchComponent} from '../workbench/workbench.component';
 import {ListEntriesComponent} from './components/entry/list/list-entries.component';
 import {ProjectDiscussionBoardComponent} from './components/discussion-board/project-discussion-board.component';
 

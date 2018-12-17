@@ -3,12 +3,14 @@
     <div class="col-3">
       <img src="{{ image ? image : defaultImage }}" width="100" height="100"/>
     </div>
-    <div class="col-3">
-      <input type="file" accept="image/*" formControlName="file" (change)="changeListener($event)">
-    </div>
     <div class="col-5 text-left">
-      <label for="name">File Name</label>
+      <label for="name">Deliverable Name</label>
       <input type="text" class="form-control" id="name" formControlName="name"/>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-12 mx-auto text-center">
+      <input type="file" accept="image/*" formControlName="file" (change)="changeListener($event)">
     </div>
   </div>
   <div class="row">
@@ -19,7 +21,9 @@
   </div>
   <div class="row mt-3">
     <div class="col-12 text-center">
-      <button class="btn btn-primary" (click)="uploadFile(assetType)">Upload</button>
+      <button class="btn btn-primary"
+              [disabled]="!fileInputForm.valid"
+              (click)="uploadFile(assetType)">Upload</button>
     </div>
   </div>
 </form>

@@ -31,8 +31,6 @@ export class ListProjectsSmallLiaisonComponent implements OnInit {
     this.numActiveRegistrants = this.projectService.getNumActiveRegistrants(this.project);
     this.numDrafts = this.projectService.getNumDrafts(this.project);
     this.numSubmissions = this.projectService.getNumSubmissions(this.project);
-
-    console.log(this.project);
   }
 
 }

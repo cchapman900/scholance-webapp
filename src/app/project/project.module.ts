@@ -17,8 +17,8 @@ import { ListEntriesComponent } from './components/entry/list/list-entries.compo
 import { ViewEntryComponent } from './components/entry/view/view-entry.component';
 import { SharedModule} from '../shared/shared.module';
 import { StudentProjectToolbarComponent } from './components/project/view/student-project-toolbar/student-project-toolbar.component';
-import { WorkbenchComponent } from './components/workbench/workbench.component';
-import { WorkbenchSidebarComponent} from './components/workbench/sidebar/workbench-sidebar.component';
+import { WorkbenchComponent } from '../workbench/workbench.component';
+import { WorkbenchSidebarComponent} from '../workbench/sidebar/workbench-sidebar.component';
 import { ProjectFormComponent } from './components/project/_form/project-form.component';
 import { AssetFormComponent } from './components/asset/form/asset-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -33,6 +33,7 @@ import { ProjectDiscussionBoardComponent } from './components/discussion-board/p
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteProjectConfirmationComponent} from './components/project/_modals/delete-project-confirmation/delete-project-confirmation.component';
 import { SelectProjectSubmissionConfirmationComponent } from './components/project/_modals/select-project-submission-confirmation/select-project-submission-confirmation.component';
+import { TextInputComponent } from './components/asset/form/text-input/text-input.component';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import { SelectProjectSubmissionConfirmationComponent } from './components/proje
     SupplementalResourceComponent,
     ProjectDiscussionBoardComponent,
     DeleteProjectConfirmationComponent,
-    SelectProjectSubmissionConfirmationComponent
+    SelectProjectSubmissionConfirmationComponent,
+    TextInputComponent
   ],
   providers: [
     AuthService,

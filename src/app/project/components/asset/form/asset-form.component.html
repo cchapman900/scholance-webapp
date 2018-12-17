@@ -1,12 +1,13 @@
 <form [formGroup]="assetForm">
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-6 text-right">
       <p>
-        Add new {{assetTypeDisplay(assetType)}}
+        Add new...
       </p>
     </div>
     <div class="form-group col-md-6">
       <select id="mediaType" name="mediaType" class="form-control" formControlName="mediaType">
+        <option value="" selected>--Select a media type--</option>
         <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
       </select>
     </div>
@@ -15,4 +16,5 @@
 <div *ngIf="assetForm.value.mediaType" class="mb-5">
   <app-file-input *ngIf="assetForm.value.mediaType === 'image'" [project_id]="project_id" [assetType]="assetType"></app-file-input>
   <app-link-input *ngIf="assetForm.value.mediaType === 'link'" [project_id]="project_id" [assetType]="assetType"></app-link-input>
+  <app-text-input *ngIf="assetForm.value.mediaType === 'text'" [project_id]="project_id" [assetType]="assetType"></app-text-input>
 </div>

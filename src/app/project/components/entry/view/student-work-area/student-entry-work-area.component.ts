@@ -14,8 +14,10 @@ export class StudentEntryWorkAreaComponent implements OnInit {
   @Input() project: Project;
   @Input() entry: Entry;
 
+  showAssetForm = false;
+
   submissionStatuses = [
-    'in progress',
+    'active',
     'draft',
     'submitted'
   ];

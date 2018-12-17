@@ -34,6 +34,8 @@ export class RegisterComponent implements OnInit {
 
   signup(name, email, password, userType) {
 
+    this.errors = [];
+
     if (!name) {
       this.errors.push('Name is required')
     }
@@ -60,8 +62,10 @@ export class RegisterComponent implements OnInit {
       this.errors.push('Password is required')
     }
 
-    if (password.length < 8) {
-      this.errors.push('Password is too short')
+    const strongRegex = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})');
+
+    if (!strongRegex.test(password)) {
+      this.errors.push('Password is not strong enough. Must be at least 8 characters, contain at least one lower case and uppercase letter, and at least one number')
     }
 
     if (!userType) {

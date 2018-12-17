@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../../../user/services/user.service';
-import {ProjectService} from '../../services/project.service';
-import {Project} from '../../models/project.model';
+import {UserService} from '../user/services/user.service';
+import {ProjectService} from '../project/services/project.service';
+import {Project} from '../project/models/project.model';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Title} from '@angular/platform-browser';
 import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
@@ -10,7 +10,7 @@ import {faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
   selector: 'app-workbench',
   templateUrl: './workbench.component.html',
   styleUrls: [
-    '../../../../assets/css/dashboard.css',
+    '../../assets/css/dashboard.css',
     './workbench.component.css'
   ]
 })

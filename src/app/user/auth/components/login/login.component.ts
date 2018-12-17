@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
     if (!email) {
       this.errors.push('Email is required');
     }
+    if (!password) {
+      this.errors.push('Password is required')
+    }
 
     if (this.errors.length === 0) {
       this.auth.login(email, password)

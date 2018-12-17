@@ -15,7 +15,7 @@
 
 <hr/>
 
-<h5>Host Organization: <a routerLink="/organizations/{{project?.organization._id}}" target="_blank">{{project?.organization.name}}</a></h5>
+<h5>Host Organization: <a routerLink="/organizations/{{project?.organization?._id}}" target="_blank">{{project?.organization.name}}</a></h5>
 <p>{{project?.organization.about}}</p>
 
 <h6>Organization Liaison: <a routerLink="/users/{{project?.liaison._id}}" target="_blank">{{project?.liaison.name}}</a></h6>
