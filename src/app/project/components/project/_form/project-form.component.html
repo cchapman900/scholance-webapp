@@ -3,7 +3,7 @@
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
       <label for="title">
-        Project Title
+        Project Title <span class="required">*</span>
         <fa-icon class="text-info ml-1"
                  [icon]="faInfoCircle"
                  ngbTooltip="This should concisely sum up what the project is and what it's about."
@@ -21,7 +21,7 @@
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
       <label for="summary">
-        Project Summary
+        Project Summary <span class="required">*</span>
         <fa-icon class="text-info ml-1"
                  [icon]="faInfoCircle"
                  ngbTooltip="This will be visible in the Project Listings page. This should be your initial hook into
@@ -34,6 +34,22 @@
       <textarea class="form-control" id="summary" rows="3"
                 formControlName="summary"
       ></textarea>
+    </div>
+  </div>
+
+  <div class="form-group row mb-4">
+    <div class="col-md-3 text-right">
+      <label for="category">
+        Project Category <span class="required">*</span>
+      </label>
+    </div>
+    <div class="col-md-3">
+      <select class="form-control" id="category"
+              formControlName="category"
+      >
+        <option value=""></option>
+        <option *ngFor="let category of categories" [value]="category">{{category}}</option>
+      </select>
     </div>
   </div>
 
@@ -59,22 +75,6 @@
 
   <div class="form-group row mb-4">
     <div class="col-md-3 text-right">
-      <label for="category">
-        Project Category
-      </label>
-    </div>
-    <div class="col-md-3">
-      <select class="form-control" id="category"
-                formControlName="category"
-      >
-        <option value=""></option>
-        <option *ngFor="let category of categories" [value]="category">{{category}}</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="form-group row mb-4">
-    <div class="col-md-3 text-right">
       <label for="specs">
         Project Specifications
         <fa-icon class="text-info ml-1"
@@ -92,7 +92,8 @@
     <div class="col-md-9" formArrayName="specs">
       <div class="row mb-2 p-3 border rounded" id="specs" *ngFor="let spec of specs.controls; let i=index">
         <div class="col-10">
-          <input type="text" class="form-control" [formControlName]="i">
+          <label for="specName{{i}}">Spec #{{i + 1}}</label>
+          <input type="text" class="form-control" [formControlName]="i" id="specName{{i}}" placeholder="The project submission must...">
         </div>
         <div class="col-2 text-right">
           <button *ngIf="i == specs.length - 1 && spec.value !== ''" class="btn btn-sm ml-auto btn-info" (click)="addSpec()">
@@ -121,7 +122,7 @@
     <div class="col-md-9" formArrayName="deliverables">
       <div class="row mb-2 p-3 border rounded" id="deliverables" *ngFor="let deliverable of deliverables.controls; let i=index" [formGroupName]="i">
         <div class="col-5 small">
-          <label for="deliverableName{{i}}">Name</label>
+          <label for="deliverableName{{i}}">Short description of deliverable</label>
           <input type="text" class="form-control" formControlName="name" id="deliverableName{{i}}">
         </div>
         <div class="col-5 small">

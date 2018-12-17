@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormArray, Validators, Form, FormGroup} from '@angular/forms';
+import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 import {faPlus, faMinus, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 import {ProjectService} from '../../../services/project.service';
 import {UserService} from '../../../../user/services/user.service';
@@ -29,6 +29,7 @@ export class ProjectFormComponent implements OnInit {
   categories: string[] = [
     'Graphic Design',
     'Marketing',
+    'Programming',
     'Web Development',
     'Writing',
     'Video & Motion Graphics',
@@ -54,6 +55,8 @@ export class ProjectFormComponent implements OnInit {
   ngOnInit() {
     this.userService.authenticatedUser$ // TODO: this seems dumb too.
       .subscribe((user) => {
+        const deadline = this.project.deadline ? this.project.deadline.split('T')[0] : null;
+
         this.projectForm = this.formBuilder.group({
           _id: [this.project._id || ''],
           title: [this.project.title || '', Validators.required],
@@ -63,10 +66,8 @@ export class ProjectFormComponent implements OnInit {
           category: [this.project.category || '', Validators.required],
           specs: this.formBuilder.array([this.createSpec()]),
           deliverables: this.formBuilder.array([this.createDeliverable()]),
-          deadline: [this.project.deadline || '']
+          deadline: [deadline || '']
         });
-
-        console.log(this.project)
 
         if (this.project.specs && this.project.specs.length > 0) {
           this.removeSpec(0); // TODO: This is kinda dumb. But having trouble initializing this array
@@ -76,7 +77,6 @@ export class ProjectFormComponent implements OnInit {
         }
 
         if (this.project.deliverables && this.project.deliverables.length > 0) {
-          console.log(this.project)
           this.removeDeliverable(0); // TODO: This is kinda dumb. But having trouble initializing this array
           for (const deliverable of this.project.deliverables) {
             this.addDeliverable(deliverable.name, deliverable.mediaType)
@@ -149,11 +149,15 @@ export class ProjectFormComponent implements OnInit {
    **************************/
 
   saveProject() {
-    // console.log(this.projectForm.value)
-    if (this.action === 'create') {
-      this.openCreateProjectAgreement()
-    } else if (this.action === 'update') {
-      this.updateProject()
+
+    if (this.projectForm.valid) {
+      if (this.action === 'create') {
+        this.openCreateProjectAgreement()
+      } else if (this.action === 'update') {
+        this.updateProject()
+      }
+    } else {
+      console.log('Invalid input')
     }
   }
 
@@ -168,7 +172,6 @@ export class ProjectFormComponent implements OnInit {
   updateProject() {
     this.projectService.updateProject(this.projectForm.value)
       .subscribe((project) => {
-        console.log(project);
         this.router.navigate(['workbench', 'projects', project._id])
       })
   }

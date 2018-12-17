@@ -45,9 +45,9 @@
     </h5>
   </div>
   <div class="col-md-9">
-    <ul>
+    <ol>
       <li *ngFor="let spec of project.specs"><strong>{{spec}}</strong></li>
-    </ul>
+    </ol>
   </div>
 
 </div>
@@ -66,11 +66,11 @@
     </h5>
   </div>
   <div class="col-md-9">
-    <ul>
+    <ol>
       <li *ngFor="let deliverable of project?.deliverables">
-        <p><strong>{{deliverable.name}}</strong> - Media type: <span class="badge badge-info">{{deliverable.mediaType}}</span> </p>
+        <p><strong>{{deliverable.name}}</strong> | <span class="small">Media type: </span> <span class="badge badge-info">{{deliverable.mediaType}}</span> </p>
       </li>
-    </ul>
+    </ol>
   </div>
 
 </div>
