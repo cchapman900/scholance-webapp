@@ -1,15 +1,17 @@
-<div class="row align-content-center">
-  <div class="col-9">
-    <h2>
-      {{project?.title}} <span class="badge badge-info ml-5">{{project?.category}}</span>
-    </h2>
+<div class="row align-content-center mb-3">
+  <div class="col-md-9">
+    <h2>{{project?.title}}</h2>
   </div>
-  <div class="col-3 text-right" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
+  <div class="col-md-3 ml-auto" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
     <app-student-project-toolbar *ngIf="project.status !== 'complete'" [project_id]="project._id"></app-student-project-toolbar>
   </div>
 </div>
+
+<h5>Project Category: <span class="text-muted small">{{project?.category}}</span></h5>
+
 <h5>Project Summary</h5>
 <p>{{project?.summary}}</p>
+
 <h5>Full Details</h5>
 <p>{{project?.fullDescription}}</p>
 

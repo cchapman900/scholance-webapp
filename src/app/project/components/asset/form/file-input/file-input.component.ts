@@ -85,7 +85,7 @@ export class FileInputComponent implements OnInit {
 
 
   fileInputForm = this.formBuilder.group({
-    file: ['', [Validators.required]],
+    file: [''],
     name: ['', [Validators.required]],
     text: ['']
   });

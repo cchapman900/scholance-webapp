@@ -1,8 +1,14 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-sm navbar-light bg-light mb-4" [ngClass]="{'shadow-lg': !isCollapsed}">
   <a class="navbar-brand" routerLink="">
     <img src="/assets/images/logo.svg" width="160" height="30" class="d-inline-block align-top">
   </a>
-  <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="isCollapsed" aria-label="Toggle navigation">
+  <button class="navbar-toggler"
+          type="button"
+          [ngClass]="{'border-info': !isCollapsed}"
+          aria-controls="navbarSupportedContent"
+          (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="isCollapsed"
+          aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 

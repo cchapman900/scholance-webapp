@@ -1,6 +1,5 @@
 <div class="row mb-5" *ngIf="authService.isAuthenticated()">
-  <hr/>
-  <div class="col-md-10 offset-md-1">
+  <div class="col-md-10 mx-auto">
     <h4>Project discussion board</h4>
     <div [hidden]="!showComments">
       <p class="text-center text-muted small" *ngIf="project?.comments.length === 0">There are no comments to display</p>

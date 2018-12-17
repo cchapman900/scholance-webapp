@@ -1,13 +1,13 @@
-<div *ngIf="!studentIsRegisteredForProject">
+<div *ngIf="studentIsRegisteredForProject === false">
 
-  <button class="btn btn-primary btn-sm" (click)="openSignupAgreement()">Sign up for Project</button>
+  <button class="btn btn-outline-primary btn-sm form-control" (click)="openSignupAgreement()">Sign up for Project</button>
 
 </div>
 
 <div *ngIf="studentIsRegisteredForProject">
 
   <div class="text-right">
-    <button class="btn btn-danger btn-sm" (click)="projectSignoff()">Sign off of project</button>
+    <button class="btn btn-outline-danger btn-sm form-control" (click)="projectSignoff()">Sign off of project</button>
   </div>
 
 </div>
