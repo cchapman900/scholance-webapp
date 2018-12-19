@@ -28,12 +28,12 @@
     <div *ngIf="project.status === 'complete'"
          class="row p-2"
          routerLink="/workbench/projects/{{project._id}}/submissions/{{project.selectedStudentId}}">
-      <div class="col-md-6">
+      <div class="col-lg-6">
         <h5>
           {{project.title}}
         </h5>
       </div>
-      <div class="col-md-6">
+      <div class="col-lg-6">
         <p class="small text-success ml-auto">Click to access assets</p>
       </div>
     </div>

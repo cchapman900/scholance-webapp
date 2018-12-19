@@ -5,6 +5,7 @@ import {Project} from '../../project/models/project.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteProjectConfirmationComponent} from '../../project/components/project/_modals/delete-project-confirmation/delete-project-confirmation.component';
 import {Router} from '@angular/router';
+import {faCaretLeft} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-workbench-sidebar',
@@ -18,6 +19,7 @@ export class WorkbenchSidebarComponent implements OnInit {
   @Input() project: Project;
   @Input() showSidebar: boolean;
   closeResult: string;
+  faCaretLeft = faCaretLeft;
 
   constructor(
     private projectService: ProjectService,

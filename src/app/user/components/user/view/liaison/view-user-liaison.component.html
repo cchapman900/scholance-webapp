@@ -1,16 +1,23 @@
-<div *ngIf="user?.organization" class="row">
+<div *ngIf="user?.organization">
+  <div class="row mb-3">
 
-  <div class="col-3 text-right">
-    <p><strong>Organization</strong></p>
-  </div>
-  <div class="col-9">
-    <a routerLink="/organizations/{{user?.organization._id}}">{{user?.organization.name}}</a>
+    <div class="col-6 col-md-3 text-right">
+      <strong>Organization</strong>
+    </div>
+
+    <div class="col-6 col-md-9">
+      <a routerLink="/organizations/{{user?.organization._id}}">{{user?.organization.name}}</a>
+    </div>
+
   </div>
 
-  <div class="col-3 text-right">
-    <p><strong *ngIf="user?.position">Position</strong></p>
-  </div>
-  <div class="col-9">
-    <p *ngIf="user?.position">{{user?.position}}</p>
+  <div class="row mb-3">
+
+    <div class="col-6 col-md-3 text-right">
+      <strong *ngIf="user?.position">Position</strong>
+    </div>
+    <div class="col-6 col-md-9">
+      <p *ngIf="user?.position">{{user?.position}}</p>
+    </div>
   </div>
 </div>
