@@ -1,105 +1,122 @@
-<div class="row align-content-center mb-3">
-  <div class="col-md-9">
-    <h2>{{project?.title}}</h2>
-  </div>
-  <div class="col-md-3 ml-auto" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
-    <app-student-project-toolbar *ngIf="project.status !== 'complete'" [project_id]="project._id"></app-student-project-toolbar>
-  </div>
+<div *ngIf="!project">
+  <app-loading></app-loading>
 </div>
-
-<h5>Project Category: <span class="text-muted small">{{project?.category}}</span></h5>
-
-<h5>Project Summary</h5>
-<p>{{project?.summary}}</p>
-
-<h5>Full Details</h5>
-<p>{{project?.fullDescription}}</p>
-
-<hr/>
-
-<h5>Host Organization: <a routerLink="/organizations/{{project?.organization?._id}}" target="_blank">{{project?.organization.name}}</a></h5>
-<p>{{project?.organization.about}}</p>
-
-<h6>Organization Liaison: <a routerLink="/users/{{project?.liaison._id}}" target="_blank">{{project?.liaison.name}}</a></h6>
-
-<hr/>
-
-<div class="row">
-
-  <div class="col-md-3">
-    <h5>Deadline</h5>
-  </div>
-  <div class="col-md-9">
-    <p>{{(project?.deadline | date) || "None"}}</p>
-  </div>
-
-</div>
-<div class="row" *ngIf="project?.specs && project?.specs.length > 0">
-
-  <div class="col-md-3">
-    <h5>
-      Project Specifications
-      <fa-icon class="text-info ml-1 small"
-               [icon]="faInfoCircle"
-               ngbTooltip="These criteria must be met for a project to be complete."
-               placement="bottom">
-      </fa-icon>
-    </h5>
-  </div>
-  <div class="col-md-9">
-    <ol>
-      <li *ngFor="let spec of project.specs"><strong>{{spec}}</strong></li>
-    </ol>
-  </div>
-
-</div>
-
-<div class="row" *ngIf="project?.deliverables && project?.deliverables.length > 0">
-
-  <div class="col-md-3">
-    <h5>
-      Expected Deliverables
-      <fa-icon class="text-info ml-1 small"
-               [icon]="faInfoCircle"
-               ngbTooltip="These are the actual files, text, or links to assets that will provide as the finished product."
-               tooltipClass="wide-tooltip"
-               placement="bottom">
-      </fa-icon>
-    </h5>
-  </div>
-  <div class="col-md-9">
-    <ol>
-      <li *ngFor="let deliverable of project?.deliverables">
-        <p><strong>{{deliverable.name}}</strong> | <span class="small">Media type: </span> <span class="badge badge-info">{{deliverable.mediaType}}</span> </p>
-      </li>
-    </ol>
-  </div>
-
-</div>
-
-<div class="row" *ngIf="authService.isAuthenticated() && project?.supplementalResources.length > 0">
-
-  <div class="col-md-3">
-    <h5>
-      Supplemental Resources
-      <fa-icon class="text-info ml-1 small"
-               [icon]="faInfoCircle"
-               ngbTooltip="Use these as starter assets to help you with your project. These might be the company logo,
-               images, or design files to help you get started on your submission."
-               tooltipClass="wide-tooltip"
-               placement="bottom">
-      </fa-icon>
-    </h5>
-  </div>
-  <div class="col-md-9">
-    <div class="row">
-      <div class="col-md-4" *ngFor="let supplementalResource of project?.supplementalResources">
-        <app-supplemental-resource [supplementalResource]="supplementalResource"
-                                   [projectId]="project._id"
-                                   [isProjectOwner]="project.liaison._id && project.liaison._id === userService.authenticatedUser?._id">
-        </app-supplemental-resource>
-      </div>
+<div *ngIf="project">
+  <div class="row align-content-center mb-3">
+    <div class="col-md-9">
+      <h2>{{project?.title}}</h2>
+    </div>
+    <div class="col-md-3 ml-auto" *ngIf="userService.authenticatedUser?.userType == 'student' && project">
+      <app-student-project-toolbar *ngIf="project.status !== 'complete'" [project_id]="project._id"></app-student-project-toolbar>
     </div>
   </div>
 
+  <h5>Project Category: <span class="text-muted small">{{project?.category}}</span></h5>
+
+  <h5>Project Summary</h5>
+  <p>{{project?.summary}}</p>
+
+  <h5>Full Details</h5>
+  <p>{{project?.fullDescription}}</p>
+
+  <hr/>
+
+  <h5>Host Organization: <a routerLink="/organizations/{{project?.organization?._id}}" target="_blank">{{project?.organization.name}}</a></h5>
+  <p>{{project?.organization.about}}</p>
+
+  <h6>Organization Liaison: <a routerLink="/users/{{project?.liaison._id}}" target="_blank">{{project?.liaison.name}}</a></h6>
+
+  <hr/>
+
+  <div class="row">
+
+    <div class="col-md-3">
+      <h5>Deadline</h5>
+    </div>
+    <div class="col-md-9">
+      <p>{{(project?.deadline | date) || "None"}}</p>
+    </div>
+
+  </div>
+  <div class="row" *ngIf="project?.specs && project?.specs.length > 0">
+
+    <div class="col-md-3">
+      <h5>
+        Project Specifications
+        <fa-icon class="text-info ml-1 small"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="These criteria must be met for a project to be complete."
+                 placement="bottom">
+        </fa-icon>
+      </h5>
+    </div>
+    <div class="col-md-9">
+      <ul>
+        <li *ngFor="let spec of project.specs"><strong>{{spec}}</strong></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="project?.deliverables && project?.deliverables.length > 0">
+
+    <div class="col-md-3">
+      <h5>
+        Expected Deliverables
+        <fa-icon class="text-info ml-1 small"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="These are the actual files, text, or links to assets that will provide as the finished product."
+                 tooltipClass="wide-tooltip"
+                 placement="bottom">
+        </fa-icon>
+      </h5>
+    </div>
+    <div class="col-md-6 border rounded">
+      <div class="row align-items-center pt-2" *ngFor="let deliverable of project?.deliverables">
+        <div class="col-4 col-md-2 text-center">
+          <h3 class="">
+            <fa-icon *ngIf="deliverable.mediaType === 'Link'" [icon]="faLink"></fa-icon>
+            <fa-icon *ngIf="deliverable.mediaType === 'Image'" [icon]="faImage"></fa-icon>
+            <fa-icon *ngIf="deliverable.mediaType === 'Text'" [icon]="faNewspaper"></fa-icon>
+          </h3>
+        </div>
+        <div class="col-8 col-md-6">
+          <p>
+            <strong>Media Type: </strong>{{deliverable.mediaType | titlecase}}
+            <br/>
+            <strong>Deliverable ID: </strong>{{deliverable.name}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row" *ngIf="authService.isAuthenticated() && project?.supplementalResources.length > 0">
+
+    <div class="col-md-3">
+      <h5>
+        Supplemental Resources
+        <fa-icon class="text-info ml-1 small"
+                 [icon]="faInfoCircle"
+                 ngbTooltip="Use these as starter assets to help you with your project. These might be the company logo,
+               images, or design files to help you get started on your submission."
+                 tooltipClass="wide-tooltip"
+                 placement="bottom">
+        </fa-icon>
+      </h5>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let supplementalResource of project?.supplementalResources">
+          <app-supplemental-resource [supplementalResource]="supplementalResource"
+                                     [projectId]="project._id"
+                                     [isProjectOwner]="project.liaison._id && project.liaison._id === userService.authenticatedUser?._id">
+          </app-supplemental-resource>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
+

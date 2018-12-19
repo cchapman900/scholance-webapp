@@ -22,7 +22,7 @@ export class Project {
   specs: [string];
   deliverables: [{
     name: string,
-    mediaType: [string]
+    mediaType: string
   }];
   category: string;
   deadline: string;
