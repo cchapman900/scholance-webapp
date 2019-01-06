@@ -26,6 +26,7 @@ import { DashboardHomeContentLiaisonComponent } from './dashboard/home/content/l
 import { AboutComponent } from './about/about.component';
 import { DeleteAccountConfirmationComponent } from './dashboard/profile/delete-account-confirmation/delete-account-confirmation.component';
 import { DashboardPortfolioComponent } from './dashboard/portfolio/dashboard-portfolio.component';
+import { CopyrightComponent } from './shared/components/copyright/copyright.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { DashboardPortfolioComponent } from './dashboard/portfolio/dashboard-por
     DashboardHomeContentLiaisonComponent,
     AboutComponent,
     DeleteAccountConfirmationComponent,
-    DashboardPortfolioComponent
+    DashboardPortfolioComponent,
+    CopyrightComponent
   ],
   imports: [
     BrowserModule,
