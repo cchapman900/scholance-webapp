@@ -75,10 +75,10 @@
     <div class="col-md-6 border rounded">
       <div class="row align-items-center pt-2" *ngFor="let deliverable of project?.deliverables">
         <div class="col-4 col-md-2 text-center">
-          <h3 class="">
-            <fa-icon *ngIf="deliverable.mediaType === 'Link'" [icon]="faLink"></fa-icon>
-            <fa-icon *ngIf="deliverable.mediaType === 'Image'" [icon]="faImage"></fa-icon>
-            <fa-icon *ngIf="deliverable.mediaType === 'Text'" [icon]="faNewspaper"></fa-icon>
+          <h3>
+            <fa-icon *ngIf="deliverable.mediaType === 'link'" [icon]="faLink"></fa-icon>
+            <fa-icon *ngIf="deliverable.mediaType === 'image'" [icon]="faImage"></fa-icon>
+            <fa-icon *ngIf="deliverable.mediaType === 'text'" [icon]="faNewspaper"></fa-icon>
           </h3>
         </div>
         <div class="col-8 col-md-6">

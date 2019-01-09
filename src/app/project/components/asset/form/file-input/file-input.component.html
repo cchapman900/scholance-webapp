@@ -17,7 +17,7 @@
     <div class="col-md-10 mx-auto">
       <label for="text"><strong>Comments on this file</strong></label>
       <textarea class="form-control" id="text" formControlName="text"></textarea>
-      <p class="alert alert-warning">
+      <p class="alert alert-warning" *ngIf="assetType === 'entryAsset'">
         You must disclose here if there would be any licencing restrictions for this asset if used for business purposes.
         <br/>
         This may include (but is not limited to) licenced fonts, images or other media.

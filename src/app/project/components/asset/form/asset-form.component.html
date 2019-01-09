@@ -1,5 +1,5 @@
 <form [formGroup]="assetForm">
-  <div class="row">
+  <div class="row my-3">
     <div class="col-md-6 text-right">
       <p>
         Add new...
@@ -8,7 +8,7 @@
     <div class="form-group col-md-6">
       <select id="mediaType" name="mediaType" class="form-control" formControlName="mediaType">
         <option value="" selected>--Select a media type--</option>
-        <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
+        <option *ngFor="let mediaType of mediaTypes | keyvalue" [ngValue]="mediaType.key">{{mediaType.value}}</option>
       </select>
     </div>
   </div>

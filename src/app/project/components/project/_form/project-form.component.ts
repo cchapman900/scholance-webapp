@@ -36,11 +36,11 @@ export class ProjectFormComponent implements OnInit {
     'Other'
     ];
 
-  mediaTypes: string[] = [
-    'Image',
-    'Link',
-    'Text'
-  ];
+  mediaTypes = {
+    'image': 'Image (PNG, JPG, etc.)',
+    'link': 'Link (GitHub, YouTube, Vimeo, etc.)',
+    'text': 'Plain Text'
+  };
 
   constructor(
     private formBuilder: FormBuilder,

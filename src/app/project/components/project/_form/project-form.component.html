@@ -59,9 +59,8 @@
         Full Description
         <fa-icon class="text-info ml-1"
                  [icon]="faInfoCircle"
-                 ngbTooltip="This won't be shown on the Project Listings page, but will be visible on the individual
-                 project page. This will give you a chance to better explain everything you are looking for in the
-                 finished product."
+                 ngbTooltip="Explain more about how the finished product will look, where it will be used and the
+                 overall impact it will have on the world."
                  placement="bottom">
         </fa-icon>
       </label>
@@ -113,7 +112,8 @@
         Expected Deliverables
         <fa-icon class="text-info ml-1"
                  [icon]="faInfoCircle"
-                 ngbTooltip="For a project submission to be complete, the following assets will be required."
+                 ngbTooltip="These are the actual &#34;things&#34; that will be submitted as part of the completed
+                 project submission."
                  tooltipClass="wide-tooltip"
                  placement="bottom">
         </fa-icon>
@@ -129,7 +129,7 @@
           <label for="mediaType{{i}}">Accepted Formats</label>
           <select type="text" class="form-control" formControlName="mediaType" id="mediaType{{i}}">
             <option></option>
-            <option *ngFor="let mediaType of mediaTypes" [ngValue]="mediaType">{{mediaType}}</option>
+            <option *ngFor="let mediaType of mediaTypes | keyvalue" [ngValue]="mediaType.key">{{mediaType.value}}</option>
           </select>
         </div>
         <div class="col-2 text-right">

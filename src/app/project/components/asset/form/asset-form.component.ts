@@ -10,14 +10,15 @@ export class AssetFormComponent implements OnInit {
   @Input() project_id: string;
   @Input() assetType: string;
   selectedMediaType: string;
-  mediaTypes = [
-    'image',
-    'link',
-    'text'
-  ];
+
+  mediaTypes = {
+    'image': 'Image (PNG, JPG, etc.)',
+    'link': 'Link (GitHub, YouTube, Vimeo, etc.)',
+    'text': 'Plain Text'
+  };
 
   assetForm = this.formBuilder.group({
-    mediaType: ['']
+    mediaType: {'': ''}
   });
 
   constructor(
