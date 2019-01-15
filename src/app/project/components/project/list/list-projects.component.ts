@@ -14,6 +14,7 @@ import ObjectID from 'bson-objectid';
 export class ListProjectsComponent implements OnInit {
   projects: Project[];
   filterForm: FormGroup;
+  categories: Array<string>;
 
   constructor(
     private projectService: ProjectService,
@@ -24,19 +25,27 @@ export class ListProjectsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    const category = this.route.snapshot.queryParamMap.get('category') || '';
+    const status = this.route.snapshot.queryParamMap.get('status') || 'active';
+    this.categories = this.projectService.getValidProjectCategories();
     this.filterForm = this.formBuilder.group({
-      status: ['active']
+      category: [category],
+      status: [status]
     });
     this.listProjects();
     this.setTitle();
   }
 
   updateFilter() {
+    const queryParams = {
+      status: this.filterForm.value.status
+    };
+    if (this.filterForm.value.category !== '') {
+      queryParams['category'] = this.filterForm.value.category;
+    }
     this.router.navigate([], {
       relativeTo: this.route,
-      queryParams: {
-        status: this.filterForm.value.status
-      }
+      queryParams: queryParams
     });
     this.listProjects()
   }

@@ -33,10 +33,11 @@ export class ProjectService extends SharedService {
    */
   listProjects (filter: any = null): Observable<Project[]> {
     const getProjectUrl = `${this.scholanceApiDomain}/projects`;
-    const options = filter ? { params: new HttpParams().set('status', filter.status)} : {};
+    const query = new HttpParams({fromObject: filter})
+    const options = filter ? { params: query} : {};
     return this.http.get<Project[]>(getProjectUrl, options)
       .pipe(
-        tap(project => { }),
+        tap(projects => { }),
         catchError(this.handleError<Project[]>('listProjects'))
       );
   }
@@ -353,6 +354,18 @@ export class ProjectService extends SharedService {
    *****************/
   public isSelectedEntry (project: Project, entry: Entry): boolean {
     return project.selectedStudentId === entry.student._id;
+  }
+
+  public getValidProjectCategories (): Array<string> {
+    return [
+      'Graphic Design',
+      'Marketing',
+      'Programming',
+      'Web Development',
+      'Writing',
+      'Video & Motion Graphics',
+      'Other'
+    ]
   }
 
 }

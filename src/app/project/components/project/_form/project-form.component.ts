@@ -26,15 +26,7 @@ export class ProjectFormComponent implements OnInit {
 
   user: User;
 
-  categories: string[] = [
-    'Graphic Design',
-    'Marketing',
-    'Programming',
-    'Web Development',
-    'Writing',
-    'Video & Motion Graphics',
-    'Other'
-    ];
+  categories: Array<string>;
 
   mediaTypes = {
     'image': 'Image (PNG, JPG, etc.)',
@@ -53,6 +45,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categories = this.projectService.getValidProjectCategories();
     this.userService.authenticatedUser$ // TODO: this seems dumb too.
       .subscribe((user) => {
         const deadline = this.project.deadline ? this.project.deadline.split('T')[0] : null;
