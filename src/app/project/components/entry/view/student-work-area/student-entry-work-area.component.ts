@@ -46,7 +46,7 @@ export class StudentEntryWorkAreaComponent implements OnInit {
     }
     this.projectService.updateEntry(this.project._id, this.entryForm.value)
       .subscribe((response) => {
-        console.log(response);
+
       })
   }
 

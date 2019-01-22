@@ -30,7 +30,7 @@ export class TextInputComponent implements OnInit {
   uploadTextAsset() {
     this.projectService.createAsset(this.assetType, this.project_id, this.textInputForm.value, this.userService.authenticatedUser._id)
       .subscribe((response) => {
-        console.log(response);
+
         location.reload();
       });
   }

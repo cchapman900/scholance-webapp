@@ -20,7 +20,7 @@ export class SupplementalResourceComponent implements OnInit {
   ngOnInit() {}
 
   delete() {
-    console.log('test');
+
     this.projectService.deleteSupplementalResource(this.projectId, this.supplementalResource._id)
       .subscribe(() => {
         location.reload();

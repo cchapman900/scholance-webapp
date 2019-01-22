@@ -157,7 +157,7 @@ export class ProjectFormComponent implements OnInit {
   createProject() {
     this.projectService.createProject(this.projectForm.value)
       .subscribe((project) => {
-        console.log(project);
+
         this.router.navigate(['workbench', 'projects', project._id])
       })
   }

@@ -30,7 +30,7 @@ export class CreateOrganizationComponent implements OnInit {
     this.userService.authenticatedUser$.subscribe((user) => {
       this.organizationService.addUserToOrganization(organization_id, this.user._id)
         .subscribe((organization) => {
-          console.log(organization);
+
           this.router.navigate(['organizations', organization_id, 'update']);
         })
     })

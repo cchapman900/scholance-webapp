@@ -128,7 +128,7 @@ export class FileInputComponent implements OnInit {
           text: this.fileInputForm.value.text,
           file: this.image
         };
-        // console.log(assetType);
+        //
         if (assetType === 'supplementalResource') {
           this.projectService.createSupplementalResourceFile(this.project_id, file)
             .subscribe(() => {

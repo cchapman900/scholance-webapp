@@ -26,7 +26,7 @@ export class UserService extends SharedService {
    * @param {string} id
    */
   setAuthenticatedUser (id: string): void {
-    console.log('Setting user for ' + id);
+
     this.authenticatedUser$ = this.getUser(id);
     this.authenticatedUser$
       .subscribe((user) => {

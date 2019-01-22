@@ -31,7 +31,7 @@ export class AccountSetupOrganizationComponent implements OnInit {
   signUpLiaisonToOrganization(organization_id: string): void {
     this.organizationService.addUserToOrganization(organization_id, this.user._id)
       .subscribe((response) => {
-        console.log('Added user to organization');
+
       })
   }
 

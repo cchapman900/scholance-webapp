@@ -54,7 +54,7 @@ export class SharedService {
         'Authorization': 'Bearer ' + localStorage.getItem('access_token')
       })
     };
-    console.log(this.httpOptions);
+
   }
 
 }

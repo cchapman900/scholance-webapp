@@ -84,7 +84,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   updateProject (project: Project): Observable<Project> {
-    console.log(project);
+
     const updateProjectUrl = `${this.scholanceApiDomain}/projects/${project._id}`;
     return this.http.put<Project>(updateProjectUrl, project, this.httpOptions)
       .pipe(
@@ -308,7 +308,7 @@ export class ProjectService extends SharedService {
    * @returns {Observable<Project>}
    */
   createEntryAssetFile (project_id: string, user_id: string, file: File): Observable<Asset> {
-    console.log(file);
+
     const uploadSupplementalResourceFileURI = `projects/${project_id}/entries/${user_id}/assets/file`;
     return this.createFile(file, uploadSupplementalResourceFileURI);
   }
@@ -321,7 +321,7 @@ export class ProjectService extends SharedService {
    */
   private createFile (file: File, location: string): Observable<Asset> {
     const createFileUrl = `${this.scholanceApiDomain}/${location}`;
-    console.log(file);
+
     return this.http.post<Asset>(createFileUrl, file, this.httpOptions)
       .pipe(
         tap((createdFile) =>  {

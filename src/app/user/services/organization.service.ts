@@ -57,7 +57,7 @@ export class OrganizationService extends SharedService {
    */
   createOrganization (organization: Organization): Observable<Organization> {
     const createOrganizationUrl = `${this.scholanceApiDomain}/organizations`;
-    console.log(organization);
+
     return this.http.post<Organization>(createOrganizationUrl, organization, this.httpOptions)
       .pipe(
         tap(createdOrganization => this.log('You successfully created an organization', 'success')),

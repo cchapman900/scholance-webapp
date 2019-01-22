@@ -37,7 +37,7 @@ export class LinkInputComponent implements OnInit {
       ''; // TODO: Do this in a regex
     this.projectService.createAsset(this.assetType, this.project_id, this.linkInputForm.value, this.userService.authenticatedUser._id)
       .subscribe((response) => {
-        console.log(response);
+
         location.reload();
       });
   }

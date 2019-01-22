@@ -76,7 +76,7 @@ export class AuthService extends SharedService {
         this.setSession(authResult);
       } else if (err) {
         this.router.navigate(['/dashboard']);
-        console.log(err);
+
         this.log(`Authentication failed: ${err.error_description}`, 'danger');
       }
     });
@@ -90,7 +90,7 @@ export class AuthService extends SharedService {
     const expiresAt = JSON.stringify(
       (authResult.expiresIn * 1000) + new Date().getTime()
     );
-    console.log(authResult);
+
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);

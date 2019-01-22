@@ -28,7 +28,7 @@ export class AppComponent {
       this.userService.authenticatedUser$.subscribe((user) => {
         this.user = user;
       });
-      console.log(localStorage.getItem('access_token'));
+
     }
 
     // Taken from https://stackoverflow.com/questions/42538251/angular-2-get-current-route/42538483
