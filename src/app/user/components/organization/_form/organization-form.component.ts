@@ -39,7 +39,7 @@ export class OrganizationFormComponent implements OnInit {
 
   save(): void {
     if (this.organizationForm.dirty && this.organizationForm.valid) {
-      this.organizationForm.value.domain = this.organizationForm.value.uri ?
+      this.organizationForm.value.domain = this.organizationForm.value.domain ?
         this.organizationForm.value.domain.replace('https://', '').replace('http://', '') :
         '';
       if (this.action === 'create') {
