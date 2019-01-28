@@ -37,14 +37,14 @@
     <div *ngFor="let project of projects" class="card mb-3">
       <div class="card-body">
         <h5 class="card-title">
-          <a routerLink="{{project._id}}"> {{project.title}}</a>
+          <a routerLink="{{project._id}}"> {{project.title}}</a> <br/>
+          <span class="small">
+            <strong>Hosted by: </strong>
+            <a routerLink="/organizations/{{project.organization?._id}}">{{project.organization?.name}}</a>
+          </span>
         </h5>
         <div class="row mb-3">
-          <div class="col-6 col-md-2 offset-1 rounded">
-            <img src="assets/images/logo.svg" class="img-fluid">
-            {{project.organization?.name}}
-          </div>
-          <div class="col-md-9">{{project.summary}}</div>
+          <div class="col-md-10 mx-auto">{{project.summary}}</div>
         </div>
         <div class="row">
           <div class="col-md-4"><span class="border rounded p-1" *ngIf="project.category">{{project.category}}</span></div>
