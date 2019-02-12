@@ -1,0 +1,12 @@
+<div *ngIf="project">
+  <app-supplemental-resource-form [project]="project"></app-supplemental-resource-form>
+
+  <div class="row text-center mt-4">
+    <div class="col-md-2 ml-auto">
+      <button class="btn btn-light btn-outline-dark form-control" (click)="nextStep()">Back</button>
+    </div>
+    <div class="col-md-2 mr-auto">
+      <button class="btn btn-success form-control" (click)="nextStep()">Next</button>
+    </div>
+  </div>
+</div>

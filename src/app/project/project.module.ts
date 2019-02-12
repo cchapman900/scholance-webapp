@@ -35,6 +35,8 @@ import {DeleteProjectConfirmationComponent} from './components/project/_modals/d
 import { SelectProjectSubmissionConfirmationComponent } from './components/project/_modals/select-project-submission-confirmation/select-project-submission-confirmation.component';
 import { TextInputComponent } from './components/asset/form/text-input/text-input.component';
 import { SupplementalResourceFormComponent } from './components/project/_forms/supplemental-resource-form.component';
+import { AddSupplementalResourceComponent } from './components/project/create/add-supplemental-resource/add-supplemental-resource.component';
+import { ConfirmProjectCreationComponent } from './components/project/create/confirm/confirm-project-creation.component';
 
 @NgModule({
   imports: [
@@ -72,7 +74,9 @@ import { SupplementalResourceFormComponent } from './components/project/_forms/s
     DeleteProjectConfirmationComponent,
     SelectProjectSubmissionConfirmationComponent,
     TextInputComponent,
-    SupplementalResourceFormComponent
+    SupplementalResourceFormComponent,
+    AddSupplementalResourceComponent,
+    ConfirmProjectCreationComponent
   ],
   providers: [
     AuthService,

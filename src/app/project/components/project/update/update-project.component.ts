@@ -21,11 +21,11 @@ export class UpdateProjectComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute
   ) {
-    const id = this.route.snapshot.paramMap.get('project_id');
-    this.getProject(id);
   }
 
   ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('project_id');
+    this.getProject(id);
     this.userService.authenticatedUser$
       .subscribe((user) => {
         this.liaison = user;

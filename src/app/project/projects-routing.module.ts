@@ -11,6 +11,8 @@ import {ViewEntryComponent} from './components/entry/view/view-entry.component';
 import {WorkbenchComponent} from '../workbench/workbench.component';
 import {ListEntriesComponent} from './components/entry/list/list-entries.component';
 import {ProjectDiscussionBoardComponent} from './components/discussion-board/project-discussion-board.component';
+import {AddSupplementalResourceComponent} from './components/project/create/add-supplemental-resource/add-supplemental-resource.component';
+import {ConfirmProjectCreationComponent} from './components/project/create/confirm/confirm-project-creation.component';
 
 const projectsRoutes: Routes = [
   {
@@ -20,6 +22,16 @@ const projectsRoutes: Routes = [
   {
     path: 'projects/create',
     component: CreateProjectComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/create/:project_id/supplemental-resources',
+    component: AddSupplementalResourceComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'projects/create/:project_id/confirm',
+    component: ConfirmProjectCreationComponent,
     canActivate: [AuthGuard]
   },
   {

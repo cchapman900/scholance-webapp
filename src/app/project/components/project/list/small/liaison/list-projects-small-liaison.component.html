@@ -1,5 +1,15 @@
 <div class="row border border-light bg-light project rounded m-3">
   <div class="col-12 pt-2 no-border">
+
+    <div *ngIf="project.status === 'created'">
+      <h5>
+        {{project.title}}
+      </h5>
+      <p class="small">
+        <strong>Project Status: </strong> <span class="text-warning">Action needed</span>
+      </p>
+    </div>
+
     <div *ngIf="project.status === 'active'">
       <h5>
         {{project.title}}

@@ -158,8 +158,8 @@
   </div>
 
   <div class="row text-center">
-    <div class="col-md-2 offset-md-6">
-      <button class="btn btn-success form-control" (click)="saveProject()" [disabled]="!projectForm.valid">Save</button>
+    <div class="col-md-2 mx-auto">
+      <button class="btn btn-success form-control" (click)="saveProject()" [disabled]="!projectForm.valid">{{action === 'create' ? 'Next' : 'Save'}}</button>
     </div>
   </div>
 </form>

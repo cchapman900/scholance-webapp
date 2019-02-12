@@ -31,6 +31,16 @@
         <p *ngIf="activeProjects?.length === 0">
           You have no active projects
         </p>
+        <div *ngFor="let project of createdProjects" routerLink="/projects/create/{{project._id}}/confirm">
+          <app-list-projects-small-student
+            *ngIf="user.userType === 'student'"
+            [project]="project" [user]="user">
+          </app-list-projects-small-student>
+          <app-list-projects-small-liaison
+            *ngIf="user.userType === 'business'"
+            [project]="project" [user]="user">
+          </app-list-projects-small-liaison>
+        </div>
         <div *ngFor="let project of activeProjects" routerLink="/workbench/projects/{{project._id}}">
           <app-list-projects-small-student
             *ngIf="user.userType === 'student'"

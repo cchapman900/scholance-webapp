@@ -50,7 +50,7 @@
             Update Project
           </button>
         </li>
-        <li *ngIf="project?.status === 'active'" class="nav-item pt-3 px-4">
+        <li *ngIf="project?.status === 'active' || project?.status === 'created'" class="nav-item pt-3 px-4">
           <button class="btn btn-danger mx-auto btn-sm form-control" (click)="openDeleteProjectConfirmation()">
             Delete Project
           </button>

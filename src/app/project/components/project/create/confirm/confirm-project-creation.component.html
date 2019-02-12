@@ -1,0 +1,13 @@
+<div *ngIf="project" class="mb-5">
+  <div>
+    <h1>Confirm Project</h1>
+    <app-project-form [project]="project" [action]="'confirm'"></app-project-form>
+  </div>
+
+  <hr/>
+
+  <div class="row">
+    <app-supplemental-resource-form [project]="project" class="col-md-10 mx-auto"></app-supplemental-resource-form>
+  </div>
+
+</div>

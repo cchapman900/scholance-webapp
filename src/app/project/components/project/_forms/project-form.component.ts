@@ -59,7 +59,8 @@ export class ProjectFormComponent implements OnInit {
           category: [this.project.category || '', Validators.required],
           specs: this.formBuilder.array([this.createSpec()]),
           deliverables: this.formBuilder.array([this.createDeliverable()]),
-          deadline: [deadline || '']
+          deadline: [deadline || ''],
+          status: [this.project.status]
         });
 
         if (this.project.specs && this.project.specs.length > 0) {
@@ -142,27 +143,28 @@ export class ProjectFormComponent implements OnInit {
    **************************/
 
   saveProject() {
-
     if (this.projectForm.valid) {
       if (this.action === 'create') {
-        this.openCreateProjectAgreement()
+        this.saveAndContinueToNextStep()
       } else if (this.action === 'update') {
         this.updateProject()
+      } else if (this.action === 'confirm') {
+        this.openCreateProjectAgreement();
       }
     } else {
       console.log('Invalid input')
     }
   }
 
-  createProject() {
+  saveAndContinueToNextStep() {
     this.projectService.createProject(this.projectForm.value)
       .subscribe((project) => {
-
-        this.router.navigate(['workbench', 'projects', project._id])
+        this.router.navigate(['projects', 'create', project._id, 'supplemental-resources'])
       })
   }
 
   updateProject() {
+    console.log(this.projectForm.value);
     this.projectService.updateProject(this.projectForm.value)
       .subscribe((project) => {
         this.router.navigate(['workbench', 'projects', project._id])
@@ -172,7 +174,8 @@ export class ProjectFormComponent implements OnInit {
   openCreateProjectAgreement() {
     this.modalService.open(CreateProjectAgreementComponent, {size: 'lg'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
-      this.createProject();
+      this.projectForm.patchValue({status: 'active'});
+      this.updateProject();
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });

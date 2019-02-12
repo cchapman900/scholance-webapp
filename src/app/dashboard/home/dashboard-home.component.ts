@@ -9,6 +9,7 @@ import {User} from '../../user/models/user.model';
   styleUrls: ['./dashboard-home.component.css']
 })
 export class DashboardHomeComponent implements OnInit {
+  createdProjects: Project[];
   activeProjects: Project[];
   completedProjects: Project[];
   profileIsComplete: boolean;
@@ -23,6 +24,7 @@ export class DashboardHomeComponent implements OnInit {
       .subscribe((user) => {
         this.user = user;
         if (user && user.projects) {
+          this.createdProjects = user.projects.filter(project => project.status === 'created');
           this.activeProjects = user.projects.filter(project => project.status === 'active');
           this.completedProjects = user.projects.filter(project => project.status === 'complete');
         }
