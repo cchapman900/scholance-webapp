@@ -1,0 +1,24 @@
+<div>
+  <h4>
+    Supplemental Resources
+    <fa-icon class="text-info ml-1"
+             [icon]="faInfoCircle"
+             ngbTooltip="Attach resources to help students get started on the project. This might be your company logo,
+             design documents, or images."
+             placement="bottom">
+    </fa-icon>
+  </h4>
+
+  <div class="row align-items-center border rounded mb-2 p-2" *ngFor="let asset of project.supplementalResources">
+    <div class="col-md-9">
+      <app-view-asset [project_id]="project._id" [asset]="asset" [assetType]="'supplementalResource'">
+      </app-view-asset>
+    </div>
+    <div class="col-md-3">
+      <button class="btn btn-danger btn-sm form-control" (click)="deleteSupplementalResource(asset._id)">
+        Delete Resource
+      </button>
+    </div>
+  </div>
+  <app-asset-form class="row card" [project_id]="project._id" [assetType]="'supplementalResource'"></app-asset-form>
+</div>
