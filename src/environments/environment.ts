@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   auth: {
     apiUrl: 'https://auth.dev-scholance.com',
-    callbackURL: 'http://local.scholance:4200/callback',
+    callbackURL: 'https://local.scholance:4200/callback',
     clientID: 'xIC1lXmLXBn1SPufKA7eSdiRSZXyytEm',
     domain: 'dev-scholance.auth0.com'
   },
