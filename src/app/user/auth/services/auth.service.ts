@@ -83,7 +83,6 @@ export class AuthService extends SharedService {
   }
 
   private setSession(authResult): void {
-    console.log(authResult);
     const user_id = this.parseUserIdFromIdToken(authResult.idToken);
     const scopes = authResult.scope || this.requestedScopes || '';
     this.userService.setAuthenticatedUser(user_id);
