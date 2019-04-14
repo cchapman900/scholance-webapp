@@ -28,7 +28,7 @@
     <div class="col-lg-5 mx-auto card">
       <div class="card-body">
         <h4>Active Projects</h4>
-        <p *ngIf="activeProjects?.length === 0">
+        <p *ngIf="activeProjects?.length === 0 && createdProjects?.length === 0">
           You have no active projects
         </p>
         <div *ngFor="let project of createdProjects" routerLink="/projects/create/{{project._id}}/confirm">

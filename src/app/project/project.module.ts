@@ -19,7 +19,7 @@ import { SharedModule} from '../shared/shared.module';
 import { StudentProjectToolbarComponent } from './components/project/view/student-project-toolbar/student-project-toolbar.component';
 import { WorkbenchComponent } from '../workbench/workbench.component';
 import { WorkbenchSidebarComponent} from '../workbench/sidebar/workbench-sidebar.component';
-import { ProjectFormComponent } from './components/project/_forms/project-form.component';
+import { ProjectFormComponent } from './components/project/_forms/project-form/project-form.component';
 import { AssetFormComponent } from './components/asset/form/asset-form.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LiaisonEntryWorkAreaComponent } from './components/entry/view/liaison-work-area/liaison-entry-work-area.component';
@@ -34,7 +34,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DeleteProjectConfirmationComponent} from './components/project/_modals/delete-project-confirmation/delete-project-confirmation.component';
 import { SelectProjectSubmissionConfirmationComponent } from './components/project/_modals/select-project-submission-confirmation/select-project-submission-confirmation.component';
 import { TextInputComponent } from './components/asset/form/text-input/text-input.component';
-import { SupplementalResourceFormComponent } from './components/project/_forms/supplemental-resource-form.component';
+import { SupplementalResourceFormComponent } from './components/project/_forms/supplemental-resource-form/supplemental-resource-form.component';
 import { AddSupplementalResourceComponent } from './components/project/create/add-supplemental-resource/add-supplemental-resource.component';
 import { ConfirmProjectCreationComponent } from './components/project/create/confirm/confirm-project-creation.component';
 

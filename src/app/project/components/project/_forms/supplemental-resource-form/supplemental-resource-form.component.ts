@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ProjectService} from '../../../services/project.service';
-import {Project} from '../../../models/project.model';
+import {ProjectService} from '../../../../services/project.service';
+import {Project} from '../../../../models/project.model';
 import {faInfoCircle} from '@fortawesome/free-solid-svg-icons';
 
 @Component({

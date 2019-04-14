@@ -1,13 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormArray, Validators, FormGroup} from '@angular/forms';
 import {faPlus, faMinus, faInfoCircle} from '@fortawesome/free-solid-svg-icons';
-import {ProjectService} from '../../../services/project.service';
-import {UserService} from '../../../../user/services/user.service';
+import {ProjectService} from '../../../../services/project.service';
+import {UserService} from '../../../../../user/services/user.service';
 import {Router} from '@angular/router';
-import {Project} from '../../../models/project.model';
-import {User} from '../../../../user/models/user.model';
+import {Project} from '../../../../models/project.model';
+import {User} from '../../../../../user/models/user.model';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CreateProjectAgreementComponent} from '../_modals/create-project-agreement/create-project-agreement.component';
+import {CreateProjectAgreementComponent} from '../../_modals/create-project-agreement/create-project-agreement.component';
 
 @Component({
   selector: 'app-project-form',
