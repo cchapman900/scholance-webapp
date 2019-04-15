@@ -17,13 +17,22 @@
 
     <div class="row">
       <div class="col-2">
-        <a *ngIf="organization?.linkedin" href="{{ organization?.linkedin }}" target="_blank">
+        <a *ngIf="organization?.linkedin"
+           href="{{ organization?.linkedin }}"
+           target="_blank"
+           class="px-2 border rounded border-light">
           <fa-icon [icon]="['fab', 'linkedin']"></fa-icon>
         </a>
-        <a *ngIf="organization?.twitter" href="{{ organization?.twitter }}" target="_blank">
+        <a *ngIf="organization?.twitter"
+           href="{{ organization?.twitter }}"
+           target="_blank"
+           class="px-2 border rounded border-light">
           <fa-icon [icon]="['fab', 'twitter']"></fa-icon>
         </a>
-        <a *ngIf="organization?.domain" href="https://{{ organization?.domain }}" target="_blank">
+        <a *ngIf="organization?.domain"
+           href="https://{{ organization?.domain }}"
+           target="_blank"
+           class="px-2 border rounded border-light">
           <span class="small">Company Website</span>
         </a>
       </div>

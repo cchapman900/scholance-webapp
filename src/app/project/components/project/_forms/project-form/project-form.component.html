@@ -95,7 +95,7 @@
           <input type="text" class="form-control" [formControlName]="i" id="specName{{i}}" placeholder="The project submission must...">
         </div>
         <div class="col-2 text-right">
-          <button *ngIf="i == specs.length - 1 && spec.value !== ''" class="btn btn-sm ml-auto btn-info" (click)="addSpec()">
+          <button *ngIf="i == specs.length - 1" [disabled]="spec.value == ''" class="btn btn-sm ml-auto btn-info" (click)="addSpec()">
             <fa-icon [icon]="faPlus"></fa-icon>
           </button>
           <button *ngIf="specs.length != 1" class="btn btn-sm mr-auto btn-danger" (click)="removeSpec(i)">

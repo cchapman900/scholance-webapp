@@ -1,12 +1,12 @@
 <form [formGroup]="organizationForm" *ngIf="organizationForm">
   <div class="row">
     <div class="col-md-2">
-      <img [src]="organization?.logo || 'assets/images/user-icon.svg'" class="img-fluid">
+      <img [src]="organization?.logo || 'assets/images/building.svg'" class="img-fluid">
     </div>
     <div class="col-md-10">
 
       <div class="form-group">
-        <label for="organization-name">Name <span class="required">*</span></label>
+        <label for="organization-name">Organization Name <span class="required">*</span></label>
         <input type="text" class="form-control" formControlName="name" name="organization-name" id="organization-name">
         <div *ngIf="name.invalid && (name.dirty || name.touched)"
              class="alert alert-danger">

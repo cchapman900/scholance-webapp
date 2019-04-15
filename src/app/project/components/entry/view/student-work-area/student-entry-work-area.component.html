@@ -1,13 +1,14 @@
-<h4>Update My Submission</h4>
+<h4>Make updates to my submission</h4>
 
 <div class="row border pt-3">
   <div class="col-md-10 mx-auto">
 
-    <div class="row mb-5">
+    <div class="row">
       <div class="col-12">
         <h5>Add Deliverable</h5>
+
         <p class="pb-2">
-          Add images, links, or text here as part of your project's submission.
+          See the <a routerLink="../">Project Overview</a> for what delieveriables are expected as part of the completed project submission.
         </p>
         <p class="text-center">
           <button class="btn btn-outline-info btn-sm"
@@ -25,21 +26,7 @@
           [formGroup]="entryForm"
           (ngSubmit)="onSubmit()">
 
-      <div class="form-group row mb-5">
-        <div class="col-12">
-          <h5>
-            <label for="commentary"><strong>Submission Commentary </strong> <span class="small">(optional)</span></label>
-          </h5>
-        </div>
-        <div class="col-md-10 mx-auto">
-          <p>
-            This will be visible to the project liaison, and is a place to introduce your project submission.
-          </p>
-          <textarea class="form-control" id="commentary" formControlName="commentary"></textarea>
-        </div>
-      </div>
-
-      <div class="form-group row mb-4">
+      <div class="form-group row">
         <div class="col-12">
           <h5>
             <label for="submissionStatus"><strong>Submission Status</strong></label>
@@ -58,6 +45,20 @@
               <li><code>Submitted</code> means that your are ready to submit your final entry.</li>
             </ul>
           </div>
+        </div>
+      </div>
+
+      <div class="form-group row mb-5">
+        <div class="col-12">
+          <h5>
+            <label for="commentary"><strong>Notes to the project liaison</strong> <span class="small"> (optional)</span></label>
+          </h5>
+        </div>
+        <div class="col-md-10 mx-auto">
+          <p>
+            This will be visible to the project liaison, and is a place to introduce your project submission.
+          </p>
+          <textarea class="form-control" id="commentary" formControlName="commentary"></textarea>
         </div>
       </div>
 
