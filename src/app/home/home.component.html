@@ -1,5 +1,10 @@
 <div class="jumbotron"></div>
 <main class="container">
+  <div class="alert alert-info">
+    <p>
+      Thank you for all of your interest. At this time, we are no longer accepting new applications.
+    </p>
+  </div>
   <h1 class="border-bottom mb-4">Open Educational Freelancing</h1>
   <div class="row">
     <div class="col-md-6 pb-3 rounded"
@@ -27,16 +32,6 @@
           </p>
         </li>
       </ul>
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <button
-            *ngIf="!auth.isAuthenticated()"
-            class="btn btn-warning form-control"
-            routerLink="/register"
-            [queryParams]="{userType: 'student'}"
-          >Register as a Student</button>
-        </div>
-      </div>
     </div>
     <div class="col-md-6 pb-3 rounded"
          (mouseover)="showOrganizationContent = true"
@@ -64,17 +59,6 @@
           </p>
         </li>
       </ul>
-      <div class="row">
-        <div class="col-md-6 mx-auto">
-          <button class="btn btn-info form-control"
-                  *ngIf="!auth.isAuthenticated()"
-                  routerLink="/register"
-                  [queryParams]="{userType: 'business'}"
-          >
-            Register as a Business Liaison
-          </button>
-        </div>
-      </div>
     </div>
   </div>
 </main>
